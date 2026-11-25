@@ -102,7 +102,8 @@ body.opened #langBtn{display:flex}
 @keyframes flagSwing{from{transform:rotate(-3.5deg)}to{transform:rotate(3.5deg)}}
 .petal{position:absolute;top:-40px;font-size:22px;animation:fall linear infinite;opacity:.8;pointer-events:none}
 @keyframes fall{to{transform:translate(var(--sway),115vh) rotate(540deg)}}
-.names{font-family:var(--serif);font-size:clamp(3.2rem,17vw,6.5rem);line-height:.95;margin:0}
+.names{font-family:var(--serif);font-size:clamp(3.2rem,17vw,6.5rem);line-height:.95;margin:0;padding-top:.22em}
+#hero .kicker{margin-bottom:14px}
 .names .l{display:inline-block;opacity:0;transform:translateY(-90px) rotate(-25deg)}
 #hero.in .names .l{animation:drop .8s cubic-bezier(.2,1.6,.4,1) forwards;animation-delay:calc(var(--i)*70ms + .3s)}
 @keyframes drop{to{opacity:1;transform:none}}
