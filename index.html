@@ -2,24 +2,31 @@
 <html lang="es">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Pika & Astrid · ¡Nos casamos!</title>
-<meta name="description" content="Tienes una invitación muy especial 💌 Ábrela y desliza.">
-<meta property="og:title" content="Pika & Astrid · ¡Nos casamos! 💍">
-<meta property="og:description" content="Tienes una invitación muy especial 💌 Ábrela y desliza.">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
+<title>Ástrid & Ibon - Ezkondu egingo gara! - ¡Nos casamos!</title>
+<meta name="description" content="Gutun bat duzu! · ¡Tienes correo! 💌">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://lockodev.github.io/boda-astrid-ibon/">
+<meta property="og:title" content="Ástrid & Ibon · Ezkondu egingo gara! · ¡Nos casamos! 💍">
+<meta property="og:description" content="Gutun bat duzu! · ¡Tienes correo! 💌">
+<meta property="og:image" content="https://lockodev.github.io/boda-astrid-ibon/img/og.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
 <meta name="theme-color" content="#fbf4ea">
+<link rel="icon" href="img/pp-rosa.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@600;700&family=Nunito:wght@400;700;900&family=Playfair+Display:ital,wght@0,700;1,700&display=swap" rel="stylesheet">
 <style>
 :root{
-  --paper:#fbf4ea; --ink:#2b2340; --terra:#e2725b; --sage:#7a9e7e;
-  --gold:#e9b44c; --rose:#f4b6c2; --sky:#9cc9e8;
+  --paper:#fbf4ea; --ink:#2b2340; --terra:#e2725b; --sage:#6f9a73;
+  --gold:#e9b44c; --pink:#e8458b;
   --serif:'Playfair Display',Georgia,serif; --hand:'Caveat','Comic Sans MS',cursive;
 }
 *{box-sizing:border-box}
 html{-webkit-text-size-adjust:100%}
-body{margin:0;background:var(--paper);color:var(--ink);font-family:'Nunito',system-ui,sans-serif;
+body{margin:0;background:var(--paper);color:var(--ink);font-family:'Nunito',system-ui,sans-serif;touch-action:pan-x pan-y;
   transition:background 1.2s ease,color 1.2s ease;-webkit-tap-highlight-color:transparent}
 body.locked{overflow:hidden;height:100vh}
 body.party{background:#140f24;color:#fff}
@@ -27,33 +34,37 @@ main{overflow-x:clip}
 section{min-height:100vh;min-height:100svh;display:flex;flex-direction:column;align-items:center;justify-content:center;
   padding:70px 22px;text-align:center;position:relative}
 h2{font-family:var(--serif);font-size:clamp(2rem,9vw,3.2rem);margin:.2em 0;line-height:1.1}
-.kicker{text-transform:uppercase;letter-spacing:.25em;font-size:.75rem;font-weight:900;color:var(--terra)}
+.kicker{text-transform:uppercase;letter-spacing:.2em;font-size:.75rem;font-weight:900;color:var(--terra)}
 .hand{font-family:var(--hand);font-size:1.6rem}
-.btn{display:inline-flex;align-items:center;gap:.5em;border:none;cursor:pointer;text-decoration:none;
+.sub{margin:.2em 0 0;opacity:.75}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:.5em;border:none;cursor:pointer;text-decoration:none;
   background:var(--ink);color:#fff;font:700 1rem 'Nunito',sans-serif;padding:.85em 1.4em;border-radius:999px;
   box-shadow:0 6px 0 rgba(0,0,0,.18);transition:transform .15s}
 .btn:active{transform:translateY(3px);box-shadow:0 3px 0 rgba(0,0,0,.18)}
 .btn.terra{background:var(--terra)} .btn.sage{background:var(--sage)} .btn.light{background:#fff;color:var(--ink)}
 .btn.small{font-size:.85rem;padding:.6em 1.1em}
+[hidden]{display:none!important}
 
-/* reveal genérico */
 [data-reveal]{opacity:0;transform:translateY(40px);transition:opacity .9s ease,transform .9s cubic-bezier(.2,1.2,.4,1)}
 [data-reveal].in{opacity:1;transform:none}
 
-/* barra de progreso */
-#progress{position:fixed;top:0;left:0;height:5px;width:0;z-index:60;background:linear-gradient(90deg,var(--terra),var(--gold));border-radius:0 4px 4px 0}
+#progress{position:fixed;top:0;left:0;height:5px;width:0;z-index:60;background:linear-gradient(90deg,var(--pink),var(--gold));border-radius:0 4px 4px 0}
 #progress::after{content:'💍';position:absolute;right:-12px;top:-7px;font-size:16px}
-
 #confetti{position:fixed;inset:0;pointer-events:none;z-index:90}
 .floaty{position:fixed;pointer-events:none;z-index:80;font-size:26px;animation:floatUp 1.4s ease-out forwards}
 @keyframes floatUp{to{transform:translate(var(--dx),-140px) rotate(var(--rot)) scale(1.4);opacity:0}}
+@keyframes popIn{from{transform:scale(0)}}
 
-/* ===== INTRO / SOBRE ===== */
-#intro{position:fixed;inset:0;z-index:100;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:34px;
-  background:radial-gradient(circle at 50% 40%,#fff8ee,#efd7bd);transition:opacity .9s,visibility .9s}
+.flag{width:24px;height:16px;border-radius:3px;display:block;box-shadow:0 0 0 1px rgba(0,0,0,.12);flex:none}
+#langBtn{position:fixed;top:14px;right:12px;z-index:70;display:none;align-items:center;gap:6px;background:rgba(255,255,255,.92);border:none;
+  border-radius:999px;padding:6px 12px 6px 8px;font:900 .78rem 'Nunito',sans-serif;box-shadow:0 4px 14px rgba(0,0,0,.18);cursor:pointer;color:var(--ink)}
+body.opened #langBtn{display:flex}
+
+/* ===== SOBRE ===== */
+#intro{position:fixed;inset:0;z-index:100;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:30px;padding:20px;
+  background:radial-gradient(circle at 50% 40%,#fff8ee,#efd7bd);transition:opacity .9s,visibility .9s;text-align:center}
 #intro.gone{opacity:0;visibility:hidden}
-#intro .top{font-family:var(--hand);font-size:2.2rem;animation:wobble 2.5s ease-in-out infinite}
-#intro .hint{font-size:.9rem;opacity:.7}
+#intro .top{font-family:var(--hand);font-size:2rem;line-height:1.1;animation:wobble 2.5s ease-in-out infinite}
 @keyframes wobble{0%,100%{transform:rotate(-3deg)}50%{transform:rotate(3deg)}}
 .envelope{position:relative;width:290px;height:185px;background:#e6c39d;border-radius:8px;box-shadow:0 25px 50px rgba(90,50,20,.25);perspective:900px}
 .envelope .letter{position:absolute;left:14px;right:14px;bottom:10px;height:165px;background:#fffdf8;border-radius:6px;z-index:1;
@@ -61,8 +72,7 @@ h2{font-family:var(--serif);font-size:clamp(2rem,9vw,3.2rem);margin:.2em 0;line-
   transition:transform 1s cubic-bezier(.3,1.3,.5,1) .55s;box-shadow:0 2px 6px rgba(0,0,0,.1)}
 .envelope .letter b{font-family:var(--serif);font-size:1.6rem}
 .envelope .letter span{font-family:var(--hand);font-size:1.3rem;color:var(--terra)}
-.envelope .pocket{position:absolute;inset:0;z-index:2;border-radius:8px;background:#ddb388;
-  clip-path:polygon(0 0,50% 58%,100% 0,100% 100%,0 100%)}
+.envelope .pocket{position:absolute;inset:0;z-index:2;border-radius:8px;background:#ddb388;clip-path:polygon(0 0,50% 58%,100% 0,100% 100%,0 100%)}
 .envelope .flap{position:absolute;top:0;left:0;right:0;height:118px;z-index:3;background:#d1a275;border-radius:8px 8px 0 0;
   clip-path:polygon(0 0,100% 0,50% 100%);transform-origin:top;transition:transform .6s ease,z-index 0s .3s}
 .envelope.open .flap{transform:rotateX(180deg);z-index:0}
@@ -72,46 +82,57 @@ h2{font-family:var(--serif);font-size:clamp(2rem,9vw,3.2rem);margin:.2em 0;line-
   box-shadow:0 4px 10px rgba(0,0,0,.3),inset 0 -4px 8px rgba(0,0,0,.25);animation:pulse 1.5s ease-in-out infinite}
 .envelope.open .seal{animation:none;transform:scale(0) rotate(90deg);transition:transform .35s}
 @keyframes pulse{0%,100%{transform:scale(1)}50%{transform:scale(1.12)}}
+.langs{display:flex;gap:12px;flex-wrap:wrap;justify-content:center;transition:opacity .4s}
+.langs button{display:flex;align-items:center;gap:10px;background:#fff;border:none;border-radius:999px;padding:12px 20px;
+  font:900 1rem 'Nunito',sans-serif;box-shadow:0 6px 0 rgba(0,0,0,.12);cursor:pointer;color:var(--ink)}
+.langs button:active{transform:translateY(3px)}
+.langs .flag{width:30px;height:20px}
+#intro .hint{font-size:.85rem;opacity:.65;margin-top:-14px}
+#intro.opening .langs,#intro.opening .hint{opacity:0;pointer-events:none}
 
 /* ===== HERO ===== */
-#hero{overflow:hidden}
+#hero{overflow:hidden;padding-top:140px}
+.garland{position:absolute;top:0;left:50%;transform:translateX(-50%);display:flex;width:max-content;pointer-events:none}
+.garland::before{content:'';position:absolute;top:3px;left:0;right:0;height:3px;background:#a0805f;border-radius:2px}
+.garland span{display:block;margin:0 -1vw;transform:translateY(-110%);transition:transform 1s cubic-bezier(.3,1.5,.5,1)}
+#hero.in .garland span{transform:none}
+.garland span:nth-child(2){transition-delay:.1s}.garland span:nth-child(3){transition-delay:.2s}.garland span:nth-child(4){transition-delay:.3s}.garland span:nth-child(5){transition-delay:.4s}
+.garland img{display:block;width:30vw;max-width:170px;transform-origin:50% 0;animation:flagSwing 3s ease-in-out infinite alternate;filter:drop-shadow(0 5px 4px rgba(0,0,0,.12))}
+.garland span:nth-child(even) img{animation-delay:-1.5s}
+@keyframes flagSwing{from{transform:rotate(-3.5deg)}to{transform:rotate(3.5deg)}}
 .petal{position:absolute;top:-40px;font-size:22px;animation:fall linear infinite;opacity:.8;pointer-events:none}
 @keyframes fall{to{transform:translate(var(--sway),115vh) rotate(540deg)}}
 .names{font-family:var(--serif);font-size:clamp(3.2rem,17vw,6.5rem);line-height:.95;margin:0}
 .names .l{display:inline-block;opacity:0;transform:translateY(-90px) rotate(-25deg)}
-#hero.in .names .l{animation:drop .8s cubic-bezier(.2,1.6,.4,1) forwards;animation-delay:calc(var(--i)*70ms + .2s)}
+#hero.in .names .l{animation:drop .8s cubic-bezier(.2,1.6,.4,1) forwards;animation-delay:calc(var(--i)*70ms + .3s)}
 @keyframes drop{to{opacity:1;transform:none}}
-.amp{display:block;font-family:var(--hand);color:var(--terra);font-size:clamp(3rem,14vw,5rem);margin:.05em 0;opacity:0;transform:scale(0) rotate(-180deg)}
-#hero.in .amp{animation:ampIn .9s cubic-bezier(.2,1.6,.4,1) .7s forwards}
+.amp{display:block;font-family:var(--hand);color:var(--pink);font-size:clamp(3rem,14vw,5rem);margin:.05em 0;opacity:0;transform:scale(0) rotate(-180deg)}
+#hero.in .amp{animation:ampIn .9s cubic-bezier(.2,1.6,.4,1) .8s forwards}
 @keyframes ampIn{to{opacity:1;transform:none}}
-.stamp{display:inline-block;margin-top:28px;border:4px solid var(--terra);color:var(--terra);padding:.3em .8em;border-radius:8px;
-  font:900 1.4rem 'Nunito',sans-serif;letter-spacing:.08em;text-transform:uppercase;opacity:0;transform:rotate(-9deg) scale(3)}
-#hero.in .stamp{animation:stamp .35s ease-in 1.7s forwards}
-@keyframes stamp{60%{opacity:1;transform:rotate(-9deg) scale(.9)}100%{opacity:1;transform:rotate(-9deg) scale(1)}}
-.scrollhint{position:absolute;bottom:28px;left:0;right:0;font-size:.85rem;opacity:0;transition:opacity 1s 2.4s}
+.stamp{display:inline-block;margin-top:26px;border:4px solid var(--terra);color:var(--terra);padding:.3em .7em;border-radius:8px;
+  font:900 1.15rem 'Nunito',sans-serif;letter-spacing:.04em;text-transform:uppercase;opacity:0;transform:rotate(-7deg) scale(3)}
+#hero.in .stamp{animation:stamp .35s ease-in 1.8s forwards}
+@keyframes stamp{60%{opacity:1;transform:rotate(-7deg) scale(.9)}100%{opacity:1;transform:rotate(-7deg) scale(1)}}
+.late{margin-top:18px;opacity:0;transition:opacity 1s 2.3s}
+#hero.in .late{opacity:.9}
+.scrollhint{position:absolute;bottom:24px;left:0;right:0;font-size:.85rem;opacity:0;transition:opacity 1s 2.6s}
 #hero.in .scrollhint{opacity:.75}
-.late{margin-top:18px;opacity:0;transition:opacity 1s 2.2s}
-#hero.in .late{opacity:.85}
 .scrollhint i{display:block;font-style:normal;font-size:1.6rem;animation:bounce 1.2s infinite}
 @keyframes bounce{50%{transform:translateY(8px)}}
 
-/* ===== ESCENAS STICKY ===== */
+/* ===== MAPA ===== */
 .scene{display:block;padding:0;min-height:0}
-#historia{height:380vh}
-#ruta{height:300vh}
+#historia{height:680vh}
 .sticky{position:sticky;top:0;height:100vh;height:100svh;overflow:hidden;display:flex;align-items:center;justify-content:center}
-.stage{position:relative;width:100%;max-width:520px;height:100%}
-
-/* historia: México ↔ Euskadi */
-.stage.flow{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;padding:0 10px}
+.stage{position:relative;width:100%;max-width:520px;height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;padding:0 10px}
 .captions{position:relative;width:100%;height:112px;flex:none}
 .captions p{position:absolute;inset:0;margin:0;display:flex;flex-direction:column;align-items:center;justify-content:flex-end;
-  font-family:var(--serif);font-size:clamp(1.35rem,6.4vw,2.1rem);line-height:1.2;opacity:0;transform:translateY(18px) scale(.96);transition:.45s}
+  font-family:var(--serif);font-size:clamp(1.3rem,6.2vw,2.1rem);line-height:1.2;opacity:0;transform:translateY(18px) scale(.96);transition:.45s}
 .captions p.on{opacity:1;transform:none}
 .captions p em{font-family:var(--hand);font-style:normal;color:var(--terra);font-size:1.3em}
 .captions p small{font-family:'Nunito',sans-serif;font-size:.5em;opacity:.6}
 #mapSvg{width:100%;max-height:52vh;overflow:visible;flex:none;margin-top:8px}
-#mapSvg .lbl{font:900 11px 'Nunito',sans-serif;letter-spacing:.15em;fill:#2b2340;opacity:.75}
+#mapSvg .lbl{font:900 10px 'Nunito',sans-serif;letter-spacing:.1em;fill:#2b2340;opacity:.75}
 #mapSvg .sea-lbl{font:italic 700 12px 'Playfair Display',serif;fill:#2f6d8f;opacity:.6}
 .wave{fill:none;stroke:#fff;stroke-width:2;stroke-linecap:round;opacity:.55;stroke-dasharray:14 10;animation:waveMove 3s linear infinite}
 @keyframes waveMove{to{stroke-dashoffset:-48}}
@@ -119,16 +140,18 @@ h2{font-family:var(--serif);font-size:clamp(2rem,9vw,3.2rem);margin:.2em 0;line-
 @keyframes cloud{from{transform:translateX(-60px)}to{transform:translateX(460px)}}
 .bobbing{animation:bobY 2.4s ease-in-out infinite}
 @keyframes bobY{50%{transform:translateY(-5px)}}
-.trail{fill:none;stroke:var(--terra);stroke-width:3;stroke-linecap:round;opacity:0}
+.trail{fill:none;stroke-width:3;stroke-linecap:round;opacity:0}
+.trail.I{stroke:var(--sage)} .trail.A{stroke:var(--terra)}
 .trail.drawing{opacity:1}
-.trail.done{opacity:.45;stroke-dasharray:3 7!important;stroke-dashoffset:0!important}
+.trail.done{opacity:.4;stroke-dasharray:3 7!important;stroke-dashoffset:0!important}
 .trail.final{stroke:var(--gold);stroke-width:4}
 .trail.final.done{opacity:1;stroke-dasharray:none!important}
 .pin .pin-in{transform:scale(0);transform-box:fill-box;transform-origin:50% 100%;transition:transform .55s cubic-bezier(.2,1.8,.4,1)}
-.showP #pinP .pin-in,.showA #pinA .pin-in{transform:scale(1)}
-#pinP{transition:transform .8s cubic-bezier(.3,1.4,.5,1)}
+.showI #pinI .pin-in,.showA #pinA .pin-in{transform:scale(1)}
+.pin{transition:transform .6s cubic-bezier(.3,1.4,.5,1)}
 .pin text.ini{font:700 22px 'Playfair Display',serif;fill:#fff}
 .pin text.nm{font:700 16px 'Caveat',cursive;fill:#2b2340}
+#miniHeart{transition:opacity .3s}
 #loveHeart{transform:scale(0);transform-box:fill-box;transform-origin:center;transition:transform .5s cubic-bezier(.2,1.8,.4,1)}
 .landed #loveHeart{transform:scale(1)}
 #rain,#rainbow{transition:opacity .8s}
@@ -137,214 +160,182 @@ h2{font-family:var(--serif);font-size:clamp(2rem,9vw,3.2rem);margin:.2em 0;line-
 .stats{font-size:.82rem;font-weight:700;line-height:1.7;opacity:.9;margin-top:6px}
 .stats b{font-family:var(--serif);font-size:1.05rem;color:var(--terra)}
 .clocks{font-size:.78rem;opacity:.7;font-weight:400}
-.pass{position:absolute;left:50%;bottom:3%;width:min(90%,340px);background:#fff;color:var(--ink);border-radius:18px;overflow:hidden;text-align:left;
+.pass{position:absolute;left:50%;bottom:3%;width:min(92%,350px);background:#fff;color:var(--ink);border-radius:18px;overflow:hidden;text-align:left;
   box-shadow:0 20px 50px rgba(0,0,0,.25);transform:translate(-50%,160%) rotate(6deg);transition:transform .7s cubic-bezier(.3,1.3,.5,1);z-index:5}
 .pass-on .pass{transform:translate(-50%,0) rotate(-2deg)}
-.pass-top{background:var(--ink);color:#fff;padding:10px 16px;font-weight:900;font-size:.78rem;letter-spacing:.12em;display:flex;justify-content:space-between}
+.pass-top{background:var(--ink);color:#fff;padding:10px 16px;font-weight:900;font-size:.74rem;letter-spacing:.1em;display:flex;justify-content:space-between;gap:8px}
 .pass-top span{opacity:.6;font-weight:400;letter-spacing:0}
 .pass-body{padding:12px 16px 14px;position:relative}
-.pass small{display:block;font-size:.62rem;text-transform:uppercase;letter-spacing:.12em;opacity:.5;font-weight:900}
-.pass .who{font:700 1.2rem var(--serif)}
+.pass small{display:block;font-size:.6rem;text-transform:uppercase;letter-spacing:.12em;opacity:.5;font-weight:900}
+.pass .who{font:700 1.05rem var(--serif)}
 .pass .route{display:flex;align-items:center;gap:10px;margin:6px 0}
 .pass .route b{font:700 2rem var(--serif)}
 .pass .route i{flex:1;border-top:2px dashed #bbb;position:relative}
 .pass .route i::after{content:'✈️';position:absolute;left:50%;top:-15px;transform:translateX(-50%) rotate(45deg);font-style:normal}
-.pass .row{display:flex;gap:16px;margin-top:8px;font-weight:700;font-size:.88rem}
+.pass .row{display:flex;gap:16px;margin-top:8px;font-weight:700;font-size:.86rem}
 .pass .row>div{flex:1}
-.pass .barcode{height:30px;margin-top:12px;background:repeating-linear-gradient(90deg,var(--ink) 0 2px,transparent 2px 4px,var(--ink) 4px 7px,transparent 7px 9px,var(--ink) 9px 10px,transparent 10px 13px)}
-.oneway{position:absolute;right:12px;top:30px;border:4px solid var(--terra);color:var(--terra);font:900 1.3rem 'Nunito',sans-serif;padding:.15em .5em;border-radius:8px;
-  background:rgba(255,255,255,.85);transform:rotate(-14deg) scale(3);opacity:0;transition:transform .3s ease-in,opacity .2s}
-.stamped .oneway{transform:rotate(-14deg) scale(1);opacity:1}
+.pass .barcode{height:28px;margin-top:12px;background:repeating-linear-gradient(90deg,var(--ink) 0 2px,transparent 2px 4px,var(--ink) 4px 7px,transparent 7px 9px,var(--ink) 9px 10px,transparent 10px 13px)}
+.oneway{position:absolute;right:10px;top:66px;border:4px solid var(--pink);color:var(--pink);font:900 1.1rem 'Nunito',sans-serif;padding:.15em .5em;border-radius:8px;
+  background:rgba(255,255,255,.88);transform:rotate(-12deg) scale(3);opacity:0;transition:transform .3s ease-in,opacity .2s;white-space:nowrap}
+.stamped .oneway{transform:rotate(-12deg) scale(1);opacity:1}
 
-/* ===== POLAROIDS ===== */
-#fotos{padding-top:40px}
-.polaroid{position:relative;background:#fff;padding:12px 12px 52px;width:min(78vw,300px);margin:34px auto;
-  box-shadow:0 14px 34px rgba(60,30,10,.18);opacity:0;transform:translateX(var(--x)) rotate(var(--r0));
-  transition:opacity .8s,transform 1.1s cubic-bezier(.2,1.3,.4,1)}
-.polaroid.in{opacity:1;transform:rotate(var(--r1))}
-.polaroid::before{content:'';position:absolute;top:-14px;left:50%;width:90px;height:28px;margin-left:-45px;background:rgba(233,180,76,.55);transform:rotate(-4deg)}
-.polaroid .ph{aspect-ratio:4/5;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;font-size:3.4rem;overflow:hidden;color:rgba(0,0,0,.45)}
-.polaroid .ph small{font-size:.8rem;font-weight:700}
-.polaroid .ph img{width:100%;height:100%;object-fit:cover}
-.polaroid figcaption{position:absolute;bottom:10px;left:0;right:0;font-family:var(--hand);font-size:1.5rem;color:var(--ink)}
+/* ===== FOTOS ===== */
+.deck{position:relative;width:min(74vw,290px);height:calc(min(74vw,290px) * 1.32);margin:34px auto 6px;pointer-events:none;
+  -webkit-user-select:none;user-select:none;-webkit-touch-callout:none}
+.frame{position:absolute;inset:0;background:#fff;padding:12px 12px 48px;box-shadow:0 12px 30px rgba(60,30,10,.2);
+  transform:rotate(var(--r));transition:transform .45s cubic-bezier(.4,0,.2,1),opacity .45s}
+.frame.fly{transform:translate(var(--fx),-40px) rotate(var(--fr));opacity:0}
+.frame .ph{width:100%;height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;
+  font-size:3rem;color:rgba(0,0,0,.4);background:center/cover no-repeat}
+.frame .ph small{font-size:.9rem;font-weight:900}
+.frame .ph.has{font-size:0}
+.frame .cap{position:absolute;bottom:10px;left:0;right:0;font-family:var(--hand);font-size:1.4rem;color:var(--ink)}
+.dots{display:flex;gap:6px;justify-content:center;margin-top:16px}
+.dots i{width:8px;height:8px;border-radius:50%;background:#e0cdb8;transition:.3s}
+.dots i.on{background:var(--terra);transform:scale(1.3)}
 
 /* ===== FECHA ===== */
-.calendar{width:220px;background:#fff;border-radius:18px;overflow:hidden;box-shadow:0 20px 40px rgba(0,0,0,.15);margin:20px auto;
+.calendar{width:220px;background:#fff;border-radius:18px;overflow:hidden;box-shadow:0 20px 40px rgba(0,0,0,.15);margin:20px auto 8px;
   transform-origin:top;transform:perspective(600px) rotateX(-95deg);opacity:0;transition:transform 1.1s cubic-bezier(.2,1.5,.4,1),opacity .4s}
 .calendar.in{transform:perspective(600px) rotateX(0);opacity:1}
 .calendar .m{background:var(--terra);color:#fff;font-weight:900;letter-spacing:.2em;text-transform:uppercase;padding:12px}
 .calendar .d{position:relative;font:700 6rem/1 var(--serif);padding:14px 0 0;color:var(--ink)}
 .calendar .d svg{position:absolute;left:50%;top:50%;width:170px;height:130px;transform:translate(-50%,-46%);overflow:visible}
-.calendar .d path{fill:none;stroke:var(--terra);stroke-width:4;stroke-linecap:round;stroke-dasharray:520;stroke-dashoffset:520;transition:stroke-dashoffset 1.3s ease 1s}
+.calendar .d path{fill:none;stroke:var(--pink);stroke-width:4;stroke-linecap:round;stroke-dasharray:520;stroke-dashoffset:520;transition:stroke-dashoffset 1.3s ease 1s}
 .calendar.in .d path{stroke-dashoffset:0}
 .calendar .w{padding:4px 0 16px;color:#777;text-transform:capitalize;font-weight:700}
-.countdown{display:flex;gap:10px;justify-content:center;margin-top:18px;flex-wrap:wrap}
+.datelong{font-weight:700;font-size:1.05rem}
+.countdown{display:flex;gap:10px;justify-content:center;margin-top:14px;flex-wrap:wrap}
 .countdown div{background:var(--ink);color:#fff;border-radius:14px;padding:10px 0;width:70px}
 .countdown b{display:block;font:700 1.8rem var(--serif)}
 .countdown small{font-size:.7rem;text-transform:uppercase;letter-spacing:.1em;opacity:.7}
 
-/* ===== TARJETAS LUGAR ===== */
-.card{background:#fff;color:var(--ink);border-radius:26px;padding:30px 24px;width:min(90vw,380px);box-shadow:0 18px 40px rgba(0,0,0,.12);position:relative}
-.card .icon{font-size:4rem;display:inline-block;cursor:pointer;user-select:none}
-.bell{transform-origin:50% 10%;animation:swing 2.2s ease-in-out infinite}
-@keyframes swing{0%,100%{transform:rotate(-14deg)}50%{transform:rotate(14deg)}}
-.card h3{font-family:var(--serif);font-size:1.7rem;margin:.3em 0 .1em}
-.card .time{display:inline-block;background:var(--paper);border-radius:999px;padding:.35em 1em;font-weight:900;margin:.6em 0 1em}
-.card p{margin:.3em 0;opacity:.8}
-.tapme{font-size:.75rem;opacity:.5;display:block;margin-top:-4px}
-.food{display:flex;justify-content:center;gap:12px;font-size:2.2rem;margin:10px 0 4px}
-.food span{opacity:0;transform:translateY(-60px)}
-.card.in .food span{animation:dropBounce .7s cubic-bezier(.3,1.7,.5,1) forwards;animation-delay:calc(var(--i)*.15s + .4s)}
-@keyframes dropBounce{to{opacity:1;transform:none}}
+/* ===== PLAN ===== */
+.timeline{position:relative;width:min(88vw,380px);margin:26px auto 10px;text-align:left}
+.tl-line{position:absolute;left:31px;top:20px;bottom:20px;width:4px;background:#ead9c4;border-radius:2px;overflow:hidden}
+.tl-line i{position:absolute;inset:0;background:linear-gradient(var(--terra),var(--pink));transform-origin:top;transform:scaleY(var(--lp,0))}
+.tl-item{position:relative;display:flex;align-items:center;gap:16px;margin:0 0 22px}
+.tl-icon{flex:none;width:66px;height:66px;border-radius:50%;background:#fff;border:3px solid var(--terra);display:flex;align-items:center;justify-content:center;
+  font-size:1.9rem;z-index:1;box-shadow:0 6px 16px rgba(0,0,0,.1)}
+.tl-item.in .tl-icon{animation:popIn .6s cubic-bezier(.3,1.7,.5,1)}
+.tl-time{font:900 .85rem 'Nunito',sans-serif;color:var(--terra);letter-spacing:.08em}
+.tl-txt b{display:block;font:700 1.25rem var(--serif);line-height:1.2}
+.place{background:#fff;color:var(--ink);border-radius:26px;padding:26px 22px;width:min(90vw,380px);box-shadow:0 18px 40px rgba(0,0,0,.12);margin-top:10px}
+.place .icon{font-size:3rem}
+.place h3{font-family:var(--serif);font-size:1.6rem;margin:.2em 0 .1em}
+.place p{margin:.3em 0;opacity:.8}
+.place .joke{font-size:.85rem;margin-top:14px}
 
-/* ===== RUTA ===== */
-.route-title{position:absolute;top:6%;left:16px;right:16px;z-index:2}
-.route-title h2{font-size:clamp(1.6rem,7vw,2.4rem)}
-#routeSvg{position:absolute;left:50%;top:19%;height:76%;width:auto;max-width:96%;transform:translateX(-50%);overflow:visible}
-#roadBase{fill:none;stroke:#e3d3c0;stroke-width:16;stroke-linecap:round}
-#roadDash{fill:none;stroke:#fff;stroke-width:2;stroke-dasharray:8 10}
-#roadDone{fill:none;stroke:var(--terra);stroke-width:7;stroke-linecap:round}
-#honk{transition:opacity .3s}
-.arrive{opacity:0;transition:opacity .5s}
-.arrived .arrive{opacity:1}
-
-/* ===== FIESTA ===== */
-#fiesta{overflow:hidden;min-height:110vh}
+/* ===== MÚSICA ===== */
+#musica{background:#140f24;color:#fff;overflow:hidden;padding-top:190px}
+#musica .kicker{color:#ff8be6}
 .beams{position:absolute;inset:-10% -30% 0;transform-origin:50% 0;opacity:0;transition:opacity 1s;pointer-events:none;
-  background:conic-gradient(from 0deg at 50% 0%,transparent 0 128deg,rgba(255,79,216,.28) 128deg 138deg,transparent 138deg 162deg,
-  rgba(79,216,255,.28) 162deg 172deg,transparent 172deg 190deg,rgba(255,220,79,.28) 190deg 200deg,transparent 200deg 222deg,
-  rgba(120,255,140,.25) 222deg 232deg,transparent 232deg);animation:sway 3.5s ease-in-out infinite alternate}
+  background:conic-gradient(from 0deg at 50% 0%,transparent 0 128deg,rgba(255,79,216,.25) 128deg 138deg,transparent 138deg 162deg,
+  rgba(79,216,255,.25) 162deg 172deg,transparent 172deg 190deg,rgba(255,220,79,.25) 190deg 200deg,transparent 200deg 222deg,
+  rgba(120,255,140,.22) 222deg 232deg,transparent 232deg);animation:sway 3.5s ease-in-out infinite alternate}
 body.party .beams{opacity:1}
 @keyframes sway{from{transform:rotate(-14deg)}to{transform:rotate(14deg)}}
-.disco{position:absolute;top:-240px;left:50%;margin-left:-55px;transition:top 1.4s cubic-bezier(.3,1.5,.5,1);z-index:1}
+.disco{position:absolute;top:-240px;left:50%;margin-left:-50px;transition:top 1.4s cubic-bezier(.3,1.5,.5,1)}
 body.party .disco{top:0}
-.disco::before{content:'';display:block;width:2px;height:70px;margin:0 auto;background:#888}
-.ball{width:110px;height:110px;border-radius:50%;
+.disco::before{content:'';display:block;width:2px;height:60px;margin:0 auto;background:#888}
+.ball{width:100px;height:100px;border-radius:50%;
   background:repeating-linear-gradient(90deg,transparent 0 9px,rgba(0,0,0,.3) 9px 10px),
     repeating-linear-gradient(0deg,transparent 0 9px,rgba(0,0,0,.3) 9px 10px),
     radial-gradient(circle at 35% 30%,#fff,#c9c9d6 35%,#6c6c80 75%,#3a3a4a);
   box-shadow:0 0 40px rgba(255,255,255,.5),0 0 90px rgba(255,79,216,.4);animation:spinball 2.5s linear infinite}
 .ball.fast{animation-duration:.4s}
-@keyframes spinball{to{background-position:110px 0,0 0,0 0}}
-.party-content{position:relative;z-index:2;margin-top:120px}
-.neon{font-family:var(--hand);font-size:clamp(3.4rem,17vw,6rem);line-height:1;margin:.1em 0;color:#fff;
-  text-shadow:0 0 6px #ff4fd8,0 0 18px #ff4fd8,0 0 42px #ff4fd8;animation:flicker 4s infinite}
-@keyframes flicker{0%,18%,22%,25%,53%,57%,100%{opacity:1}20%,24%,55%{opacity:.35}}
-.party-content p{font-size:1.15rem}
-.dancers{font-size:2.6rem;margin:16px 0 26px}
-.dancers span{display:inline-block;animation:dance .5s ease-in-out infinite alternate}
-.dancers span:nth-child(2){animation-delay:.25s}
-@keyframes dance{from{transform:rotate(-12deg) translateY(0)}to{transform:rotate(12deg) translateY(-10px)}}
-body.shake main{animation:shake .5s}
-@keyframes shake{20%{transform:translate(-6px,3px)}40%{transform:translate(6px,-3px)}60%{transform:translate(-4px,2px)}80%{transform:translate(4px,-2px)}}
-
-/* ===== MÚSICA ===== */
-#musica{background:#140f24;color:#fff}
-#musica .kicker{color:#ff8be6}
-.turntable{width:190px;height:190px;border-radius:26px;background:#2a2342;display:flex;align-items:center;justify-content:center;margin:18px auto;
-  box-shadow:inset 0 0 0 3px rgba(255,255,255,.08),0 10px 30px rgba(0,0,0,.4);position:relative}
-.turntable::after{content:'';position:absolute;right:16px;top:18px;width:6px;height:90px;background:#bbb;border-radius:3px;transform:rotate(22deg);transform-origin:top}
-.vinyl{width:160px;height:160px;border-radius:50%;display:flex;align-items:center;justify-content:center;animation:spin 3s linear infinite;
-  background:conic-gradient(from 30deg,rgba(255,255,255,.12),transparent 15%,transparent 50%,rgba(255,255,255,.12) 65%,transparent 80%),
-    radial-gradient(circle,var(--terra) 0 23%,#111 24% 27%,transparent 28%),repeating-radial-gradient(circle,#1b1b1b 0 2px,#262626 2px 4px)}
-.vinyl span{font:700 .95rem var(--serif);color:#fff}
-.vinyl.fast{animation-duration:.45s}
-@keyframes spin{to{transform:rotate(360deg)}}
-.spotify{width:min(92vw,420px);margin:6px auto 16px}
+@keyframes spinball{to{background-position:100px 0,0 0,0 0}}
+#musica > *:not(.beams):not(.disco){position:relative;z-index:1}
+#musica h2{text-shadow:0 0 6px #ff4fd8,0 0 22px rgba(255,79,216,.6)}
+.spotify{width:min(92vw,420px);margin:18px auto 16px}
 .spotify iframe{width:100%;height:352px;border:0;border-radius:14px}
 .spotify .ph{border:2px dashed rgba(255,255,255,.3);border-radius:16px;padding:22px;font-size:.9rem;opacity:.8}
 .or{margin:26px 0 10px;opacity:.85}
-#songForm{display:flex;flex-direction:column;gap:10px;width:min(92vw,380px)}
-#songForm input:not([type=radio]):not([type=hidden]){background:rgba(255,255,255,.08);border:1.5px solid rgba(255,255,255,.25);border-radius:14px;
-  padding:.85em 1em;color:#fff;font:1rem 'Nunito',sans-serif;outline:none;width:100%}
-#songForm input:focus{border-color:#ff8be6}
-#songForm input::placeholder{color:rgba(255,255,255,.5)}
+.form{display:flex;flex-direction:column;gap:10px;width:min(92vw,380px)}
+.form input:not([type=radio]),.form textarea{background:rgba(255,255,255,.08);border:1.5px solid rgba(255,255,255,.25);border-radius:14px;
+  padding:.85em 1em;color:inherit;font:1rem 'Nunito',sans-serif;outline:none;width:100%;resize:vertical}
+.form input:focus,.form textarea:focus{border-color:#ff8be6}
+.form ::placeholder{color:currentColor;opacity:.5}
 .fieldrow{display:flex;gap:8px} .fieldrow input{flex:1;min-width:0}
 .dice{flex:none;width:54px;border-radius:14px;border:1.5px solid rgba(255,255,255,.25);background:rgba(255,255,255,.08);font-size:1.5rem;cursor:pointer}
 .dice.roll{animation:spin .5s}
+@keyframes spin{to{transform:rotate(360deg)}}
 .chips{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin:2px 0}
 .chips label{position:relative}
 .chips input{position:absolute;opacity:0;pointer-events:none}
 .chips span{display:inline-block;padding:.45em .9em;border-radius:999px;border:1.5px solid rgba(255,255,255,.3);font-size:.85rem;cursor:pointer;transition:.2s}
 .chips input:checked+span{background:#ff8be6;border-color:#ff8be6;color:#140f24;font-weight:900}
-#songForm .btn{align-self:center;margin-top:6px}
+.form .btn{align-self:center;margin-top:6px}
 #songThanks{min-height:1.5em;margin-top:14px;color:#ffd36e}
 .reqs{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin-top:8px;max-width:380px}
 .reqs span{background:rgba(255,255,255,.12);border-radius:999px;padding:.35em .9em;font-size:.85rem;animation:popIn .5s cubic-bezier(.3,1.7,.5,1)}
-@keyframes popIn{from{transform:scale(0)}}
-
-/* ===== INFO FLIP ===== */
-.flips{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:16px;width:min(92vw,520px);margin-top:20px}
-.flip{height:170px;perspective:800px;cursor:pointer}
-.flip .fi{position:relative;width:100%;height:100%;transition:transform .7s cubic-bezier(.3,1.4,.5,1);transform-style:preserve-3d}
-.flip.on .fi{transform:rotateY(180deg)}
-.flip .f,.flip .b{position:absolute;inset:0;border-radius:20px;backface-visibility:hidden;-webkit-backface-visibility:hidden;
-  display:flex;flex-direction:column;align-items:center;justify-content:center;padding:14px;box-shadow:0 10px 24px rgba(0,0,0,.1)}
-.flip .f{background:#fff;color:var(--ink)} .flip .f span{font-size:2.8rem}
-.flip .f b{margin-top:6px}
-.flip .f small{opacity:.5;font-size:.72rem;margin-top:4px}
-.flip .b{background:var(--sage);color:#fff;transform:rotateY(180deg);font-size:.95rem;line-height:1.35}
-.flip:nth-child(2) .b{background:var(--terra)} .flip:nth-child(3) .b{background:var(--gold);color:var(--ink)}
 
 /* ===== RSVP ===== */
-.rsvp-zone{position:relative;width:min(92vw,380px);height:230px;margin-top:12px}
+.rsvp-zone{position:relative;width:min(92vw,380px);height:200px;margin-top:6px}
 .rsvp-zone .btn{position:absolute;font-size:1.2rem;padding:.9em 1.8em;transition:left .25s ease,top .25s ease,transform .15s}
-#yes{left:12%;top:40%} #no{left:58%;top:40%;background:#bbb}
+#yes{left:12%;top:38%} #no{left:60%;top:38%;background:#aaa}
 #noMsg{height:1.6em;font-family:var(--hand);font-size:1.5rem;color:var(--terra)}
-#yesBox{display:none;flex-direction:column;align-items:center;gap:12px;margin-top:6px}
-#yesBox.show{display:flex;animation:dropBounce .6s cubic-bezier(.3,1.7,.5,1)}
-#yesBox h3{font-family:var(--serif);font-size:2rem;margin:0}
-footer{padding:40px 20px 60px;text-align:center;font-family:var(--hand);font-size:1.4rem;opacity:.7}
-
-@media (prefers-reduced-motion:reduce){
-  *{animation-duration:.01ms!important;animation-iteration-count:1!important}
-}
+#rsvpForm{color:var(--ink);background:#fff;border-radius:24px;padding:22px 18px;box-shadow:0 18px 40px rgba(0,0,0,.12);animation:popIn .5s cubic-bezier(.3,1.5,.5,1)}
+#rsvpForm h3{font-family:var(--serif);font-size:1.7rem;margin:0 0 4px}
+#rsvpForm input,#rsvpForm textarea{background:var(--paper);border-color:#e4d3bf}
+#rsvpForm input:focus,#rsvpForm textarea:focus{border-color:var(--terra)}
+.nums{display:flex;gap:8px;justify-content:space-between}
+.nums label{flex:1;display:flex;flex-direction:column;align-items:center;gap:6px;font-size:.78rem;font-weight:700}
+.step{display:flex;align-items:center;background:var(--paper);border:1.5px solid #e4d3bf;border-radius:999px;overflow:hidden}
+.step button{width:30px;height:34px;border:none;background:none;font:900 1.2rem 'Nunito',sans-serif;color:var(--terra);cursor:pointer}
+.step output{min-width:22px;text-align:center;font:700 1.05rem var(--serif)}
+.linklike{background:none;border:none;color:inherit;opacity:.6;font:.85rem 'Nunito',sans-serif;text-decoration:underline;cursor:pointer;align-self:center}
+#doneBox{display:flex;flex-direction:column;align-items:center;gap:12px;margin-top:10px;animation:popIn .5s cubic-bezier(.3,1.5,.5,1)}
+#doneBox h3{font-family:var(--serif);font-size:1.9rem;margin:0}
+footer{padding:30px 20px 70px;text-align:center}
+footer img{width:min(70vw,300px);transform-origin:50% 0;animation:flagSwing 3s ease-in-out infinite alternate}
+footer p{font-family:var(--hand);font-size:1.5rem;margin:.6em 0 0;opacity:.85}
+@media (prefers-reduced-motion:reduce){*{animation-duration:.01ms!important;animation-iteration-count:1!important}}
 </style>
 </head>
 <body class="locked">
 <div id="progress"></div>
 <canvas id="confetti"></canvas>
+<button id="langBtn" aria-label="Hizkuntza / Idioma"></button>
 
 <!-- ============ SOBRE ============ -->
 <div id="intro">
-  <div class="top">¡Tienes correo! 💌</div>
+  <div class="top">Gutun bat duzu!<br>¡Tienes correo! 💌</div>
   <div class="envelope" id="envelope">
-    <div class="letter"><b data-c="pareja"></b><span>tienen algo que contarte…</span></div>
+    <div class="letter"><b data-c="pareja"></b><span data-t="letterSub"></span></div>
     <div class="pocket"></div>
     <div class="flap"></div>
-    <button class="seal" id="seal" aria-label="Abrir invitación" data-c="iniciales"></button>
+    <button class="seal" id="seal" aria-label="Ireki / Abrir" data-c="iniciales"></button>
   </div>
-  <div class="hint">Toca el sello para abrir</div>
+  <div class="langs">
+    <button data-lang="eu"><span class="fl-eu"></span>Euskara</button>
+    <button data-lang="es"><span class="fl-es"></span>Castellano</button>
+  </div>
+  <div class="hint">Aukeratu hizkuntza · Elige idioma</div>
 </div>
 
 <main>
-<!-- ============ HERO ============ -->
+<!-- ============ PORTADA ============ -->
 <section id="hero">
-  <div class="kicker">Atención, noticia bomba</div>
+  <div class="garland" id="garland"></div>
+  <div class="kicker" data-t="heroKicker"></div>
   <h1 class="names" id="names"></h1>
-  <div class="stamp">¡Nos casamos!</div>
-  <div class="late hand">De México a Euskadi, con amor 💚</div>
-  <div class="scrollhint">Desliza hacia abajo<i>👇</i></div>
+  <div class="stamp" data-t="stamp"></div>
+  <div class="late hand" data-t="late"></div>
+  <div class="scrollhint"><span data-t="scroll"></span><i>👇</i></div>
 </section>
 
-<!-- ============ HISTORIA (sticky) ============ -->
+<!-- ============ HISTORIA: MAZATLÁN ↔ DONOSTI ============ -->
 <section class="scene" id="historia">
-  <div class="sticky"><div class="stage flow">
+  <div class="sticky"><div class="stage">
     <div class="captions">
-      <p class="on"><span>Érase una vez <em data-c="nombres.0"></em>,</span><span>en Euskadi 🌧️</span></p>
-      <p><span>…y <em data-c="nombres.1"></em>,</span><span>en México ☀️</span></p>
-      <p><span>Entre los dos:</span><span><em>9.200 km</em> y un océano</span></p>
-      <p><span>Primero fue un viaje…</span></p>
-      <p><span>…luego otro…</span></p>
-      <p><span>…y otro más, hasta perder la cuenta</span><small>(y alguna maleta)</small></p>
-      <p><span>Hasta que un día…</span></p>
-      <p><em>¡Billete solo de ida!</em><span>Esta vez, para quedarse 💚</span></p>
+      <p class="on" data-t="cap0"></p><p data-t="cap1"></p><p data-t="cap2"></p><p data-t="cap3"></p><p data-t="cap4"></p>
+      <p data-t="cap5"></p><p data-t="cap6"></p><p data-t="cap7"></p><p data-t="cap8"></p><p data-t="cap9"></p>
     </div>
-
-    <svg id="mapSvg" viewBox="0 0 400 300" aria-label="Mapa entre México y Euskadi">
+    <svg id="mapSvg" viewBox="0 0 400 300">
       <defs>
         <clipPath id="mapClip"><rect x="0" y="0" width="400" height="300" rx="26"/></clipPath>
-        <clipPath id="clipP"><circle cx="0" cy="-40" r="20"/></clipPath>
+        <clipPath id="clipI"><circle cx="0" cy="-40" r="20"/></clipPath>
         <clipPath id="clipA"><circle cx="0" cy="-40" r="20"/></clipPath>
       </defs>
       <g clip-path="url(#mapClip)">
@@ -362,41 +353,40 @@ footer{padding:40px 20px 60px;text-align:center;font-family:var(--hand);font-siz
         <text x="334" y="236" font-size="20">🐑</text>
         <text x="380" y="232" font-size="15">🌲</text>
         <g class="bobbing"><text x="192" y="240" font-size="24">🐋</text></g>
-        <text class="sea-lbl" x="200" y="285" text-anchor="middle">Océano Atlántico</text>
-        <text class="lbl" x="45" y="292" text-anchor="middle">MÉXICO</text>
-        <text class="lbl" x="356" y="292" text-anchor="middle">EUSKADI</text>
+        <text class="sea-lbl" x="200" y="285" text-anchor="middle" data-t="sea"></text>
+        <text class="lbl" x="45" y="292" text-anchor="middle" data-t="mx"></text>
+        <text class="lbl" x="350" y="292" text-anchor="middle">EUSKAL HERRIA</text>
       </g>
       <text x="18" y="70" font-size="26">☀️</text>
       <text id="rain" x="356" y="58" font-size="26">🌧️</text>
       <text id="rainbow" x="358" y="40" font-size="24">🌈</text>
       <g class="cloud"><text x="0" y="38" font-size="20">☁️</text></g>
       <g id="trails"></g>
-      <g id="pinP" class="pin"><g class="pin-in"><g class="bobbing">
+      <g id="pinI" class="pin"><g class="pin-in"><g class="bobbing">
         <path d="M0 0 C -6 -10 -26 -22 -26 -40 A26 26 0 1 1 26 -40 C 26 -22 6 -10 0 0Z" fill="#fff" stroke="#2b2340" stroke-width="3"/>
-        <circle cx="0" cy="-40" r="20" fill="#7a9e7e"/>
+        <circle cx="0" cy="-40" r="20" fill="#6f9a73"/>
         <text class="ini" x="0" y="-32" text-anchor="middle"></text>
-      </g><text class="nm" x="0" y="18" text-anchor="middle" data-c="nombres.0"></text></g></g>
+      </g><text class="nm" x="0" y="18" text-anchor="middle" data-c="eu.nombre"></text></g></g>
       <g id="pinA" class="pin"><g class="pin-in"><g class="bobbing" style="animation-delay:-1.2s">
         <path d="M0 0 C -6 -10 -26 -22 -26 -40 A26 26 0 1 1 26 -40 C 26 -22 6 -10 0 0Z" fill="#fff" stroke="#2b2340" stroke-width="3"/>
         <circle cx="0" cy="-40" r="20" fill="#e2725b"/>
         <text class="ini" x="0" y="-32" text-anchor="middle"></text>
-      </g><text class="nm" x="0" y="18" text-anchor="middle" data-c="nombres.1"></text></g></g>
+      </g><text class="nm" x="0" y="18" text-anchor="middle" data-c="mx.nombre"></text></g></g>
+      <text id="miniHeart" font-size="22" text-anchor="middle" dominant-baseline="central" opacity="0">💕</text>
       <text id="loveHeart" x="341" y="72" font-size="34" text-anchor="middle">💞</text>
-      <g id="plane" opacity="0"><text font-size="24" text-anchor="middle" dominant-baseline="central">✈️</text></g>
+      <g id="plane" opacity="0"><text font-size="22" text-anchor="middle" dominant-baseline="central">✈️</text></g>
     </svg>
-
-    <div class="stats">✈️ <b id="stFl">0</b> vuelos · 🌍 <b id="stKm">0</b> km · 📱 <b>∞</b> videollamadas
+    <div class="stats">✈️ <b id="stFl">0</b> <span data-t="sTrips"></span> · 🌍 <b id="stKm">0</b> km · 📱 <b>∞</b> <span data-t="sCalls"></span>
       <div class="clocks" id="clocks"></div></div>
-
     <div class="pass">
-      <div class="pass-top">✈️ TARJETA DE EMBARQUE <span>Boarding pass</span></div>
+      <div class="pass-top"><span style="opacity:1;font-weight:900;letter-spacing:.1em" data-t="pTitle"></span><span>Boarding pass</span></div>
       <div class="pass-body">
-        <small>Pasaje a nombre de</small><div class="who" data-c="nombres.1"></div>
+        <small data-t="pName"></small><div class="who" data-c="pasajera"></div>
         <div class="route"><b data-c="origen.codigo"></b><i></i><b data-c="destino.codigo"></b></div>
-        <div class="row"><div><small>Desde</small><span data-c="origen.ciudad"></span></div><div><small>Hasta</small><span data-c="destino.ciudad"></span></div></div>
-        <div class="row"><div><small>Asiento</small>1A ❤️</div><div><small>Vuelta</small>Solo de vacaciones 😉</div></div>
+        <div class="row"><div><small data-t="pFrom"></small><span data-c="origen.ciudad"></span></div><div><small data-t="pTo"></small><span data-c="destino.ciudad"></span></div></div>
+        <div class="row"><div><small data-t="pSeat"></small>1A ❤️</div><div><small data-t="pBack"></small><span data-t="pBackVal"></span></div></div>
         <div class="barcode"></div>
-        <div class="oneway">SOLO IDA</div>
+        <div class="oneway" data-t="pStamp"></div>
       </div>
     </div>
   </div></div>
@@ -404,20 +394,17 @@ footer{padding:40px 20px 60px;text-align:center;font-family:var(--hand);font-siz
 
 <!-- ============ FOTOS ============ -->
 <section id="fotos">
-  <div class="kicker" data-reveal>Pruebas del delito</div>
-  <h2 data-reveal>Nuestra historia</h2>
-  <figure class="polaroid" data-reveal style="--x:-120vw;--r0:-40deg;--r1:-4deg">
-    <div class="ph">🥰<small>📸 aquí va una foto</small></div><figcaption>Cómo empezó todo</figcaption></figure>
-  <figure class="polaroid" data-reveal style="--x:120vw;--r0:40deg;--r1:3deg">
-    <div class="ph">✈️<small>📸 aquí va una foto</small></div><figcaption>Entre aeropuertos</figcaption></figure>
-  <figure class="polaroid" data-reveal style="--x:-120vw;--r0:-30deg;--r1:-2deg">
-    <div class="ph">💍<small>📸 aquí va una foto</small></div><figcaption>Y dijo que ¡SÍ!</figcaption></figure>
+  <div class="kicker" data-reveal data-t="phKicker"></div>
+  <h2 data-reveal data-t="phTitle"></h2>
+  <p class="sub hand" data-reveal data-t="phSub"></p>
+  <div class="deck" id="deck"></div>
+  <div class="dots" id="dots"></div>
 </section>
 
 <!-- ============ FECHA ============ -->
 <section id="fecha">
-  <div class="kicker" data-reveal>Apúntalo, que se te olvida</div>
-  <h2 data-reveal>¿Cuándo?</h2>
+  <div class="kicker" data-reveal data-t="dKicker"></div>
+  <h2 data-reveal data-t="dTitle"></h2>
   <div class="calendar" data-reveal>
     <div class="m" id="calM"></div>
     <div class="d"><span id="calD"></span>
@@ -425,229 +412,285 @@ footer{padding:40px 20px 60px;text-align:center;font-family:var(--hand);font-siz
     </div>
     <div class="w" id="calW"></div>
   </div>
-  <p class="hand" data-reveal>Faltan…</p>
+  <p class="datelong" data-reveal id="dateLong"></p>
   <div class="countdown" data-reveal>
-    <div><b id="cdD">0</b><small>días</small></div>
-    <div><b id="cdH">0</b><small>horas</small></div>
+    <div><b id="cdD">0</b><small data-t="uD"></small></div>
+    <div><b id="cdH">0</b><small data-t="uH"></small></div>
     <div><b id="cdM">0</b><small>min</small></div>
-    <div><b id="cdS">0</b><small>seg</small></div>
+    <div><b id="cdS">0</b><small data-t="uS"></small></div>
   </div>
 </section>
 
-<!-- ============ CEREMONIA ============ -->
-<section id="ceremonia">
-  <div class="kicker" data-reveal>Primer acto</div>
-  <h2 data-reveal>La ceremonia</h2>
-  <div class="card" data-reveal>
-    <span class="icon bell" id="bell">🔔</span>
-    <span class="tapme">(tócala)</span>
-    <h3 data-c="ceremonia.nombre"></h3>
-    <p data-c="ceremonia.direccion"></p>
-    <div class="time">⏰ <span data-c="ceremonia.hora"></span> h</div><br>
-    <a class="btn terra" id="mapCer" target="_blank" rel="noopener">📍 Cómo llegar</a>
-    <p style="font-size:.85rem;margin-top:14px">Llega pronto: los pañuelos se reparten por orden de llegada 🤧</p>
-  </div>
-</section>
-
-<!-- ============ RUTA (sticky) ============ -->
-<section class="scene" id="ruta">
-  <div class="sticky"><div class="stage">
-    <div class="route-title">
-      <div class="kicker">Y de ahí…</div>
-      <h2>¡Todos a celebrarlo!</h2>
-    </div>
-    <svg id="routeSvg" viewBox="0 0 300 520">
-      <path id="roadBase" d="M150 70 C 30 140, 270 200, 150 270 S 30 400, 150 450"/>
-      <path id="roadDash" d="M150 70 C 30 140, 270 200, 150 270 S 30 400, 150 450"/>
-      <path id="roadDone" d="M150 70 C 30 140, 270 200, 150 270 S 30 400, 150 450"/>
-      <text x="40" y="95" font-size="26">🌳</text>
-      <text x="245" y="130" font-size="22">🌻</text>
-      <text x="40" y="250" font-size="24">🌳</text>
-      <text x="235" y="345" font-size="28">🐄</text>
-      <text x="215" y="372" font-size="11" font-family="Caveat,cursive" fill="currentColor">¡muuu, felicidades!</text>
-      <text x="60" y="420" font-size="22">🌷</text>
-      <text x="150" y="40" font-size="34" text-anchor="middle">💒</text>
-      <text x="200" y="48" font-size="15" font-family="Caveat,cursive" fill="currentColor">ceremonia</text>
-      <text x="150" y="497" font-size="34" text-anchor="middle">🥂</text>
-      <text x="60" y="505" font-size="15" font-family="Caveat,cursive" fill="currentColor">celebración</text>
-      <g class="arrive"><text x="150" y="470" font-size="14" text-anchor="middle">✨🎉✨</text></g>
-      <g id="honk" opacity="0">
-        <rect x="-44" y="-16" width="88" height="26" rx="13" fill="#fff" stroke="#2b2340" stroke-width="2"/>
-        <text x="0" y="2" font-size="13" text-anchor="middle" font-family="Nunito,sans-serif" font-weight="900" fill="#2b2340">¡PIII PIII!</text>
-      </g>
-      <g id="car"><text font-size="30" text-anchor="middle" dominant-baseline="central">🚗</text></g>
-    </svg>
-  </div></div>
-</section>
-
-<!-- ============ CELEBRACIÓN ============ -->
-<section id="celebracion">
-  <div class="kicker" data-reveal>Segundo acto</div>
-  <h2 data-reveal>A comer se ha dicho</h2>
-  <div class="card" data-reveal>
-    <span class="icon">🍽️</span>
-    <h3 data-c="celebracion.nombre"></h3>
-    <p data-c="celebracion.direccion"></p>
-    <div class="food"><span style="--i:0">🥂</span><span style="--i:1">🍤</span><span style="--i:2">🥘</span><span style="--i:3">🎂</span></div>
-    <div class="time">⏰ <span data-c="celebracion.hora"></span> h</div><br>
-    <a class="btn sage" id="mapCel" target="_blank" rel="noopener">📍 Cómo llegar</a>
-    <p style="font-size:.85rem;margin-top:14px">Menú: pintxos, croquetas y amor a los dos lados del charco.</p>
-  </div>
-</section>
-
-<!-- ============ FIESTA ============ -->
-<section id="fiesta">
-  <div class="beams"></div>
-  <div class="disco"><div class="ball" id="ball"></div></div>
-  <div class="party-content">
-    <div class="kicker" style="color:#ff8be6">Tercer acto</div>
-    <div class="neon">¡Fiesta!</div>
-    <p>A partir de las <b data-c="fiesta.hora"></b> h<br>y hasta que el cuerpo aguante</p>
-    <p style="font-size:.95rem;opacity:.8">Rancheras, reguetón y trikitixa. Todo cabe.</p>
-    <div class="dancers"><span>💃</span><span>🕺</span></div>
-    <button class="btn light" id="party">🔊 Dale caña</button>
+<!-- ============ PLAN DEL DÍA ============ -->
+<section id="plan">
+  <div class="kicker" data-reveal data-t="plKicker"></div>
+  <h2 data-reveal data-t="plTitle"></h2>
+  <p class="sub" data-reveal data-t="plSub"></p>
+  <div class="timeline" id="timeline"><div class="tl-line"><i></i></div></div>
+  <div class="place" data-reveal>
+    <div class="icon">🏨</div>
+    <h3 data-c="lugar.nombre"></h3>
+    <p data-c="lugar.direccion"></p>
+    <br><a class="btn terra" id="mapLink" target="_blank" rel="noopener" data-t="howTo"></a>
+    <p class="joke" data-t="joke"></p>
   </div>
 </section>
 
 <!-- ============ MÚSICA ============ -->
 <section id="musica">
-  <div class="kicker">La banda sonora la ponéis vosotros</div>
-  <h2>¿Qué canción no puede faltar?</h2>
-  <div class="turntable"><div class="vinyl" id="vinyl"><span data-c="iniciales"></span></div></div>
+  <div class="beams"></div>
+  <div class="disco"><div class="ball" id="ball"></div></div>
+  <div class="kicker" data-t="mKicker"></div>
+  <h2 data-t="mTitle"></h2>
+  <p data-t="mSub" style="max-width:380px"></p>
   <div id="spotifyBox" class="spotify"></div>
-  <a class="btn light" id="spCollab" target="_blank" rel="noopener">🎧 Añadir canciones en Spotify</a>
-  <p class="or">¿Sin Spotify? Pídela aquí y se la pasamos al DJ:</p>
-  <form id="songForm" name="canciones" method="POST" data-netlify="true" netlify-honeypot="bot-field">
-    <input type="hidden" name="form-name" value="canciones">
-    <p hidden><label>No rellenar: <input name="bot-field"></label></p>
-    <div class="fieldrow"><input name="cancion" placeholder="Canción *" required autocomplete="off"><button type="button" class="dice" id="dice" title="Inspírame">🎲</button></div>
-    <input name="artista" placeholder="Artista" autocomplete="off">
+  <a class="btn light" id="spCollab" target="_blank" rel="noopener" data-t="mCollab" hidden></a>
+  <p class="or" data-t="mOr"></p>
+  <form class="form" id="songForm" autocomplete="off">
+    <div class="fieldrow"><input name="cancion" data-tp="mSong" required><button type="button" class="dice" id="dice">🎲</button></div>
+    <input name="artista" data-tp="mArtist">
     <div class="chips">
-      <label><input type="radio" name="momento" value="Para bailar" checked><span>💃 Para bailar</span></label>
-      <label><input type="radio" name="momento" value="Primer baile"><span>💞 Primer baile</span></label>
-      <label><input type="radio" name="momento" value="Para cantar a gritos"><span>🎤 Cantar a gritos</span></label>
-      <label><input type="radio" name="momento" value="Para el after"><span>🌙 Para el after</span></label>
+      <label><input type="radio" name="momento" value="c1" checked><span data-t="c1"></span></label>
+      <label><input type="radio" name="momento" value="c2"><span data-t="c2"></span></label>
+      <label><input type="radio" name="momento" value="c3"><span data-t="c3"></span></label>
+      <label><input type="radio" name="momento" value="c4"><span data-t="c4"></span></label>
     </div>
-    <input name="nombre" placeholder="Tu nombre">
-    <button class="btn terra" type="submit">🎶 Pedir canción</button>
+    <input name="nombre" data-tp="mName">
+    <button class="btn terra" type="submit" data-t="mSend"></button>
   </form>
   <div id="songThanks" class="hand"></div>
   <div id="myRequests" class="reqs"></div>
 </section>
 
-<!-- ============ INFO ============ -->
-<section id="info">
-  <div class="kicker" data-reveal>Letra pequeña</div>
-  <h2 data-reveal>Cosas que debes saber</h2>
-  <div class="flips" data-reveal>
-    <div class="flip"><div class="fi">
-      <div class="f"><span>👗</span><b>Dress code</b><small>toca para ver</small></div>
-      <div class="b" data-c="info.dresscode"></div></div></div>
-    <div class="flip"><div class="fi">
-      <div class="f"><span>🎁</span><b>Regalo</b><small>toca para ver</small></div>
-      <div class="b" data-c="info.regalo"></div></div></div>
-    <div class="flip"><div class="fi">
-      <div class="f"><span>🚌</span><b>Transporte</b><small>toca para ver</small></div>
-      <div class="b" data-c="info.transporte"></div></div></div>
-  </div>
-</section>
-
-<!-- ============ RSVP ============ -->
+<!-- ============ CONFIRMACIÓN ============ -->
 <section id="rsvp">
-  <div class="kicker" data-reveal>La pregunta del millón</div>
-  <h2 data-reveal>¿Te vienes?</h2>
-  <p data-reveal>Confírmanoslo antes del <b data-c="confirmarAntes"></b></p>
+  <div class="kicker" data-reveal data-t="rKicker"></div>
+  <h2 data-reveal data-t="rTitle"></h2>
+  <p data-reveal data-t="rDeadline"></p>
   <div class="rsvp-zone" id="zone">
-    <button class="btn terra" id="yes">¡Sí! 🎉</button>
-    <button class="btn" id="no">No</button>
+    <button class="btn terra" id="yes" data-t="yes"></button>
+    <button class="btn" id="no" data-t="no"></button>
   </div>
   <div id="noMsg"></div>
-  <div id="yesBox">
-    <h3>¡Bieeen! 🥳</h3>
-    <p>Ahora díselo a los novios:</p>
-    <a class="btn terra" id="wa" target="_blank" rel="noopener">💬 Confirmar por WhatsApp</a>
-    <a class="btn small" id="gcal" target="_blank" rel="noopener">📅 Añadir al calendario</a>
+  <form class="form" id="rsvpForm" autocomplete="off" hidden>
+    <h3 id="rsvpTitle"></h3>
+    <input name="nombre" data-tp="fName" required>
+    <div class="nums">
+      <label><span data-t="fAdults"></span><div class="step" data-name="adultos"><button type="button" data-d="-1">−</button><output>1</output><button type="button" data-d="1">+</button></div></label>
+      <label><span data-t="fKids"></span><div class="step" data-name="ninos"><button type="button" data-d="-1">−</button><output>0</output><button type="button" data-d="1">+</button></div></label>
+      <label class="onlyYes"><span data-t="fKidMenu"></span><div class="step" data-name="menus"><button type="button" data-d="-1">−</button><output>0</output><button type="button" data-d="1">+</button></div></label>
+    </div>
+    <textarea name="intol" rows="2" class="onlyYes" data-tp="fIntol"></textarea>
+    <textarea name="coment" rows="3" data-tp="fComment"></textarea>
+    <button class="btn terra" type="submit" data-t="fSend"></button>
+    <button class="linklike" type="button" id="changeAns" data-t="fChange"></button>
+  </form>
+  <div id="doneBox" hidden>
+    <h3 id="doneTitle"></h3>
+    <p id="doneText"></p>
+    <a class="btn small" id="gcal" target="_blank" rel="noopener" data-t="addCal"></a>
   </div>
 </section>
 
-<footer>Maitasun handiz · Con todo nuestro amor,<br><span data-c="pareja"></span> 💛</footer>
+<footer>
+  <img src="img/pp-rosa.png" alt="" draggable="false">
+  <p><span data-t="love"></span><br><b data-c="pareja"></b> 💛<br>Eskerrik asko!</p>
+</footer>
 </main>
 
 <script>
 /* =========================================================
-   ✏️  RELLENA AQUÍ LOS DATOS (todo lo demás se adapta solo)
+   ✏️  DATOS (todo lo demás se adapta solo)
    ========================================================= */
 const CONFIG = {
-  nombres: ['Pika', 'Astrid'],
-  fecha: '2027-06-12T12:00:00',              // fecha y hora de la ceremonia
-  ceremonia:   { nombre: 'Sitio de la ceremonia',   hora: '12:00', direccion: 'Calle Ejemplo 1, Bilbao', mapa: '' },
-  celebracion: { nombre: 'Sitio de la celebración', hora: '14:30', direccion: 'Camino Ejemplo 2, Bizkaia', mapa: '' },
-  fiesta: { hora: '18:00' },
-  origen:  { ciudad: 'Ciudad de México', corta: 'CDMX',   codigo: 'MEX', zona: 'America/Mexico_City' },
-  destino: { ciudad: 'Bilbao',           corta: 'Bilbao', codigo: 'BIO', zona: 'Europe/Madrid' },
-  spotify: {
-    playlist: '',   // enlace a la lista, p. ej. https://open.spotify.com/playlist/XXXX (se incrusta para escucharla)
-    invitar: ''     // enlace "Invitar colaboradores" de Spotify (para que añadan canciones)
+  eu: { nombre: 'Ibon' },                       // el que vive aquí
+  mx: { nombre: 'Ástrid' },                     // la que viene de México
+  pasajera: 'Ástrid Lilian Bonales Valle',
+  fecha: '2026-12-20T12:45:00+01:00',          // hora de la ceremonia (hora de aquí)
+  lugar: { nombre: 'Hotel Río Bidasoa', direccion: 'Nafarroa-Behera Kalea, 1 · 20280 Hondarribia (Gipuzkoa)', mapa: 'Hotel Río Bidasoa Hondarribia' },
+  plan: [
+    { hora: '12:45', icon: '💍', es: 'Ceremonia', eu: 'Ezkontza zeremonia' },
+    { hora: '14:00', icon: '🥂', es: 'Cóctel y pintxos', eu: 'Koktela eta pintxoak' },
+    { hora: '15:00', icon: '🍽️', es: 'Banquete', eu: 'Bazkaria' },
+    { hora: '', icon: '💃', es: 'Sobremesa… y lo que surja', eu: 'Bazkalondoa… eta sortzen dena' }
+  ],
+  origen:  { ciudad: 'Mazatlán', codigo: 'MZT', zona: 'America/Mazatlan' },
+  destino: { ciudad: 'Donosti',  codigo: 'EAS', zona: 'Europe/Madrid' },
+  km: 9350,
+  confirmarAntes: { es: '7 de diciembre', eu: 'abenduaren 7a' },
+  telefono: '34626917669',                      // WhatsApp para confirmaciones y canciones
+  spotify: { playlist: '', invitar: '' },       // enlace de la lista y de "Invitar colaboradores"
+  fotos: [                                      // 6 marcos: src = ruta de la foto, pie = texto corto (opcional)
+    { src: '', pie: '' }, { src: '', pie: '' }, { src: '', pie: '' },
+    { src: '', pie: '' }, { src: '', pie: '' }, { src: '', pie: '' }
+  ],
+  caras: { eu: '', mx: '' }                     // fotos de cara para las chinchetas del mapa (opcional)
+};
+CONFIG.pareja = `${CONFIG.mx.nombre} & ${CONFIG.eu.nombre}`;
+CONFIG.iniciales = 'A&I';
+
+/* ================= textos ES / EU ================= */
+const I = CONFIG.eu.nombre, A = CONFIG.mx.nombre;
+const T = {
+  es: {
+    letterSub: 'tienen algo que contarte…',
+    heroKicker: '🎉 Atención, noticia bomba 🎉', stamp: '¡Nos casamos!', late: 'De México a Euskal Herria, con amor 💚', scroll: 'Desliza hacia abajo',
+    cap0: `<span>Érase una vez <em>${I}</em>,</span><span>en Donosti 🌧️</span>`,
+    cap1: `<span>…y <em>${A}</em>,</span><span>en Mazatlán ☀️</span>`,
+    cap2: `<span>Entre los dos:</span><span><em>9.350 km</em> y un océano</span>`,
+    cap3: `<span>Primero, ${I} cruzó el charco…</span>`,
+    cap4: `<span>…luego vino ${A}…</span>`,
+    cap5: `<span>…otra vez ${I}…</span>`,
+    cap6: `<span>…y otra vez ${A}…</span>`,
+    cap7: `<span>…y ${I}, ¡dos veces seguidas! 😅</span><small>(y siempre con billete de vuelta)</small>`,
+    cap8: `<span>Hasta que un día…</span>`,
+    cap9: `<em>¡Billete solo de ida!</em><span>Esta vez, para quedarse 💚</span>`,
+    sea: 'Océano Atlántico', mx: 'MÉXICO', sTrips: 'viajes', sCalls: 'videollamadas',
+    clocks: (a, b) => `🕐 Mazatlán ${a} · Donosti ${b}`, clocksSame: t => `🕐 Por fin en la misma zona horaria: ${t}`,
+    pTitle: '✈️ TARJETA DE EMBARQUE', pName: 'Pasajera', pFrom: 'Desde', pTo: 'Hasta', pSeat: 'Asiento', pBack: 'Vuelta',
+    pBackVal: 'Solo de vacaciones 😉', pStamp: 'SOLO IDA',
+    phKicker: 'Pruebas del delito', phTitle: 'Nuestra historia de amor', phSub: 'Cómo empezó todo', phFrame: n => `Foto ${n}`,
+    dKicker: '📝 Apúntalo, ¡que no se te olvide!', dTitle: '¿Cuándo?', uD: 'días', uH: 'horas', uS: 'seg',
+    plKicker: 'El gran día', plTitle: 'Plan del día', plSub: 'Todo en el mismo sitio, sin coches ni prisas 🙌', later: 'Después',
+    howTo: '📍 Cómo llegar', joke: 'Llega pronto: los pañuelos se reparten por orden de llegada 🤧',
+    mKicker: 'No habrá DJ…', mTitle: '…¡así que la música la ponéis vosotros!',
+    mSub: 'Proponed las canciones que no pueden faltar y las añadiremos a nuestra lista de Spotify 🎶',
+    mSpotifyPh: '🎧 Aquí aparecerá nuestra lista de Spotify, para escucharla desde la invitación.',
+    mCollab: '🎧 Añadir canciones en Spotify', mOr: '¿Sin Spotify? Proponla aquí:',
+    mSong: 'Canción *', mArtist: 'Artista', mName: 'Tu nombre', mSend: '🎶 Proponer canción',
+    c1: '💃 Para bailar', c2: '💞 Para emocionarse', c3: '🎤 Para cantar a gritos', c4: '🌙 Para el final',
+    mThanks: '¡Apuntada! 🎧', mMsg: (s, m, n) => `🎶 Propuesta de canción para la boda: ${s} (${m})${n ? ' — ' + n : ''}`,
+    rKicker: 'La pregunta del millón', rTitle: '¿Vienes?', rDeadline: `Confírmanoslo antes del <b>${CONFIG.confirmarAntes.es}</b>`,
+    yes: '¡Sí! 🎉', no: 'No', noFinal: 'No puedo 😢',
+    excuses: ['¿Seguro? 🤨', 'Habrá pintxos 👀', 'Y tequila 🌵'], noLast: 'Vale… 😢',
+    yesTitle: '¡Bieeen! 🥳', noTitle: '¡Qué pena! 😢',
+    fName: 'Nombre(s) *', fAdults: 'Adultos', fKids: 'Niños', fKidMenu: 'Menús infantiles',
+    fIntol: 'Intolerancias o alergias', fComment: '¿Algo más? Cuéntanos', fSend: '💬 Enviar por WhatsApp', fChange: 'cambiar respuesta',
+    doneYesT: '¡Ya casi está! 🎉', doneYes: 'Solo falta darle a enviar en WhatsApp. ¡Nos vemos en la boda!',
+    doneNoT: '¡Gracias por avisar! 💛', doneNo: 'Solo falta darle a enviar en WhatsApp. ¡Os echaremos de menos!',
+    addCal: '📅 Añadir al calendario', love: 'Con todo nuestro amor,',
+    wa: (yes, d) => `¡Hola, ${A} e ${I}! 💌\n${yes ? '✅ ¡SÍ, allí estaremos!' : '❌ No podremos ir 😢'}\n👤 ${d.nombre}\n👥 Adultos: ${d.adultos} · Niños: ${d.ninos}` +
+      (yes ? `\n🧒 Menús infantiles: ${d.menus}\n🥗 Intolerancias/alergias: ${d.intol || 'ninguna'}` : '') + (d.coment ? `\n💬 ${d.coment}` : ''),
+    calText: `Boda de ${A} e ${I} 💍`, calDetails: 'Ceremonia 12:45 · Cóctel 14:00 · Banquete 15:00',
+    months: ['enero', 'febrero', 'marzo', 'abril', 'mayo', 'junio', 'julio', 'agosto', 'septiembre', 'octubre', 'noviembre', 'diciembre'],
+    days: ['domingo', 'lunes', 'martes', 'miércoles', 'jueves', 'viernes', 'sábado'],
+    dateLong: (y, m, d, w) => `${w[0].toUpperCase() + w.slice(1)}, ${d} de ${m} de ${y}`
   },
-  canciones: 'auto',  // peticiones sin Spotify: 'netlify' (formulario de Netlify), 'whatsapp' o 'auto'
-  confirmarAntes: '1 de mayo',
-  telefono: '34600000000',                   // WhatsApp para confirmar (con prefijo, sin +)
-  info: {
-    dresscode: 'Elegante… pero que se pueda bailar. Tacones de repuesto muy recomendados 👠',
-    regalo: 'Tu presencia es el mejor regalo. Aunque si insistes… ES00 0000 0000 0000 0000 😇',
-    transporte: 'Habrá autobús desde la ceremonia al sitio de la celebración y de vuelta 🚌'
-  },
-  fotos: { cara1: '', cara2: '', historia: ['', '', ''] }   // rutas o URLs de imágenes
+  eu: {
+    letterSub: 'zerbait kontatu nahi dizute…',
+    heroKicker: '🎉 Adi, albiste itzela! 🎉', stamp: 'Ezkondu egingo gara!', late: 'Mexikotik Euskal Herrira, maitasunez 💚', scroll: 'Irristatu behera',
+    cap0: `<span>Bazen behin <em>${I}</em>,</span><span>Donostian 🌧️</span>`,
+    cap1: `<span>…eta <em>${A}</em>,</span><span>Mazatlánen ☀️</span>`,
+    cap2: `<span>Bien artean:</span><span><em>9.350 km</em> eta ozeano bat</span>`,
+    cap3: `<span>Lehenik, ${I}ek ozeanoa zeharkatu zuen…</span>`,
+    cap4: `<span>…gero ${A} etorri zen…</span>`,
+    cap5: `<span>…berriro ${I}…</span>`,
+    cap6: `<span>…eta berriro ${A}…</span>`,
+    cap7: `<span>…eta ${I}, bi aldiz jarraian! 😅</span><small>(eta beti itzulerako txartelarekin)</small>`,
+    cap8: `<span>Harik eta egun batean…</span>`,
+    cap9: `<em>Joateko txartela soilik!</em><span>Oraingoan, geratzeko 💚</span>`,
+    sea: 'Ozeano Atlantikoa', mx: 'MEXIKO', sTrips: 'bidaia', sCalls: 'bideodei',
+    clocks: (a, b) => `🕐 Mazatlán ${a} · Donostia ${b}`, clocksSame: t => `🕐 Azkenean, ordu-eremu berean: ${t}`,
+    pTitle: '✈️ ONTZIRATZE-TXARTELA', pName: 'Bidaiaria', pFrom: 'Nondik', pTo: 'Nora', pSeat: 'Eserlekua', pBack: 'Itzulera',
+    pBackVal: 'Oporretan bakarrik 😉', pStamp: 'JOAN BAKARRIK',
+    phKicker: 'Delituaren frogak', phTitle: 'Gure maitasun istorioa', phSub: 'Nola hasi zen dena', phFrame: n => `${n}. argazkia`,
+    dKicker: '📝 Idatzi agendan, ez ahazteko!', dTitle: 'Noiz?', uD: 'egun', uH: 'ordu', uS: 'seg',
+    plKicker: 'Egun handia', plTitle: 'Eguneko egitaraua', plSub: 'Dena leku berean, autorik eta presarik gabe 🙌', later: 'Gero',
+    howTo: '📍 Nola heldu', joke: 'Etorri garaiz, mukizapiak lehenengo iristen direnen artean banatuko baitira! 🤧',
+    mKicker: 'Ez da DJrik izango…', mTitle: '…beraz, musika zuek jarriko duzue!',
+    mSub: 'Proposatu falta ezin diren abestiak eta gure Spotify zerrendara gehituko ditugu 🎶',
+    mSpotifyPh: '🎧 Hemen agertuko da gure Spotify zerrenda, gonbidapenetik bertatik entzuteko.',
+    mCollab: '🎧 Gehitu abestiak Spotifyn', mOr: 'Spotifyrik ez? Proposatu hemen:',
+    mSong: 'Abestia *', mArtist: 'Artista', mName: 'Zure izena', mSend: '🎶 Abestia proposatu',
+    c1: '💃 Dantzatzeko', c2: '💞 Hunkitzeko', c3: '🎤 Oihuka abesteko', c4: '🌙 Amaierarako',
+    mThanks: 'Apuntatuta! 🎧', mMsg: (s, m, n) => `🎶 Abesti proposamena ezkontzarako: ${s} (${m})${n ? ' — ' + n : ''}`,
+    rKicker: 'Milioi bateko galdera', rTitle: 'Etorriko zara?', rDeadline: `Baieztatu <b>${CONFIG.confirmarAntes.eu}</b> baino lehen`,
+    yes: 'Bai! 🎉', no: 'Ez', noFinal: 'Ezin dut 😢',
+    excuses: ['Ziur? 🤨', 'Pintxoak egongo dira 👀', 'Eta tekila 🌵'], noLast: 'Ados… 😢',
+    yesTitle: 'Ederki! 🥳', noTitle: 'Zer pena! 😢',
+    fName: 'Izena(k) *', fAdults: 'Helduak', fKids: 'Haurrak', fKidMenu: 'Haurren menuak',
+    fIntol: 'Intolerantziak edo alergiak', fComment: 'Besterik? Kontaiguzu', fSend: '💬 Bidali WhatsApp bidez', fChange: 'erantzuna aldatu',
+    doneYesT: 'Ia prest! 🎉', doneYes: 'WhatsAppen bidali botoia sakatzea besterik ez da falta. Ezkontzan ikusiko gara!',
+    doneNoT: 'Eskerrik asko abisatzeagatik! 💛', doneNo: 'WhatsAppen bidali botoia sakatzea besterik ez da falta. Faltan botako zaituztegu!',
+    addCal: '📅 Gehitu egutegira', love: 'Maitasun handiz,',
+    wa: (yes, d) => `Kaixo, ${A} eta ${I}! 💌\n${yes ? '✅ BAI, han izango gara!' : '❌ Ezin izango gara joan 😢'}\n👤 ${d.nombre}\n👥 Helduak: ${d.adultos} · Haurrak: ${d.ninos}` +
+      (yes ? `\n🧒 Haurren menuak: ${d.menus}\n🥗 Intolerantziak/alergiak: ${d.intol || 'bat ere ez'}` : '') + (d.coment ? `\n💬 ${d.coment}` : ''),
+    calText: `${A} eta ${I}en ezkontza 💍`, calDetails: 'Zeremonia 12:45 · Koktela 14:00 · Bazkaria 15:00',
+    months: ['urtarrila', 'otsaila', 'martxoa', 'apirila', 'maiatza', 'ekaina', 'uztaila', 'abuztua', 'iraila', 'urria', 'azaroa', 'abendua'],
+    days: ['igandea', 'astelehena', 'asteartea', 'asteazkena', 'osteguna', 'ostirala', 'larunbata'],
+    dateLong: (y, m, d, w) => `${y}ko ${m.slice(0, -1)}aren ${d}an, ${w}`
+  }
 };
 
 /* ================= utilidades ================= */
 const $ = s => document.querySelector(s), $$ = s => [...document.querySelectorAll(s)];
 const get = path => path.split('.').reduce((o, k) => (o == null ? o : o[k]), CONFIG);
-CONFIG.pareja = CONFIG.nombres.join(' & ');
-CONFIG.iniciales = CONFIG.nombres.map(n => n[0]).join('&');
 $$('[data-c]').forEach(el => { el.textContent = get(el.dataset.c) ?? ''; });
 
-const mapUrl = c => 'https://www.google.com/maps/search/?api=1&query=' + encodeURIComponent(c.mapa || (c.nombre + ' ' + c.direccion));
-$('#mapCer').href = mapUrl(CONFIG.ceremonia);
-$('#mapCel').href = mapUrl(CONFIG.celebracion);
+const FLAGS = {
+  eu: '<svg class="flag" viewBox="0 0 30 20"><rect width="30" height="20" fill="#D52B1E"/><path d="M0 0L30 20M30 0L0 20" stroke="#009B48" stroke-width="3.4"/><path d="M15 0V20M0 10H30" stroke="#fff" stroke-width="3.4"/></svg>',
+  es: '<svg class="flag" viewBox="0 0 30 20"><rect width="10" height="20" fill="#006847"/><rect x="10" width="10" height="20" fill="#fff"/><rect x="20" width="10" height="20" fill="#CE1126"/><circle cx="15" cy="10" r="2.6" fill="#8C5A2B"/></svg>'
+};
+$$('.fl-eu').forEach(e => e.outerHTML = FLAGS.eu);
+$$('.fl-es').forEach(e => e.outerHTML = FLAGS.es);
 
-// nombres del hero, letra a letra
+// bloquear zoom (iOS ignora user-scalable)
+['gesturestart', 'gesturechange'].forEach(ev => document.addEventListener(ev, e => e.preventDefault(), { passive: false }));
+document.addEventListener('touchmove', e => { if (e.touches.length > 1) e.preventDefault(); }, { passive: false });
+let lastTap = 0;
+document.addEventListener('touchend', e => { const n = Date.now(); if (n - lastTap < 300 && !e.target.closest('input,textarea,button,a')) e.preventDefault(); lastTap = n; }, { passive: false });
+
+/* ================= idioma ================= */
+let lang = localStorage.getItem('lang') || ((navigator.language || '').toLowerCase().startsWith('eu') ? 'eu' : 'es');
+const L = () => T[lang];
+const fecha = new Date(CONFIG.fecha);
+const [fy, fm, fd] = CONFIG.fecha.slice(0, 10).split('-').map(Number);
+const fw = new Date(Date.UTC(fy, fm - 1, fd)).getUTCDay();
+function setLang(l) {
+  lang = l; localStorage.setItem('lang', l); document.documentElement.lang = l;
+  $$('[data-t]').forEach(el => {
+    const v = T[l][el.dataset.t]; if (typeof v !== 'string') return;
+    if (el instanceof SVGElement) el.textContent = v; else el.innerHTML = v;
+  });
+  $$('[data-tp]').forEach(el => el.placeholder = T[l][el.dataset.tp]);
+  const other = l === 'es' ? 'eu' : 'es';
+  $('#langBtn').innerHTML = FLAGS[other] + (other === 'eu' ? 'EUSKARA' : 'CASTELLANO');
+  // fecha
+  const mName = L().months[fm - 1], wName = L().days[fw];
+  $('#calM').textContent = mName + ' ' + fy; $('#calD').textContent = fd; $('#calW').textContent = wName;
+  $('#dateLong').textContent = L().dateLong(fy, mName, fd, wName);
+  buildTimeline(); updateClocks(); buildDeckLabels();
+  $('#gcal').href = gcalUrl();
+  if (rsvpState) showForm(rsvpState);
+}
+$('#langBtn').addEventListener('click', () => { setLang(lang === 'es' ? 'eu' : 'es'); tone(660, .12, 'triangle', .1); });
+
+/* ================= portada ================= */
 (() => {
   let i = 0;
   const word = w => [...w].map(ch => `<span class="l" style="--i:${i++}">${ch}</span>`).join('');
-  $('#names').innerHTML = word(CONFIG.nombres[0]) + '<span class="amp">&amp;</span>' + word(CONFIG.nombres[1]);
+  $('#names').innerHTML = word(A) + '<span class="amp">&amp;</span>' + word(I);
+  $('#garland').innerHTML = ['amarillo', 'verde', 'rosa', 'azul', 'morado'].map(c => `<span><img src="img/pp-${c}.png" alt="" draggable="false"></span>`).join('');
+  for (let k = 0; k < 14; k++) {
+    const p = document.createElement('span'); p.className = 'petal';
+    p.textContent = ['🌸', '🌼', '💮', '🍃'][k % 4];
+    p.style.left = Math.random() * 100 + '%';
+    p.style.setProperty('--sway', (Math.random() * 120 - 60) + 'px');
+    p.style.animationDuration = 7 + Math.random() * 7 + 's';
+    p.style.animationDelay = -Math.random() * 14 + 's';
+    $('#hero').appendChild(p);
+  }
 })();
 
-// caras en las chinchetas del mapa
-[['#pinP', CONFIG.fotos.cara1, 0, 'clipP'], ['#pinA', CONFIG.fotos.cara2, 1, 'clipA']].forEach(([sel, src, n, clip]) => {
-  const g = $(sel + ' .bobbing'); g.querySelector('.ini').textContent = CONFIG.nombres[n][0];
-  if (src) {
-    const im = document.createElementNS('http://www.w3.org/2000/svg', 'image');
-    Object.entries({ href: src, x: -20, y: -60, width: 40, height: 40, preserveAspectRatio: 'xMidYMid slice', 'clip-path': `url(#${clip})` })
-      .forEach(([k, v]) => im.setAttribute(k, v));
-    g.appendChild(im);
-  }
-});
-$$('.polaroid .ph').forEach((ph, i) => {
-  const src = CONFIG.fotos.historia[i];
-  if (src) ph.innerHTML = `<img src="${src}" alt="">`;
-});
-
-/* ================= fecha + cuenta atrás ================= */
-const fecha = new Date(CONFIG.fecha);
-$('#calM').textContent = fecha.toLocaleDateString('es-ES', { month: 'long' }) + ' ' + fecha.getFullYear();
-$('#calD').textContent = fecha.getDate();
-$('#calW').textContent = fecha.toLocaleDateString('es-ES', { weekday: 'long' });
+/* ================= cuenta atrás ================= */
 function tick() {
-  let s = Math.max(0, Math.floor((fecha - Date.now()) / 1000));
-  $('#cdD').textContent = Math.floor(s / 86400);
-  $('#cdH').textContent = Math.floor(s % 86400 / 3600);
-  $('#cdM').textContent = Math.floor(s % 3600 / 60);
-  $('#cdS').textContent = s % 60;
+  const s = Math.max(0, Math.floor((fecha - Date.now()) / 1000));
+  $('#cdD').textContent = Math.floor(s / 86400); $('#cdH').textContent = Math.floor(s % 86400 / 3600);
+  $('#cdM').textContent = Math.floor(s % 3600 / 60); $('#cdS').textContent = s % 60;
 }
 tick(); setInterval(tick, 1000);
 
-/* ================= sonidos (WebAudio, sin archivos) ================= */
+/* ================= sonidos ================= */
 let actx;
 function tone(freq, dur = .4, type = 'sine', vol = .25, when = 0) {
   if (!actx) return;
@@ -658,26 +701,19 @@ function tone(freq, dur = .4, type = 'sine', vol = .25, when = 0) {
 }
 const ding = () => { tone(880, 1.2, 'sine', .25); tone(1320, 1, 'sine', .1, .02); };
 const chime = () => [523, 659, 784, 1047].forEach((f, i) => tone(f, .5, 'triangle', .15, i * .09));
-const honk = () => { tone(400, .15, 'square', .06); tone(400, .15, 'square', .06, .22); };
-function beat() {
-  [0, .25, .5, .75, 1, 1.25, 1.5, 1.75].forEach((w, i) => {
-    tone(i % 2 ? 180 : 60, .18, i % 2 ? 'square' : 'sine', i % 2 ? .05 : .4, w);
-    tone([523, 659, 784, 659][i % 4] * 2, .12, 'triangle', .06, w + .125);
-  });
-}
+const sad = () => [392, 370, 349, 330].forEach((f, i) => tone(f, .4, 'triangle', .12, i * .25));
 
 /* ================= confeti ================= */
 const cv = $('#confetti'), ctx = cv.getContext('2d');
-let parts = [], running = false, dpr = Math.min(2, devicePixelRatio || 1);
+let parts = [], running = false; const dpr = Math.min(2, devicePixelRatio || 1);
 function resize() { cv.width = innerWidth * dpr; cv.height = innerHeight * dpr; }
 resize(); addEventListener('resize', resize);
-const COLORS = ['#e2725b', '#e9b44c', '#7a9e7e', '#f4b6c2', '#9cc9e8', '#ff4fd8'];
+const COLORS = ['#e8458b', '#2fa36b', '#f2b134', '#2f8fd8', '#8e5bd0', '#e2725b'];
 function burst(x, y, n = 80, spread = 1) {
   for (let i = 0; i < n; i++) {
     const a = Math.random() * Math.PI * 2, v = (4 + Math.random() * 8) * spread;
-    parts.push({ x, y, vx: Math.cos(a) * v, vy: Math.sin(a) * v - 6, r: Math.random() * 6,
-      vr: (Math.random() - .5) * .4, w: 6 + Math.random() * 6, h: 4 + Math.random() * 6,
-      c: COLORS[i % COLORS.length], life: 1, heart: Math.random() < .15 });
+    parts.push({ x, y, vx: Math.cos(a) * v, vy: Math.sin(a) * v - 6, r: Math.random() * 6, vr: (Math.random() - .5) * .4,
+      w: 6 + Math.random() * 6, h: 4 + Math.random() * 6, c: COLORS[i % COLORS.length], life: 1 });
   }
   if (!running) { running = true; requestAnimationFrame(loop); }
 }
@@ -687,132 +723,136 @@ function loop() {
   for (const p of parts) {
     p.vy += .25; p.vx *= .99; p.x += p.vx; p.y += p.vy; p.r += p.vr; p.life -= .006;
     ctx.save(); ctx.translate(p.x, p.y); ctx.rotate(p.r); ctx.globalAlpha = Math.min(1, p.life * 2);
-    if (p.heart) { ctx.font = '16px serif'; ctx.fillText('💖', -8, 8); }
-    else { ctx.fillStyle = p.c; ctx.fillRect(-p.w / 2, -p.h / 2, p.w, p.h); }
-    ctx.restore();
+    ctx.fillStyle = p.c; ctx.fillRect(-p.w / 2, -p.h / 2, p.w, p.h); ctx.restore();
   }
   if (parts.length) requestAnimationFrame(loop); else { running = false; ctx.clearRect(0, 0, innerWidth, innerHeight); }
 }
 
-/* ================= toques en pantalla = corazones ================= */
+/* ================= toques = corazones ================= */
 document.addEventListener('pointerdown', e => {
-  if (e.target.closest('button,a,.flip,#bell')) return;
+  if (e.target.closest('button,a,input,textarea,label,#intro')) return;
   const set = document.body.classList.contains('party') ? ['🪩', '✨', '🎶', '🎉'] : ['💖', '💕', '🌸', '✨', '🥰'];
   for (let i = 0; i < 3; i++) {
     const s = document.createElement('span'); s.className = 'floaty';
     s.textContent = set[Math.floor(Math.random() * set.length)];
     s.style.left = (e.clientX - 13) + 'px'; s.style.top = (e.clientY - 13) + 'px';
-    s.style.setProperty('--dx', (Math.random() * 120 - 60) + 'px');
-    s.style.setProperty('--rot', (Math.random() * 90 - 45) + 'deg');
+    s.style.setProperty('--dx', (Math.random() * 120 - 60) + 'px'); s.style.setProperty('--rot', (Math.random() * 90 - 45) + 'deg');
     s.style.animationDelay = i * 80 + 'ms';
     document.body.appendChild(s); setTimeout(() => s.remove(), 1700);
   }
 });
 
 /* ================= abrir el sobre ================= */
-$('#seal').addEventListener('click', () => {
+let opened = false;
+function openEnvelope(l) {
+  if (opened) return; opened = true;
+  setLang(l);
   try { actx = new (window.AudioContext || window.webkitAudioContext)(); } catch (e) {}
-  $('#envelope').classList.add('open'); ding();
+  $('#intro').classList.add('opening'); $('#envelope').classList.add('open'); ding();
   setTimeout(() => {
-    $('#intro').classList.add('gone');
-    document.body.classList.remove('locked');
+    $('#intro').classList.add('gone'); document.body.classList.remove('locked'); document.body.classList.add('opened');
     $('#hero').classList.add('in');
-    setTimeout(() => { burst(innerWidth / 2, innerHeight * .45, 120); chime(); }, 1750);
+    setTimeout(() => { burst(innerWidth / 2, innerHeight * .45, 120); chime(); }, 1850);
   }, 1900);
-});
-
-// pétalos cayendo en el hero
-for (let i = 0; i < 16; i++) {
-  const p = document.createElement('span'); p.className = 'petal';
-  p.textContent = ['🌸', '🌼', '💮', '🍃'][i % 4];
-  p.style.left = Math.random() * 100 + '%';
-  p.style.setProperty('--sway', (Math.random() * 120 - 60) + 'px');
-  p.style.animationDuration = 7 + Math.random() * 7 + 's';
-  p.style.animationDelay = -Math.random() * 14 + 's';
-  $('#hero').appendChild(p);
 }
+$$('.langs button').forEach(b => b.addEventListener('click', () => openEnvelope(b.dataset.lang)));
+$('#seal').addEventListener('click', () => openEnvelope(lang));
 
-/* ================= apariciones al hacer scroll ================= */
+/* ================= apariciones ================= */
 const io = new IntersectionObserver(es => es.forEach(e => {
   if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); }
 }), { threshold: .25 });
 $$('[data-reveal]').forEach(el => io.observe(el));
+new IntersectionObserver(es => es.forEach(e => {
+  document.body.classList.toggle('party', e.isIntersecting);
+  document.querySelector('meta[name=theme-color]').content = e.isIntersecting ? '#140f24' : '#fbf4ea';
+}), { rootMargin: '-40% 0px -40% 0px' }).observe($('#musica'));
 
-// modo fiesta (fondo oscuro, bola de discoteca…) en la fiesta y en la música
-const darkSet = new Set();
-const darkIO = new IntersectionObserver(es => {
-  es.forEach(e => e.isIntersecting ? darkSet.add(e.target) : darkSet.delete(e.target));
-  const on = darkSet.size > 0;
-  document.body.classList.toggle('party', on);
-  document.querySelector('meta[name=theme-color]').content = on ? '#140f24' : '#fbf4ea';
-}, { rootMargin: '-40% 0px -40% 0px' });
-[$('#fiesta'), $('#musica')].forEach(el => darkIO.observe(el));
-
-/* ================= escenas ligadas al scroll ================= */
-const caps = $$('.captions p');
-const hist = $('#historia'), trailsG = $('#trails'), plane = $('#plane'), pinA = $('#pinA'), pinP = $('#pinP');
+/* ================= MAPA: los viajes ================= */
+const hist = $('#historia'), trailsG = $('#trails'), plane = $('#plane'), miniHeart = $('#miniHeart');
+const PIN = { I: $('#pinI'), A: $('#pinA') };
 const SVGNS = 'http://www.w3.org/2000/svg';
-// mar con borde ondulado
 (() => { let d = 'M0 118 Q12.5 110 25 118'; for (let x = 50; x <= 400; x += 25) d += ` T${x} 118`; $('#sea').setAttribute('d', d + ' V300 H0Z'); })();
-// posiciones (punta de cada chincheta)
-const A = { x: 62, y: 165 }, P = { x: 340, y: 152 }, A2 = { x: 318, y: 158 }, P2 = { x: 364, y: 150 };
-const arc = (a, b, h) => `M${a.x} ${a.y - 40} C ${a.x + 70} ${h}, ${b.x - 70} ${h}, ${b.x} ${b.y - 40}`;
-const FLIGHTS = [[A, P, 20], [P, A, 90], [A, P, -5], [P, A, 55], [A, A2, 10]];   // el último: solo ida
-const trails = FLIGHTS.map((f, i) => {
-  const el = document.createElementNS(SVGNS, 'path');
-  el.setAttribute('d', arc(...f)); el.setAttribute('class', 'trail' + (i === 4 ? ' final' : ''));
-  trailsG.appendChild(el);
-  const L = el.getTotalLength(); el.style.strokeDasharray = L; el.style.strokeDashoffset = L;
-  return { el, L };
+[['I', CONFIG.caras.eu, 'clipI'], ['A', CONFIG.caras.mx, 'clipA']].forEach(([k, src, clip]) => {
+  const g = PIN[k].querySelector('.bobbing'); g.querySelector('.ini').textContent = (k === 'I' ? I : A)[0];
+  if (src) {
+    const im = document.createElementNS(SVGNS, 'image');
+    Object.entries({ href: src, x: -20, y: -60, width: 40, height: 40, preserveAspectRatio: 'xMidYMid slice', 'clip-path': `url(#${clip})` }).forEach(([a, v]) => im.setAttribute(a, v));
+    g.appendChild(im);
+  }
 });
+// puntas de las chinchetas
+const POS = {
+  I: { home: { x: 340, y: 152 }, host: { x: 364, y: 150 }, away: { x: 88, y: 168 } },   // Ibon: casa, recibiendo visita, de visita en México
+  A: { home: { x: 62, y: 165 }, host: { x: 36, y: 166 }, away: { x: 318, y: 158 } }     // Ástrid: casa, recibiendo visita, de visita aquí
+};
+const arc = (a, b, h) => `M${a.x} ${a.y - 40} C ${a.x + (b.x - a.x) * .25} ${h}, ${a.x + (b.x - a.x) * .75} ${h}, ${b.x} ${b.y - 40}`;
+const TRIPS = [['I', 15, 80], ['A', -5, 65], ['I', 25, 95], ['A', 5, 55], ['I', -10, 85], ['I', 30, 70]];   // [quién, altura ida, altura vuelta]
+const legs = [];
+function addLeg(d, cls) {
+  const el = document.createElementNS(SVGNS, 'path'); el.setAttribute('d', d); el.setAttribute('class', 'trail ' + cls);
+  trailsG.appendChild(el); const L = el.getTotalLength(); el.style.strokeDasharray = L; el.style.strokeDashoffset = L;
+  legs.push({ el, L }); return legs.length - 1;
+}
+TRIPS.forEach(([w, h1, h2]) => { addLeg(arc(POS[w].home, POS[w].away, h1), w); addLeg(arc(POS[w].away, POS[w].home, h2), w); });
+const FINAL = addLeg(arc(POS.A.home, POS.A.away, 10), 'A final');
 const seg = (p, a, b) => Math.min(1, Math.max(0, (p - a) / (b - a)));
-const place = (g, x, y) => { g.style.transform = `translate(${x}px,${y}px)`; };
-place(pinA, A.x, A.y); place(pinP, P.x, P.y);
-function setTrail(i, t) {
-  const { el, L } = trails[i];
+function setLeg(i, t) {
+  const { el, L } = legs[i];
   el.classList.toggle('drawing', t > 0 && t < 1); el.classList.toggle('done', t >= 1);
   if (t < 1) el.style.strokeDashoffset = L * (1 - t);
 }
-const CAP_T = [.06, .12, .18, .30, .42, .66, .84];
+const ptOn = (i, t) => legs[i].el.getPointAtLength(legs[i].L * t);
+function place(k, p, instant) {
+  PIN[k].style.transition = instant ? 'none' : '';
+  PIN[k].style.transform = `translate(${p.x}px,${p.y}px)`;
+}
+function flyPlane(i, t) {
+  const { el, L } = legs[i], l = Math.min(L, L * t + 14);
+  const pt = el.getPointAtLength(l), a = el.getPointAtLength(Math.max(0, l - 1)), b = el.getPointAtLength(Math.min(L, l + 1));
+  plane.setAttribute('transform', `translate(${pt.x},${pt.y}) rotate(${Math.atan2(b.y - a.y, b.x - a.x) * 180 / Math.PI + 45})`);
+  plane.setAttribute('opacity', 1);
+}
+const caps = $$('.captions p');
+const CAP_T = [.05, .10, .15, .24, .33, .42, .51, .70, .86];
 let landedDone = false, stampDone = false;
 function story(p) {
   const idx = CAP_T.filter(t => p >= t).length;
   caps.forEach((c, i) => c.classList.toggle('on', i === idx));
-  hist.classList.toggle('showP', hist.getBoundingClientRect().top < innerHeight * .4);
-  hist.classList.toggle('showA', p >= .06);
+  hist.classList.toggle('showI', hist.getBoundingClientRect().top < innerHeight * .4);
+  hist.classList.toggle('showA', p >= .05);
 
-  let active = null, done = 0, kmT = 0;
-  for (let i = 0; i < 5; i++) {
-    const t = i < 4 ? seg(p, .18 + i * .12, .30 + i * .12) : seg(p, .86, .97);
-    setTrail(i, t); kmT += t;
+  let pos = { I: POS.I.home, A: POS.A.home }, moving = null, done = 0, legsDone = 0, planeOn = false, heart = null;
+  TRIPS.forEach(([w], k) => {
+    const t = seg(p, .15 + k * .09, .24 + k * .09), out = seg(t, 0, .4), back = seg(t, .6, 1);
+    setLeg(2 * k, out); setLeg(2 * k + 1, back); legsDone += out + back;
     if (t >= 1) done++;
-    if (t > 0 && t < 1) active = { i, t };
-  }
-  $('#stFl').textContent = done;
-  $('#stKm').textContent = (Math.round(kmT * 9200 / 100) * 100).toLocaleString('es-ES');
-
-  if (active) {
-    const { el, L } = trails[active.i], l = L * active.t;
-    const pt = el.getPointAtLength(l), a = el.getPointAtLength(Math.max(0, l - 1)), b = el.getPointAtLength(Math.min(L, l + 1));
-    const ang = Math.atan2(b.y - a.y, b.x - a.x) * 180 / Math.PI + 45;     // el emoji ✈️ apunta arriba-derecha
-    plane.setAttribute('transform', `translate(${pt.x},${pt.y}) rotate(${ang})`);
-    plane.setAttribute('opacity', 1);
-  } else plane.setAttribute('opacity', 0);
-
-  // en el último vuelo Astrid viaja detrás del avión
+    if (t > 0 && t < 1) {
+      const host = w === 'I' ? 'A' : 'I';
+      pos[host] = POS[host].host; moving = w;
+      if (back > 0) { const q = ptOn(2 * k + 1, back); pos[w] = { x: q.x, y: q.y + 40 }; if (back < 1) { flyPlane(2 * k + 1, back); planeOn = true; } }
+      else { const q = ptOn(2 * k, out); pos[w] = { x: q.x, y: q.y + 40 }; if (out < 1) { flyPlane(2 * k, out); planeOn = true; } else heart = w === 'I' ? { x: 62, y: 86 } : { x: 341, y: 70 }; }
+    }
+  });
   const tf = seg(p, .86, .97);
-  if (tf >= 1) place(pinA, A2.x, A2.y);
-  else if (tf > 0) {
-    const { el, L } = trails[4], q = el.getPointAtLength(L * Math.max(0, tf - .08 * (1 - tf)));
-    place(pinA, q.x, q.y + 40);
-  } else place(pinA, A.x, A.y);
-  if (p >= .86) place(pinP, P2.x, P2.y); else place(pinP, P.x, P.y);
+  setLeg(FINAL, tf); legsDone += tf; if (tf >= 1) done++;
+  if (tf > 0) {
+    pos.I = POS.I.host; moving = 'A';
+    if (tf < 1) { const q = ptOn(FINAL, tf); pos.A = { x: q.x, y: q.y + 40 }; flyPlane(FINAL, tf); planeOn = true; }
+    else pos.A = POS.A.away;
+  }
+  place('I', pos.I, moving === 'I'); place('A', pos.A, moving === 'A');
+  if (!planeOn) plane.setAttribute('opacity', 0);
+  if (heart) { miniHeart.setAttribute('x', heart.x); miniHeart.setAttribute('y', heart.y); miniHeart.setAttribute('opacity', 1); }
+  else miniHeart.setAttribute('opacity', 0);
 
-  hist.classList.toggle('pass-on', p >= .68 && p < .86);
-  const stamped = p >= .75; hist.classList.toggle('stamped', stamped);
+  $('#stFl').textContent = done;
+  $('#stKm').textContent = (Math.round(legsDone * CONFIG.km / 50) * 50).toLocaleString('es-ES');
+
+  hist.classList.toggle('pass-on', p >= .70 && p < .86);
+  const stamped = p >= .76; hist.classList.toggle('stamped', stamped);
   if (stamped && !stampDone) { stampDone = true; tone(90, .25, 'square', .15); }
   if (!stamped) stampDone = false;
-
   const landed = tf >= 1;
   if (landed !== hist.classList.contains('landed')) { hist.classList.toggle('landed', landed); updateClocks(); }
   if (landed && !landedDone) {
@@ -822,132 +862,147 @@ function story(p) {
 }
 function updateClocks() {
   const f = tz => new Date().toLocaleTimeString('es-ES', { hour: '2-digit', minute: '2-digit', timeZone: tz });
-  $('#clocks').textContent = hist.classList.contains('landed')
-    ? `🕐 Por fin en la misma zona horaria: ${f(CONFIG.destino.zona)}`
-    : `🕐 ${CONFIG.origen.corta} ${f(CONFIG.origen.zona)} · ${CONFIG.destino.corta} ${f(CONFIG.destino.zona)}`;
+  $('#clocks').textContent = hist.classList.contains('landed') ? L().clocksSame(f(CONFIG.destino.zona)) : L().clocks(f(CONFIG.origen.zona), f(CONFIG.destino.zona));
 }
-updateClocks(); setInterval(updateClocks, 15000);
+setInterval(updateClocks, 15000);
 
-const ruta = $('#ruta'), road = $('#roadDone'), car = $('#car'), honkEl = $('#honk');
-const len = road.getTotalLength();
-road.style.strokeDasharray = len;
-let honked = false, carFlip = 1;
-function route(p) {
-  road.style.strokeDashoffset = len * (1 - p);
-  const pt = road.getPointAtLength(len * p), nx = road.getPointAtLength(Math.min(len, len * p + 3));
-  if (Math.abs(nx.x - pt.x) > .3) carFlip = nx.x > pt.x ? -1 : 1;     // el emoji 🚗 mira a la izquierda
-  car.setAttribute('transform', `translate(${pt.x},${pt.y}) scale(${carFlip},1)`);
-  const showHonk = p > .42 && p < .62;
-  honkEl.setAttribute('opacity', showHonk ? 1 : 0);
-  honkEl.setAttribute('transform', `translate(${pt.x},${pt.y - 34})`);
-  if (showHonk && !honked) { honked = true; honk(); }
-  if (!showHonk && (p < .3)) honked = false;
-  ruta.classList.toggle('arrived', p > .97);
+/* ================= FOTOS: baraja que no para ================= */
+const deck = $('#deck'), dotsEl = $('#dots');
+const PH_BG = ['#f6d6c8', '#d7e8d0', '#f9e2b0', '#d3e3f3', '#e6d8f2', '#f8d3e2'];
+const frames = CONFIG.fotos.map((f, i) => {
+  const fr = document.createElement('div'); fr.className = 'frame';
+  fr.style.setProperty('--r', (i % 2 ? 1 : -1) * (2 + Math.random() * 5) + 'deg');
+  fr.innerHTML = `<div class="ph${f.src ? ' has' : ''}" style="background-color:${PH_BG[i % 6]}${f.src ? `;background-image:url('${f.src}')` : ''}">📸<small></small></div><div class="cap">${f.pie || ''}</div>`;
+  deck.appendChild(fr); dotsEl.appendChild(document.createElement('i'));
+  return fr;
+});
+function buildDeckLabels() { frames.forEach((fr, i) => { fr.querySelector('small').textContent = L().phFrame(i + 1); }); }
+let order = frames.map((_, i) => i).reverse();                      // el último del array está arriba
+function stackZ() { order.forEach((fi, z) => frames[fi].style.zIndex = z); [...dotsEl.children].forEach((d, i) => d.classList.toggle('on', i === order[order.length - 1])); }
+stackZ();
+function dealNext() {
+  const top = frames[order[order.length - 1]], dir = Math.random() < .5 ? -1 : 1;
+  top.style.setProperty('--fx', dir * 130 + '%'); top.style.setProperty('--fr', dir * 25 + 'deg');
+  top.classList.add('fly');
+  setTimeout(() => { order.unshift(order.pop()); stackZ(); top.classList.remove('fly'); }, 450);
 }
+let dealing = false;
+new IntersectionObserver(es => { if (es[0].isIntersecting && !dealing) { dealing = true; setInterval(dealNext, 1300); } }, { threshold: .3 }).observe(deck);
+deck.addEventListener('contextmenu', e => e.preventDefault());
 
-const progress = $('#progress');
+/* ================= PLAN DEL DÍA ================= */
+const timeline = $('#timeline');
+function buildTimeline() {
+  $$('.tl-item').forEach(n => n.remove());
+  CONFIG.plan.forEach(it => {
+    const d = document.createElement('div'); d.className = 'tl-item'; d.setAttribute('data-reveal', '');
+    d.innerHTML = `<div class="tl-icon">${it.icon}</div><div class="tl-txt"><div class="tl-time">${it.hora ? it.hora + ' h' : L().later}</div><b>${it[lang]}</b></div>`;
+    timeline.appendChild(d); io.observe(d);
+  });
+}
+$('#mapLink').href = 'https://www.google.com/maps/search/?api=1&query=' + encodeURIComponent(CONFIG.lugar.mapa);
+
+/* ================= scroll ================= */
+const progress = $('#progress'), tlLine = $('.tl-line');
 let ticking = false;
 function onScroll() {
   ticking = false;
-  const h = document.documentElement;
-  progress.style.width = (scrollY / (h.scrollHeight - innerHeight) * 100) + '%';
-  for (const [el, fn] of [[hist, story], [ruta, route]]) {
-    const r = el.getBoundingClientRect();
-    if (r.bottom < -50 || r.top > innerHeight + 50) continue;
-    fn(Math.min(1, Math.max(0, -r.top / (r.height - innerHeight))));
-  }
+  progress.style.width = (scrollY / (document.documentElement.scrollHeight - innerHeight) * 100) + '%';
+  const r = hist.getBoundingClientRect();
+  if (r.bottom > -50 && r.top < innerHeight + 50) story(Math.min(1, Math.max(0, -r.top / (r.height - innerHeight))));
+  const tr = timeline.getBoundingClientRect();
+  tlLine.style.setProperty('--lp', Math.min(1, Math.max(0, (innerHeight * .75 - tr.top) / tr.height)));
 }
 addEventListener('scroll', () => { if (!ticking) { ticking = true; requestAnimationFrame(onScroll); } }, { passive: true });
 addEventListener('resize', onScroll);
-story(0); route(0);
 
-/* ================= interacciones ================= */
-$('#bell').addEventListener('click', e => {
-  ding(); const r = e.target.getBoundingClientRect(); burst(r.left + r.width / 2, r.top + r.height / 2, 30, .6);
-});
-$('#party').addEventListener('click', () => {
-  beat(); burst(innerWidth * .25, innerHeight * .7, 70); burst(innerWidth * .75, innerHeight * .7, 70);
-  document.body.classList.add('shake'); $('#ball').classList.add('fast');
-  setTimeout(() => { document.body.classList.remove('shake'); $('#ball').classList.remove('fast'); }, 2000);
-});
-$$('.flip').forEach(f => f.addEventListener('click', () => { f.classList.toggle('on'); tone(660, .15, 'triangle', .1); }));
-
-/* ================= música: Spotify + peticiones ================= */
+/* ================= MÚSICA ================= */
 (() => {
   const sp = CONFIG.spotify, id = (sp.playlist.match(/playlist\/([A-Za-z0-9]+)/) || [])[1];
   $('#spotifyBox').innerHTML = id
     ? `<iframe src="https://open.spotify.com/embed/playlist/${id}?theme=0" loading="lazy" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"></iframe>`
-    : '<div class="ph">🎧 Aquí aparecerá la lista de Spotify de la boda, para escucharla desde la propia invitación.</div>';
-  const collab = $('#spCollab');
-  if (sp.invitar || sp.playlist) collab.href = sp.invitar || sp.playlist;
-  else collab.addEventListener('click', e => { e.preventDefault(); $('#songThanks').textContent = '(aquí irá el enlace a la lista colaborativa)'; });
-
+    : '<div class="ph" data-t="mSpotifyPh"></div>';
+  if (sp.invitar || sp.playlist) { const c = $('#spCollab'); c.href = sp.invitar || sp.playlist; c.hidden = false; }
   const IDEAS = [['Rosas', 'La Oreja de Van Gogh'], ['Querida', 'Juan Gabriel'], ['El Rey', 'Vicente Fernández'],
     ['Soldadito marinero', 'Fito & Fitipaldis'], ['Bidi Bidi Bom Bom', 'Selena'], ['Hasta la raíz', 'Natalia Lafourcade'],
-    ['Eres', 'Café Tacvba'], ['Ay mamá', 'Rigoberta Bandini'], ['Eres mi religión', 'Maná'], ['Macarena', 'Los del Río'],
-    ['La Bamba', 'Ritchie Valens'], ['Corazón contento', 'Marisol']];
-  const form = $('#songForm'), dice = $('#dice'), vinyl = $('#vinyl');
+    ['Eres', 'Café Tacvba'], ['Txoria txori', 'Mikel Laboa'], ['Eres mi religión', 'Maná'], ['Ay mamá', 'Rigoberta Bandini'],
+    ['La Bamba', 'Ritchie Valens'], ['Lau teilatu', 'Itoiz']];
+  const form = $('#songForm'), dice = $('#dice');
   dice.addEventListener('click', () => {
     const [c, a] = IDEAS[Math.floor(Math.random() * IDEAS.length)];
     form.cancion.value = c; form.artista.value = a;
     dice.classList.remove('roll'); void dice.offsetWidth; dice.classList.add('roll'); tone(520, .1, 'triangle', .1);
   });
-  const useNetlify = CONFIG.canciones === 'netlify' || (CONFIG.canciones === 'auto' && location.hostname.endsWith('netlify.app'));
-  form.addEventListener('submit', async e => {
+  form.addEventListener('submit', e => {
     e.preventDefault();
-    const fd = new FormData(form), cancion = fd.get('cancion').trim();
-    if (!cancion) return;
-    const song = cancion + (fd.get('artista').trim() ? ' – ' + fd.get('artista').trim() : '');
-    const wa = `https://wa.me/${CONFIG.telefono}?text=` + encodeURIComponent(
-      `🎶 Canción para la boda de ${CONFIG.pareja}: ${song} (${fd.get('momento')})` + (fd.get('nombre').trim() ? ` — de ${fd.get('nombre').trim()}` : ''));
-    let ok = false;
-    if (useNetlify) {
-      try { ok = (await fetch('/', { method: 'POST', headers: { 'Content-Type': 'application/x-www-form-urlencoded' }, body: new URLSearchParams(fd).toString() })).ok; } catch (err) {}
-      if (!ok) { location.href = wa; return; }
-    } else window.open(wa, '_blank');
-    $('#songThanks').textContent = '¡Apuntada! El DJ ya está avisado 🎧';
+    const fd = new FormData(form), c = fd.get('cancion').trim(); if (!c) return;
+    const song = c + (fd.get('artista').trim() ? ' – ' + fd.get('artista').trim() : '');
+    window.open(`https://wa.me/${CONFIG.telefono}?text=` + encodeURIComponent(L().mMsg(song, L()[fd.get('momento')], fd.get('nombre').trim())), '_blank');
+    $('#songThanks').textContent = L().mThanks;
     const tag = document.createElement('span'); tag.textContent = '🎵 ' + song; $('#myRequests').appendChild(tag);
-    vinyl.classList.add('fast'); setTimeout(() => vinyl.classList.remove('fast'), 1800);
-    const r = vinyl.getBoundingClientRect(); burst(r.left + r.width / 2, r.top + r.height / 2, 60, .8); chime();
+    $('#ball').classList.add('fast'); setTimeout(() => $('#ball').classList.remove('fast'), 1800);
+    const r = form.getBoundingClientRect(); burst(r.left + r.width / 2, r.top, 60, .8); chime();
     form.reset();
   });
 })();
 
-/* ================= RSVP: el botón "No" que huye ================= */
-const no = $('#no'), yes = $('#yes'), zone = $('#zone'), noMsg = $('#noMsg');
-const excusas = ['¿Seguro? 🤨', 'Venga ya 😅', 'Que no te escapas…', 'Habrá pintxos 👀', 'Y tequila 🌵', 'Mira, déjalo'];
-let tries = 0, tired = false;
+/* ================= CONFIRMACIÓN ================= */
+const no = $('#no'), yes = $('#yes'), zone = $('#zone'), noMsg = $('#noMsg'), rform = $('#rsvpForm');
+let tries = 0, tired = false, rsvpState = null;
 function runAway(e) {
   if (tired) return;
   if (e && e.cancelable) e.preventDefault();
-  const zw = zone.clientWidth, zh = zone.clientHeight;
-  no.style.left = Math.random() * (zw - no.offsetWidth) + 'px';
-  no.style.top = Math.random() * (zh - no.offsetHeight) + 'px';
-  noMsg.textContent = excusas[Math.min(tries, excusas.length - 1)];
-  tone(300 + tries * 60, .12, 'square', .05);
-  if (++tries >= 7) { tired = true; no.textContent = 'Bueno, vale, sí 🙈'; no.style.background = 'var(--sage)'; noMsg.textContent = 'El botón se ha cansado de correr'; }
-  yes.style.transform = `scale(${1 + Math.min(tries, 6) * .08})`;
+  no.style.left = Math.random() * (zone.clientWidth - no.offsetWidth) + 'px';
+  no.style.top = Math.random() * (zone.clientHeight - no.offsetHeight) + 'px';
+  noMsg.textContent = L().excuses[tries]; tone(300 + tries * 60, .12, 'square', .05);
+  if (++tries >= L().excuses.length) { tired = true; setTimeout(() => { no.textContent = L().noFinal; noMsg.textContent = L().noLast; }, 600); }
 }
 no.addEventListener('pointerenter', e => { if (e.pointerType === 'mouse') runAway(e); });
 no.addEventListener('touchstart', runAway, { passive: false });
-no.addEventListener('click', e => { if (tired) sayYes(); else runAway(e); });
-
-const wedEnd = new Date(fecha.getTime() + 14 * 3600e3);
-const fmt = d => d.getFullYear() + String(d.getMonth() + 1).padStart(2, '0') + String(d.getDate()).padStart(2, '0') + 'T' +
-  String(d.getHours()).padStart(2, '0') + String(d.getMinutes()).padStart(2, '0') + '00';
-$('#wa').href = `https://wa.me/${CONFIG.telefono}?text=` + encodeURIComponent(`¡Hola! 🎉 Confirmo que voy a la boda de ${CONFIG.pareja}. Seremos ___ personas. Alergias/intolerancias: ___`);
-$('#gcal').href = 'https://calendar.google.com/calendar/render?action=TEMPLATE' +
-  '&text=' + encodeURIComponent(`Boda de ${CONFIG.pareja} 💍`) +
-  '&dates=' + fmt(fecha) + '/' + fmt(wedEnd) +
-  '&location=' + encodeURIComponent(CONFIG.ceremonia.nombre + ', ' + CONFIG.ceremonia.direccion) +
-  '&details=' + encodeURIComponent(`Ceremonia ${CONFIG.ceremonia.hora} h en ${CONFIG.ceremonia.nombre}. Después, comida y fiesta en ${CONFIG.celebracion.nombre}.`);
-
-function sayYes() {
-  zone.style.display = 'none'; noMsg.textContent = '';
-  $('#yesBox').classList.add('show'); chime();
-  for (let i = 0; i < 4; i++) setTimeout(() => burst(Math.random() * innerWidth, innerHeight * (.3 + Math.random() * .4), 90), i * 250);
+no.addEventListener('click', e => { if (tired) answer('no'); else runAway(e); });
+yes.addEventListener('click', () => answer('yes'));
+function answer(a) {
+  rsvpState = a; zone.hidden = true; noMsg.textContent = '';
+  showForm(a);
+  if (a === 'yes') { chime(); for (let i = 0; i < 4; i++) setTimeout(() => burst(Math.random() * innerWidth, innerHeight * (.3 + Math.random() * .4), 90), i * 250); }
+  else sad();
 }
-yes.addEventListener('click', sayYes);
+function showForm(a) {
+  rform.hidden = false;
+  $('#rsvpTitle').textContent = a === 'yes' ? L().yesTitle : L().noTitle;
+  $$('.onlyYes').forEach(el => el.hidden = a !== 'yes');
+}
+$$('.step').forEach(st => st.addEventListener('click', e => {
+  const b = e.target.closest('button'); if (!b) return;
+  const o = st.querySelector('output'); o.textContent = Math.max(0, Math.min(20, +o.textContent + +b.dataset.d)); tone(600, .06, 'triangle', .08);
+}));
+$('#changeAns').addEventListener('click', () => {
+  rsvpState = null; rform.hidden = true; $('#doneBox').hidden = true; zone.hidden = false;
+  tries = 0; tired = false; no.textContent = L().no; no.style.left = ''; no.style.top = '';
+});
+rform.addEventListener('submit', e => {
+  e.preventDefault();
+  const d = { nombre: rform.nombre.value.trim(), intol: rform.intol.value.trim(), coment: rform.coment.value.trim() };
+  if (!d.nombre) return;
+  $$('.step').forEach(st => d[st.dataset.name] = st.querySelector('output').textContent);
+  const isYes = rsvpState === 'yes';
+  window.open(`https://wa.me/${CONFIG.telefono}?text=` + encodeURIComponent(L().wa(isYes, d)), '_blank');
+  rform.hidden = true; $('#doneBox').hidden = false;
+  $('#doneTitle').textContent = isYes ? L().doneYesT : L().doneNoT;
+  $('#doneText').textContent = isYes ? L().doneYes : L().doneNo;
+  $('#gcal').hidden = !isYes;
+});
+function gcalUrl() {
+  const z = d => d.toISOString().replace(/[-:]/g, '').slice(0, 15) + 'Z';
+  const end = new Date(fecha.getTime() + 8 * 3600e3);
+  return 'https://calendar.google.com/calendar/render?action=TEMPLATE&ctz=Europe/Madrid' +
+    '&text=' + encodeURIComponent(L().calText) + '&dates=' + z(fecha) + '/' + z(end) +
+    '&location=' + encodeURIComponent(CONFIG.lugar.nombre + ', ' + CONFIG.lugar.direccion) + '&details=' + encodeURIComponent(L().calDetails);
+}
+
+/* ================= arranque ================= */
+setLang(lang);
+story(0); onScroll();
 </script>
 </body>
 </html>
