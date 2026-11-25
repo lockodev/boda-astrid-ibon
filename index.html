@@ -180,22 +180,17 @@ body.opened #langBtn{display:flex}
   background:rgba(255,255,255,.88);transform:rotate(-12deg) scale(3);opacity:0;transition:transform .3s ease-in,opacity .2s;white-space:nowrap}
 .stamped .oneway{transform:rotate(-12deg) scale(1);opacity:1}
 
-/* ===== FOTOS ===== */
-.deck{position:relative;width:min(80vw,320px);height:calc(min(80vw,320px) * 1.05);margin:34px auto 6px;pointer-events:none;
-  -webkit-user-select:none;user-select:none;-webkit-touch-callout:none}
-.frame{position:absolute;inset:0;background:#fff;padding:10px 10px 34px;box-shadow:0 12px 30px rgba(60,30,10,.2);
-  transform:rotate(var(--r));transition:transform .3s cubic-bezier(.4,0,.2,1),opacity .3s}
-.frame .cap:empty::after{content:'♥';color:var(--pink);font-size:1.1rem;opacity:.6}
-.frame.fly{transform:translate(var(--fx),-40px) rotate(var(--fr));opacity:0}
-.frame .ph{width:100%;height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;
-  font-size:3rem;color:rgba(0,0,0,.4);background:center/cover no-repeat}
-.frame .ph small{font-size:.9rem;font-weight:900}
-.frame .ph.has{font-size:0}
-.frame .ph.has small{display:none}
-.frame .cap{position:absolute;bottom:10px;left:0;right:0;font-family:var(--hand);font-size:1.4rem;color:var(--ink)}
-.dots{display:flex;flex-wrap:wrap;gap:5px;justify-content:center;margin-top:16px;max-width:300px}
-.dots i{width:6px;height:6px;border-radius:50%;background:#e0cdb8;transition:.3s}
-.dots i.on{background:var(--terra);transform:scale(1.3)}
+/* ===== FOTOS: la mesa ===== */
+#fotos{min-height:0;padding:80px 22px 28px}
+#mesa{min-height:0;height:100vh;height:100svh;padding:0}
+.table{position:relative;width:100%;height:100%;overflow:hidden;perspective:1000px;-webkit-user-select:none;user-select:none;-webkit-touch-callout:none;
+  background:
+    radial-gradient(ellipse at 50% 45%,rgba(255,240,220,.18),rgba(40,20,5,.45) 100%),
+    repeating-linear-gradient(91deg,rgba(60,30,10,.10) 0 2px,transparent 2px 7px,rgba(255,230,200,.05) 7px 9px,transparent 9px 17px),
+    repeating-linear-gradient(89deg,transparent 0 40px,rgba(60,30,10,.08) 40px 42px,transparent 42px 95px),
+    linear-gradient(90deg,#9b6a42,#b47f53 28%,#a5714a 55%,#bb895d 80%,#a06d45)}
+.tphoto{position:absolute;box-sizing:border-box;border:5px solid #fff;border-radius:2px;background:#fff center/cover no-repeat;
+  pointer-events:none;will-change:transform,opacity;opacity:0;backface-visibility:hidden}
 
 /* ===== FECHA ===== */
 .calendar{width:220px;background:#fff;border-radius:18px;overflow:hidden;box-shadow:0 20px 40px rgba(0,0,0,.15);margin:20px auto 8px;
@@ -400,9 +395,8 @@ footer p{font-family:var(--hand);font-size:1.5rem;margin:.6em 0 0;opacity:.85}
   <div class="kicker" data-reveal data-t="phKicker"></div>
   <h2 data-reveal data-t="phTitle"></h2>
   <p class="sub hand" data-reveal data-t="phSub"></p>
-  <div class="deck" id="deck"></div>
-  <div class="dots" id="dots"></div>
 </section>
+<section id="mesa"><div class="table" id="table"></div></section>
 
 <!-- ============ FECHA ============ -->
 <section id="fecha">
@@ -525,7 +519,7 @@ const CONFIG = {
   spotify: { playlist: '', invitar: '' },       // enlace de la lista y de "Invitar colaboradores"
   // fotos de "Nuestra historia": img/fotos/01.jpg … 23.jpg (pie = texto corto opcional)
   fotos: Array.from({ length: 23 }, (_, i) => ({ src: `img/fotos/${String(i + 1).padStart(2, '0')}.jpg`, pie: '' })),
-  fotoMs: 800,                                  // cada cuánto cambia la foto (milisegundos)
+  fotoMs: 650,                                  // cada cuánto cae una foto (milisegundos)
   caras: { eu: '', mx: '' }                     // fotos de cara para las chinchetas del mapa (opcional)
 };
 CONFIG.pareja = `${CONFIG.mx.nombre} & ${CONFIG.eu.nombre}`;
@@ -661,7 +655,7 @@ function setLang(l) {
   const mName = L().months[fm - 1], wName = L().days[fw];
   $('#calM').textContent = mName + ' ' + fy; $('#calD').textContent = fd; $('#calW').textContent = wName;
   $('#dateLong').textContent = L().dateLong(fy, mName, fd, wName);
-  buildTimeline(); updateClocks(); buildDeckLabels();
+  buildTimeline(); updateClocks();
   $('#gcal').href = gcalUrl();
   if (rsvpState) showForm(rsvpState);
 }
@@ -868,30 +862,58 @@ function updateClocks() {
 }
 setInterval(updateClocks, 15000);
 
-/* ================= FOTOS: baraja que no para ================= */
-const deck = $('#deck'), dotsEl = $('#dots');
-const PH_BG = ['#f6d6c8', '#d7e8d0', '#f9e2b0', '#d3e3f3', '#e6d8f2', '#f8d3e2'];
-const frames = CONFIG.fotos.map((f, i) => {
-  const fr = document.createElement('div'); fr.className = 'frame';
-  fr.style.setProperty('--r', (i % 2 ? 1 : -1) * (2 + Math.random() * 5) + 'deg');
-  fr.innerHTML = `<div class="ph${f.src ? ' has' : ''}" style="background-color:${PH_BG[i % 6]}${f.src ? `;background-image:url('${f.src}')` : ''}">📸<small></small></div><div class="cap">${f.pie || ''}</div>`;
-  deck.appendChild(fr); dotsEl.appendChild(document.createElement('i'));
-  return fr;
-});
-function buildDeckLabels() { frames.forEach((fr, i) => { fr.querySelector('small').textContent = L().phFrame(i + 1); }); }
-let order = frames.map((_, i) => i).reverse();                      // el último del array está arriba
-function stackZ() { order.forEach((fi, z) => frames[fi].style.zIndex = z); [...dotsEl.children].forEach((d, i) => d.classList.toggle('on', i === order[order.length - 1])); }
-stackZ();
-function dealNext() {
-  const top = frames[order[order.length - 1]], dir = Math.random() < .5 ? -1 : 1;
-  top.style.setProperty('--fx', dir * 130 + '%'); top.style.setProperty('--fr', dir * 25 + 'deg');
-  top.classList.add('fly');
-  setTimeout(() => { order.unshift(order.pop()); stackZ(); top.classList.remove('fly'); }, 300);
+/* ================= FOTOS: caen sobre la mesa ================= */
+const table = $('#table');
+const fotoImgs = CONFIG.fotos.filter(f => f.src).map(f => { const im = new Image(); im.src = f.src; return im; });
+const fotosReady = Promise.all(fotoImgs.map(im => (im.decode ? im.decode() : Promise.resolve()).catch(() => {})));
+const shuffle = a => { for (let i = a.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [a[i], a[j]] = [a[j], a[i]]; } return a; };
+const rnd = (a, b) => a + Math.random() * (b - a);
+let dropRun = 0, dropTimers = [];
+function clearTable() { dropRun++; dropTimers.forEach(clearTimeout); dropTimers = []; table.innerHTML = ''; }
+async function dropPhotos() {
+  clearTable(); const run = dropRun;
+  await fotosReady; if (run !== dropRun) return;
+  const W = table.clientWidth, H = table.clientHeight, pad = 8, n = fotoImgs.length;
+  // rejilla con algo de desorden: cada foto tiene su hueco, así casi todas quedan a la vista
+  const cols = Math.max(2, Math.round(Math.sqrt(n * W / H))), rows = Math.ceil(n / cols);
+  const cw = (W - 2 * pad) / cols, ch = (H - 2 * pad) / rows;
+  const cells = shuffle([...Array(cols * rows).keys()]).slice(0, n);
+  const order = shuffle([...fotoImgs.keys()]);
+  const L = Math.min(cw * 1.22, ch * 1.3);               // lado mayor de cada foto sobre la mesa
+  const step = CONFIG.fotoMs, dur = step * 2;
+  order.forEach((pi, k) => {
+    const im = fotoImgs[pi], ar = (im.naturalWidth || 4) / (im.naturalHeight || 3);
+    const w = ar >= 1 ? L : L * ar * 1.08, h = ar >= 1 ? L / ar : L * 1.08;
+    const c = cells[k], col = c % cols, row = Math.floor(c / cols);
+    let x = pad + (col + .5) * cw + rnd(-.14, .14) * cw, y = pad + (row + .5) * ch + rnd(-.14, .14) * ch;
+    x = Math.min(W - w / 2 - 2, Math.max(w / 2 + 2, x)); y = Math.min(H - h / 2 - 2, Math.max(h / 2 + 2, y));
+    const r = rnd(-12, 12), r0 = rnd(-9, 9), S = Math.min(W * .86 / w, H * .6 / h);
+    const dx = W / 2 - x + rnd(-12, 12), dy = H * .46 - y + rnd(-12, 12);
+    const drift = [rnd(-14, 14), rnd(-10, 6)], tilt = [rnd(-14, 14), rnd(-14, 14)];
+    const el = document.createElement('div'); el.className = 'tphoto';
+    el.style.cssText = `width:${w}px;height:${h}px;left:${x - w / 2}px;top:${y - h / 2}px;background-image:url("${im.src}");z-index:${k + 1}`;
+    const T = (tx, ty, rz, rx, ry, sc) => `translate(${tx}px,${ty}px) rotateZ(${rz}deg) rotateX(${rx}deg) rotateY(${ry}deg) scale(${sc})`;
+    const kf = [
+      { offset: 0,   opacity: 0, transform: T(dx, dy - 20, r0, 0, 0, S * 1.1), boxShadow: '0 80px 70px rgba(0,0,0,0)', easing: 'ease-out' },
+      { offset: .14, opacity: 1, transform: T(dx, dy, r0, 0, 0, S), boxShadow: '0 70px 60px rgba(0,0,0,.18)', easing: 'ease-in-out' },
+      { offset: .5,  opacity: 1, transform: T(dx + drift[0], dy + drift[1], r0 * .7, tilt[0] * .3, tilt[1] * .3, S * .97), boxShadow: '0 60px 55px rgba(0,0,0,.2)', easing: 'cubic-bezier(.45,0,.95,.55)' },
+      { offset: .88, opacity: 1, transform: T(0, 0, r, tilt[0] * .1, tilt[1] * .1, .965), boxShadow: '0 1px 2px rgba(0,0,0,.45)', easing: 'cubic-bezier(.2,.7,.3,1)' },
+      { offset: .94, opacity: 1, transform: T(rnd(-2, 2), rnd(-2, 2), r + rnd(-1.5, 1.5), 0, 0, 1.012), boxShadow: '0 3px 6px rgba(0,0,0,.35)', easing: 'ease-out' },
+      { offset: 1,   opacity: 1, transform: T(0, 0, r, 0, 0, 1), boxShadow: '0 2px 5px rgba(0,0,0,.35)' }
+    ];
+    dropTimers.push(setTimeout(() => {
+      if (run !== dropRun) return;
+      table.appendChild(el);
+      el.animate(kf, { duration: dur, fill: 'forwards' });
+      dropTimers.push(setTimeout(() => { if (run === dropRun) tone(rnd(110, 150), .09, 'sine', .14); }, dur * .88));
+    }, k * step));
+  });
 }
-CONFIG.fotos.forEach(f => { if (f.src) new Image().src = f.src; });   // precarga
-let dealing = false;
-new IntersectionObserver(es => { if (es[0].isIntersecting && !dealing) { dealing = true; setInterval(dealNext, CONFIG.fotoMs); } }, { threshold: .3 }).observe(deck);
-deck.addEventListener('contextmenu', e => e.preventDefault());
+new IntersectionObserver(es => es.forEach(e => {
+  if (e.intersectionRatio >= .6 && !table.dataset.on) { table.dataset.on = '1'; dropPhotos(); }
+  else if (e.intersectionRatio === 0 && table.dataset.on) { delete table.dataset.on; clearTable(); }
+}), { threshold: [0, .6] }).observe(table);
+table.addEventListener('contextmenu', e => e.preventDefault());
 
 /* ================= PLAN DEL DÍA ================= */
 const timeline = $('#timeline');
