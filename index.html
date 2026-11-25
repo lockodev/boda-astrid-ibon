@@ -183,12 +183,7 @@ body.opened #langBtn{display:flex}
 /* ===== FOTOS: la mesa ===== */
 #fotos{min-height:0;padding:80px 22px 28px}
 #mesa{min-height:0;height:100vh;height:100svh;padding:0}
-.table{position:relative;width:100%;height:100%;overflow:hidden;perspective:1000px;-webkit-user-select:none;user-select:none;-webkit-touch-callout:none;
-  background:
-    radial-gradient(ellipse at 50% 45%,rgba(255,240,220,.18),rgba(40,20,5,.45) 100%),
-    repeating-linear-gradient(91deg,rgba(60,30,10,.10) 0 2px,transparent 2px 7px,rgba(255,230,200,.05) 7px 9px,transparent 9px 17px),
-    repeating-linear-gradient(89deg,transparent 0 40px,rgba(60,30,10,.08) 40px 42px,transparent 42px 95px),
-    linear-gradient(90deg,#9b6a42,#b47f53 28%,#a5714a 55%,#bb895d 80%,#a06d45)}
+.table{position:relative;width:100%;height:100%;overflow:hidden;perspective:1000px;-webkit-user-select:none;user-select:none;-webkit-touch-callout:none}
 .tphoto{position:absolute;box-sizing:border-box;padding:9px 9px 0;border-radius:3px;background:#fff;
   pointer-events:none;will-change:transform,opacity;opacity:0;backface-visibility:hidden}
 .tphoto .im{width:100%;background:center/cover no-repeat}
@@ -229,26 +224,14 @@ body.opened #langBtn{display:flex}
 .place .joke{font-size:.85rem;margin-top:14px}
 
 /* ===== MÚSICA ===== */
-#musica{background:#140f24;color:#fff;overflow:hidden;padding-top:190px}
+#musica{background:#140f24;color:#fff;overflow:hidden;padding-top:190px;padding-bottom:min(210px,18vh + 30px)}
 #musica .kicker{color:#ff8be6}
-.beams{position:absolute;inset:-10% -30% 0;transform-origin:50% 0;opacity:0;transition:opacity 1s;pointer-events:none;
-  background:conic-gradient(from 0deg at 50% 0%,transparent 0 128deg,rgba(255,79,216,.25) 128deg 138deg,transparent 138deg 162deg,
-  rgba(79,216,255,.25) 162deg 172deg,transparent 172deg 190deg,rgba(255,220,79,.25) 190deg 200deg,transparent 200deg 222deg,
-  rgba(120,255,140,.22) 222deg 232deg,transparent 232deg);animation:sway 3.5s ease-in-out infinite alternate}
-body.party .beams{opacity:1}
-@keyframes sway{from{transform:rotate(-14deg)}to{transform:rotate(14deg)}}
-.disco{position:absolute;top:-240px;left:50%;margin-left:-50px;transition:top 1.4s cubic-bezier(.3,1.5,.5,1)}
-body.party .disco{top:0}
-.disco::before{content:'';display:block;width:2px;height:60px;margin:0 auto;background:#888}
-.ball{width:100px;height:100px;border-radius:50%;
-  background:repeating-linear-gradient(90deg,transparent 0 9px,rgba(0,0,0,.3) 9px 10px),
-    repeating-linear-gradient(0deg,transparent 0 9px,rgba(0,0,0,.3) 9px 10px),
-    radial-gradient(circle at 35% 30%,#fff,#c9c9d6 35%,#6c6c80 75%,#3a3a4a);
-  box-shadow:0 0 40px rgba(255,255,255,.5),0 0 90px rgba(255,79,216,.4);animation:spinball 2.5s linear infinite}
-.ball.fast{animation-duration:.4s}
-@keyframes spinball{to{background-position:100px 0,0 0,0 0}}
-#musica > *:not(.beams):not(.disco){position:relative;z-index:1}
-#musica h2{text-shadow:0 0 6px #ff4fd8,0 0 22px rgba(255,79,216,.6)}
+.disco-cv{position:absolute;inset:0;width:100%;height:100%;z-index:0;pointer-events:none}
+#musica > *:not(.disco-cv){position:relative;z-index:1}
+#musica h2,#musica > p{text-shadow:0 2px 10px #000,0 0 22px rgba(0,0,0,.8)}
+#musica h2{text-shadow:0 0 6px #ff4fd8,0 0 22px rgba(255,79,216,.6),0 3px 12px #000}
+.ballhint{position:absolute!important;top:182px;left:0;right:0;font-size:.78rem;opacity:.65;text-shadow:0 1px 6px #000}
+#musica .kicker{margin-top:26px}
 .spotify{width:min(92vw,420px);margin:18px auto 16px}
 .spotify iframe{width:100%;height:352px;border:0;border-radius:14px}
 .spotify .ph{border:2px dashed rgba(255,255,255,.3);border-radius:16px;padding:22px;font-size:.9rem;opacity:.8}
@@ -439,8 +422,7 @@ footer p{font-family:var(--hand);font-size:1.5rem;margin:.6em 0 0;opacity:.85}
 
 <!-- ============ MÚSICA ============ -->
 <section id="musica">
-  <div class="beams"></div>
-  <div class="disco"><div class="ball" id="ball"></div></div>
+  <div class="ballhint" data-t="mBall"></div>
   <div class="kicker" data-t="mKicker"></div>
   <h2 data-t="mTitle"></h2>
   <p data-t="mSub" style="max-width:380px"></p>
@@ -560,6 +542,7 @@ const T = {
     howTo: '📍 Cómo llegar', joke: 'Llega pronto: los pañuelos se reparten por orden de llegada 🤧',
     mKicker: 'No habrá DJ…', mTitle: '…¡así que la música la ponéis vosotros!',
     mSub: 'Proponed las canciones que no pueden faltar y las añadiremos a nuestra lista de Spotify 🎶',
+    mBall: '👆 toca la bola',
     mSpotifyPh: '🎧 Aquí aparecerá nuestra lista de Spotify, para escucharla desde la invitación.',
     mCollab: '🎧 Añadir canciones en Spotify', mOr: '¿Sin Spotify? Proponla aquí:',
     mSong: 'Canción *', mArtist: 'Artista', mName: 'Tu nombre', mSend: '🎶 Proponer canción',
@@ -604,6 +587,7 @@ const T = {
     howTo: '📍 Nola heldu', joke: 'Etorri garaiz, mukizapiak lehenengo iristen direnen artean banatuko baitira! 🤧',
     mKicker: 'Ez da DJrik izango…', mTitle: '…beraz, musika zuek jarriko duzue!',
     mSub: 'Proposatu falta ezin diren abestiak eta gure Spotify zerrendara gehituko ditugu 🎶',
+    mBall: '👆 ukitu bola',
     mSpotifyPh: '🎧 Hemen agertuko da gure Spotify zerrenda, gonbidapenetik bertatik entzuteko.',
     mCollab: '🎧 Gehitu abestiak Spotifyn', mOr: 'Spotifyrik ez? Proposatu hemen:',
     mSong: 'Abestia *', mArtist: 'Artista', mName: 'Zure izena', mSend: '🎶 Abestia proposatu',
@@ -974,6 +958,111 @@ function onScroll() {
 addEventListener('scroll', () => { if (!ticking) { ticking = true; requestAnimationFrame(onScroll); } }, { passive: true });
 addEventListener('resize', onScroll);
 
+/* ================= DISCOTECA: bola de espejos, focos, reflejos y pista ================= */
+const disco = (() => {
+  const sec = $('#musica'), cv = document.createElement('canvas'); cv.className = 'disco-cv'; sec.prepend(cv);
+  const g = cv.getContext('2d');
+  let W = 0, H = 0, dp = 1, running = false, theta = 0, last = 0, turboUntil = 0;
+  const t0 = performance.now();
+  function size() { dp = Math.min(1.5, devicePixelRatio || 1); W = sec.clientWidth; H = sec.clientHeight; cv.width = W * dp; cv.height = H * dp; }
+  const hash = (a, b) => { const s = Math.sin(a * 127.1 + b * 311.7) * 43758.5453; return s - Math.floor(s); };
+  const HEADS = [{ x: .04, ph: 0, sp: .9 }, { x: .3, ph: 1.7, sp: 1.25 }, { x: .7, ph: 3.1, sp: 1.05 }, { x: .96, ph: 4.4, sp: .8 }];
+  const DOTS = Array.from({ length: 90 }, () => ({ lon: Math.random() * Math.PI * 2, y: Math.random(), s: 2 + Math.random() * 3.5, hue: Math.random() * 360, ph: Math.random() * 6 }));
+  const BX = () => W / 2, BY = 112, R = 54;
+  function frame(now) {
+    if (!running) return;
+    const t = (now - t0) / 1000, dt = Math.min(.05, last ? (now - last) / 1000 : 0); last = now;
+    const turbo = now < turboUntil, bpm = turbo ? 150 : 118, beatF = t * bpm / 60, beatN = Math.floor(beatF), pulse = Math.exp(-(beatF % 1) * 5);
+    theta += dt * (turbo ? 2.8 : .55);
+    const bx = BX(), by = BY;
+    g.setTransform(dp, 0, 0, dp, 0, 0);
+    g.globalCompositeOperation = 'source-over';
+    g.fillStyle = '#120d22'; g.fillRect(0, 0, W, H);
+    g.globalCompositeOperation = 'lighter';
+    // focos móviles: barren la sala y laten con el ritmo
+    HEADS.forEach((h, i) => {
+      const hue = (t * 35 + i * 90 + (turbo ? t * 260 : 0)) % 360;
+      const ang = Math.PI / 2 + Math.sin(t * h.sp * (turbo ? 2.3 : 1) + h.ph) * .6;
+      const len = Math.max(H, 900) * 1.1, spread = .075 + .025 * Math.sin(t * 2.7 + i);
+      const x0 = h.x * W, inten = (.16 + .42 * pulse) * (.82 + Math.random() * .18);
+      const gr = g.createLinearGradient(x0, 0, x0 + Math.cos(ang) * len, Math.sin(ang) * len);
+      gr.addColorStop(0, `hsla(${hue},100%,62%,${inten})`); gr.addColorStop(.6, `hsla(${hue},100%,60%,${inten * .35})`); gr.addColorStop(1, `hsla(${hue},100%,60%,0)`);
+      g.fillStyle = gr; g.beginPath(); g.moveTo(x0, 0);
+      g.lineTo(x0 + Math.cos(ang - spread) * len, Math.sin(ang - spread) * len);
+      g.lineTo(x0 + Math.cos(ang + spread) * len, Math.sin(ang + spread) * len); g.closePath(); g.fill();
+      const sg = g.createRadialGradient(x0, 0, 0, x0, 0, 46);
+      sg.addColorStop(0, `hsla(${hue},100%,85%,${.35 + .5 * pulse})`); sg.addColorStop(1, 'hsla(0,0%,0%,0)');
+      g.fillStyle = sg; g.fillRect(x0 - 46, -46, 92, 92);
+    });
+    // reflejos de la bola que recorren las paredes al girar
+    DOTS.forEach(d => {
+      const a = d.lon + theta, c = Math.cos(a); if (c < .05) return;
+      const x = bx + Math.sin(a) * W * .8, y = 30 + d.y * (H - 60);
+      const al = c * (.3 + .3 * Math.sin(t * 7 + d.ph)) * (turbo ? 1.4 : 1), r = d.s * 2.4;
+      const rg = g.createRadialGradient(x, y, 0, x, y, r);
+      rg.addColorStop(0, `hsla(${d.hue},90%,88%,${al})`); rg.addColorStop(1, 'hsla(0,0%,0%,0)');
+      g.fillStyle = rg; g.fillRect(x - r, y - r, r * 2, r * 2);
+    });
+    // pista de baile en perspectiva
+    const fh = Math.min(190, H * .16), fy = H - fh, cols = 7, rows = 5;
+    for (let r = 0; r < rows; r++) for (let c = 0; c < cols; c++) {
+      const v0 = Math.pow(r / rows, 1.35), v1 = Math.pow((r + 1) / rows, 1.35);
+      const w0 = W * (.6 + .5 * v0), w1 = W * (.6 + .5 * v1), y0 = fy + fh * v0 + 1, y1 = fy + fh * v1 - 1;
+      const xa = bx - w0 / 2 + w0 * c / cols + 1, xb = bx - w0 / 2 + w0 * (c + 1) / cols - 1;
+      const xd = bx - w1 / 2 + w1 * c / cols + 1, xc = bx - w1 / 2 + w1 * (c + 1) / cols - 1;
+      const on = hash(c + r * 7, beatN) > .45, hue = hash(c * 3 + r, beatN) * 360;
+      g.fillStyle = `hsla(${hue},100%,55%,${on ? .3 + .45 * pulse : .05})`;
+      g.beginPath(); g.moveTo(xa, y0); g.lineTo(xb, y0); g.lineTo(xc, y1); g.lineTo(xd, y1); g.closePath(); g.fill();
+    }
+    // la bola de espejos
+    g.globalCompositeOperation = 'source-over';
+    g.strokeStyle = '#8a8a9a'; g.lineWidth = 1.5; g.beginPath(); g.moveTo(bx, 0); g.lineTo(bx, by - R); g.stroke();
+    const base = g.createRadialGradient(bx - R * .3, by - R * .3, R * .1, bx, by, R);
+    base.addColorStop(0, '#5a5a66'); base.addColorStop(1, '#0c0c12');
+    g.fillStyle = base; g.beginPath(); g.arc(bx, by, R, 0, Math.PI * 2); g.fill();
+    const STEP = Math.PI / 15, sparks = [];
+    for (let la = -Math.PI / 2 + STEP * .5, li = 0; la < Math.PI / 2 - .01; la += STEP, li++) {
+      const n = Math.max(6, Math.round(30 * Math.cos(la))), dl = Math.PI * 2 / n;
+      for (let k = 0; k < n; k++) {
+        const lo = k * dl + theta, mid = lo + dl * .45, zc = Math.cos(la + STEP * .45) * Math.cos(mid);
+        if (zc <= .03) continue;
+        const P = (A, B) => [bx + R * Math.cos(A) * Math.sin(B), by - R * Math.sin(A)];
+        const p1 = P(la, lo), p2 = P(la, lo + dl * .88), p3 = P(la + STEP * .88, lo + dl * .88), p4 = P(la + STEP * .88, lo);
+        const nx = Math.cos(la) * Math.sin(mid), ny = Math.sin(la);
+        const lit = Math.max(0, -.45 * nx + .55 * ny + .7 * zc);
+        const sp = hash(li, k), tw = Math.pow(Math.max(0, Math.sin(t * (turbo ? 9 : 3) + sp * 50 + mid * 3)), 14);
+        const hue = (t * 50 + sp * 360) % 360;
+        g.fillStyle = tw > .35 ? `hsl(${hue},85%,${62 + 30 * tw}%)` : `hsl(225,12%,${Math.min(92, 14 + 62 * lit + 18 * sp)}%)`;
+        g.beginPath(); g.moveTo(p1[0], p1[1]); g.lineTo(p2[0], p2[1]); g.lineTo(p3[0], p3[1]); g.lineTo(p4[0], p4[1]); g.closePath(); g.fill();
+        if (tw > .85) sparks.push([(p1[0] + p3[0]) / 2, (p1[1] + p3[1]) / 2, hue]);
+      }
+    }
+    g.globalCompositeOperation = 'lighter';
+    const halo = g.createRadialGradient(bx, by, R * .8, bx, by, R * 2.2);
+    halo.addColorStop(0, `hsla(${(t * 40) % 360},100%,75%,${.18 + .2 * pulse})`); halo.addColorStop(1, 'hsla(0,0%,0%,0)');
+    g.fillStyle = halo; g.fillRect(bx - R * 2.2, by - R * 2.2, R * 4.4, R * 4.4);
+    sparks.slice(0, 6).forEach(([x, y, hue]) => {           // destellos en forma de estrella
+      g.strokeStyle = `hsla(${hue},100%,90%,.9)`; g.lineWidth = 1.2; const s = 9 + Math.random() * 6;
+      g.beginPath(); g.moveTo(x - s, y); g.lineTo(x + s, y); g.moveTo(x, y - s); g.lineTo(x, y + s); g.stroke();
+    });
+    if (turbo && pulse > .8) { g.fillStyle = 'rgba(255,255,255,.12)'; g.fillRect(0, 0, W, H); }   // estroboscopio
+    requestAnimationFrame(frame);
+  }
+  function start() { if (running) return; size(); running = true; last = 0; requestAnimationFrame(frame); }
+  function stop() { running = false; }
+  new IntersectionObserver(es => es.forEach(e => e.isIntersecting ? start() : stop()), { rootMargin: '100px' }).observe(sec);
+  if (window.ResizeObserver) new ResizeObserver(() => { if (running) size(); }).observe(sec);
+  function turbo(ms = 3000) {
+    turboUntil = performance.now() + ms;
+    [0, .2, .4, .6, .8, 1, 1.2, 1.4].forEach((w, i) => tone(i % 2 ? 180 : 60, .16, i % 2 ? 'square' : 'sine', i % 2 ? .05 : .35, w));
+  }
+  sec.addEventListener('pointerdown', e => {
+    const r = sec.getBoundingClientRect(), x = e.clientX - r.left, y = e.clientY - r.top;
+    if (Math.hypot(x - BX(), y - BY) < R * 1.4) { turbo(3500); burst(e.clientX, e.clientY, 50, .7); }
+  });
+  return { turbo };
+})();
+
 /* ================= MÚSICA ================= */
 (() => {
   const sp = CONFIG.spotify, id = (sp.playlist.match(/playlist\/([A-Za-z0-9]+)/) || [])[1];
@@ -998,7 +1087,7 @@ addEventListener('resize', onScroll);
     window.open(`https://wa.me/${CONFIG.telefono}?text=` + encodeURIComponent(L().mMsg(song, L()[fd.get('momento')], fd.get('nombre').trim())), '_blank');
     $('#songThanks').textContent = L().mThanks;
     const tag = document.createElement('span'); tag.textContent = '🎵 ' + song; $('#myRequests').appendChild(tag);
-    $('#ball').classList.add('fast'); setTimeout(() => $('#ball').classList.remove('fast'), 1800);
+    disco.turbo(2500);
     const r = form.getBoundingClientRect(); burst(r.left + r.width / 2, r.top, 60, .8); chime();
     form.reset();
   });
