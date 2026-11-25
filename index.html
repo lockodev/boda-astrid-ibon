@@ -697,6 +697,27 @@ function tone(freq, dur = .4, type = 'sine', vol = .25, when = 0) {
 }
 const ding = () => { tone(880, 1.2, 'sine', .25); tone(1320, 1, 'sine', .1, .02); };
 const chime = () => [523, 659, 784, 1047].forEach((f, i) => tone(f, .5, 'triangle', .15, i * .09));
+// sonido de cámara de fotos: "clic" del obturador + "clac" del espejo, hecho con ruido filtrado
+let noiseBuf;
+function shutter() {
+  if (!actx) return;
+  if (!noiseBuf) {
+    noiseBuf = actx.createBuffer(1, Math.floor(actx.sampleRate * .2), actx.sampleRate);
+    const d = noiseBuf.getChannelData(0); for (let i = 0; i < d.length; i++) d[i] = Math.random() * 2 - 1;
+  }
+  const t = actx.currentTime;
+  const hit = (when, dur, freq, q, vol) => {
+    const s = actx.createBufferSource(), f = actx.createBiquadFilter(), g = actx.createGain();
+    s.buffer = noiseBuf; s.playbackRate.value = .9 + Math.random() * .2;
+    f.type = 'bandpass'; f.frequency.value = freq * (.92 + Math.random() * .16); f.Q.value = q;
+    g.gain.setValueAtTime(vol, t + when); g.gain.exponentialRampToValueAtTime(.001, t + when + dur);
+    s.connect(f).connect(g).connect(actx.destination); s.start(t + when); s.stop(t + when + dur + .02);
+  };
+  hit(0, .025, 4200, 1.2, .55);      // clic
+  hit(.004, .04, 900, .9, .35);      // cuerpo
+  hit(.06, .045, 2600, 1, .4);       // clac (se rearma)
+  hit(.064, .05, 500, .8, .3);
+}
 const sad = () => [392, 370, 349, 330].forEach((f, i) => tone(f, .4, 'triangle', .12, i * .25));
 
 /* ================= confeti ================= */
@@ -908,7 +929,7 @@ async function dropPhotos() {
       if (run !== dropRun) return;
       table.appendChild(el);
       el.animate(kf, { duration: dur, fill: 'forwards' });
-      dropTimers.push(setTimeout(() => { if (run === dropRun) tone(rnd(120, 170), .06, 'sine', .08); }, dur * .62));
+      shutter();
     }, k * step));
   });
 }
