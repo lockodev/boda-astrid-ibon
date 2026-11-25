@@ -224,7 +224,7 @@ body.opened #langBtn{display:flex}
 .place .joke{font-size:.85rem;margin-top:14px}
 
 /* ===== MÚSICA ===== */
-#musica{background:#140f24;color:#fff;overflow:hidden;padding-top:190px;padding-bottom:min(210px,18vh + 30px)}
+#musica{background:#140f24;color:#fff;overflow:hidden;padding-top:190px}
 #musica .kicker{color:#ff8be6}
 .disco-cv{position:absolute;inset:0;width:100%;height:100%;z-index:0;pointer-events:none}
 #musica > *:not(.disco-cv){position:relative;z-index:1}
@@ -691,26 +691,30 @@ function tone(freq, dur = .4, type = 'sine', vol = .25, when = 0) {
 }
 const ding = () => { tone(880, 1.2, 'sine', .25); tone(1320, 1, 'sine', .1, .02); };
 const chime = () => [523, 659, 784, 1047].forEach((f, i) => tone(f, .5, 'triangle', .15, i * .09));
-// sonido de cámara de fotos: "clic" del obturador + "clac" del espejo, hecho con ruido filtrado
+// sonido al posarse cada foto: un "plop" suave de papel + una notita de marimba
+// que va subiendo por la escala con cada foto (como una melodía que se va formando)
 let noiseBuf;
-function shutter() {
+const PLOP_NOTES = [523, 587, 659, 784, 880, 1047, 880, 784, 659, 784, 880, 1047, 1175, 1319];   // pentatónica de Do
+function photoPlop(k) {
   if (!actx) return;
   if (!noiseBuf) {
-    noiseBuf = actx.createBuffer(1, Math.floor(actx.sampleRate * .2), actx.sampleRate);
+    noiseBuf = actx.createBuffer(1, Math.floor(actx.sampleRate * .15), actx.sampleRate);
     const d = noiseBuf.getChannelData(0); for (let i = 0; i < d.length; i++) d[i] = Math.random() * 2 - 1;
   }
   const t = actx.currentTime;
-  const hit = (when, dur, freq, q, vol) => {
-    const s = actx.createBufferSource(), f = actx.createBiquadFilter(), g = actx.createGain();
-    s.buffer = noiseBuf; s.playbackRate.value = .9 + Math.random() * .2;
-    f.type = 'bandpass'; f.frequency.value = freq * (.92 + Math.random() * .16); f.Q.value = q;
-    g.gain.setValueAtTime(vol, t + when); g.gain.exponentialRampToValueAtTime(.001, t + when + dur);
-    s.connect(f).connect(g).connect(actx.destination); s.start(t + when); s.stop(t + when + dur + .02);
-  };
-  hit(0, .025, 4200, 1.2, .55);      // clic
-  hit(.004, .04, 900, .9, .35);      // cuerpo
-  hit(.06, .045, 2600, 1, .4);       // clac (se rearma)
-  hit(.064, .05, 500, .8, .3);
+  // papel que cae sobre el montón: ruido muy suave y apagado
+  const s = actx.createBufferSource(), f = actx.createBiquadFilter(), g = actx.createGain();
+  s.buffer = noiseBuf; f.type = 'lowpass'; f.frequency.value = 900;
+  g.gain.setValueAtTime(.05, t); g.gain.exponentialRampToValueAtTime(.001, t + .09);
+  s.connect(f).connect(g).connect(actx.destination); s.start(t); s.stop(t + .1);
+  // notita de marimba: suave, redonda y corta
+  const fr = PLOP_NOTES[k % PLOP_NOTES.length];
+  [[fr, .07, .45], [fr * 4, .012, .12]].forEach(([fq, vol, dec]) => {
+    const o = actx.createOscillator(), gg = actx.createGain();
+    o.type = 'sine'; o.frequency.value = fq;
+    gg.gain.setValueAtTime(0, t + .01); gg.gain.linearRampToValueAtTime(vol, t + .018); gg.gain.exponentialRampToValueAtTime(.0005, t + .018 + dec);
+    o.connect(gg).connect(actx.destination); o.start(t + .01); o.stop(t + .03 + dec);
+  });
 }
 const sad = () => [392, 370, 349, 330].forEach((f, i) => tone(f, .4, 'triangle', .12, i * .25));
 
@@ -922,7 +926,7 @@ async function dropPhotos() {
       if (run !== dropRun) return;
       table.appendChild(el);
       el.animate(kf, { duration: dur, fill: 'forwards' });
-      shutter();
+      dropTimers.push(setTimeout(() => { if (run === dropRun) photoPlop(k); }, dur * .72));   // suena al posarse
     }, k * step));
   });
 }
@@ -1003,17 +1007,6 @@ const disco = (() => {
       rg.addColorStop(0, `hsla(${d.hue},90%,88%,${al})`); rg.addColorStop(1, 'hsla(0,0%,0%,0)');
       g.fillStyle = rg; g.fillRect(x - r, y - r, r * 2, r * 2);
     });
-    // pista de baile en perspectiva
-    const fh = Math.min(190, H * .16), fy = H - fh, cols = 7, rows = 5;
-    for (let r = 0; r < rows; r++) for (let c = 0; c < cols; c++) {
-      const v0 = Math.pow(r / rows, 1.35), v1 = Math.pow((r + 1) / rows, 1.35);
-      const w0 = W * (.6 + .5 * v0), w1 = W * (.6 + .5 * v1), y0 = fy + fh * v0 + 1, y1 = fy + fh * v1 - 1;
-      const xa = bx - w0 / 2 + w0 * c / cols + 1, xb = bx - w0 / 2 + w0 * (c + 1) / cols - 1;
-      const xd = bx - w1 / 2 + w1 * c / cols + 1, xc = bx - w1 / 2 + w1 * (c + 1) / cols - 1;
-      const on = hash(c + r * 7, beatN) > .45, hue = hash(c * 3 + r, beatN) * 360;
-      g.fillStyle = `hsla(${hue},100%,55%,${on ? .3 + .45 * pulse : .05})`;
-      g.beginPath(); g.moveTo(xa, y0); g.lineTo(xb, y0); g.lineTo(xc, y1); g.lineTo(xd, y1); g.closePath(); g.fill();
-    }
     // la bola de espejos
     g.globalCompositeOperation = 'source-over';
     g.strokeStyle = '#8a8a9a'; g.lineWidth = 1.5; g.beginPath(); g.moveTo(bx, 0); g.lineTo(bx, by - R); g.stroke();
