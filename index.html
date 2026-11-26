@@ -544,7 +544,7 @@ const T = {
     mSub: 'Proponed las canciones que no pueden faltar y las añadiremos a nuestra lista de Spotify 🎶',
     mBall: '👆 toca la bola',
     mSpotifyPh: '🎧 Aquí aparecerá nuestra lista de Spotify, para escucharla desde la invitación.',
-    mCollab: '🎧 Añadir canciones en Spotify', mOr: '¿Sin Spotify? Proponla aquí:',
+    mCollab: '🎧 Añadir canciones en Spotify', mOr: '¿Sin Spotify? Proponla aquí:', mOr2: 'Proponed vuestras canciones aquí 👇',
     mSong: 'Canción *', mArtist: 'Artista', mName: 'Tu nombre', mSend: '🎶 Proponer canción',
     c1: '💃 Para bailar', c2: '💞 Para emocionarse', c3: '🎤 Para cantar a gritos', c4: '🌙 Para el final',
     mThanks: '¡Apuntada! 🎧', mMsg: (s, m, n) => `🎶 Propuesta de canción para la boda: ${s} (${m})${n ? ' — ' + n : ''}`,
@@ -589,7 +589,7 @@ const T = {
     mSub: 'Proposatu falta ezin diren abestiak eta gure Spotify zerrendara gehituko ditugu 🎶',
     mBall: '👆 ukitu bola',
     mSpotifyPh: '🎧 Hemen agertuko da gure Spotify zerrenda, gonbidapenetik bertatik entzuteko.',
-    mCollab: '🎧 Gehitu abestiak Spotifyn', mOr: 'Spotifyrik ez? Proposatu hemen:',
+    mCollab: '🎧 Gehitu abestiak Spotifyn', mOr: 'Spotifyrik ez? Proposatu hemen:', mOr2: 'Proposatu zuen abestiak hemen 👇',
     mSong: 'Abestia *', mArtist: 'Artista', mName: 'Zure izena', mSend: '🎶 Abestia proposatu',
     c1: '💃 Dantzatzeko', c2: '💞 Hunkitzeko', c3: '🎤 Oihuka abesteko', c4: '🌙 Amaierarako',
     mThanks: 'Apuntatuta! 🎧', mMsg: (s, m, n) => `🎶 Abesti proposamena ezkontzarako: ${s} (${m})${n ? ' — ' + n : ''}`,
@@ -1059,9 +1059,9 @@ const disco = (() => {
 /* ================= MÚSICA ================= */
 (() => {
   const sp = CONFIG.spotify, id = (sp.playlist.match(/playlist\/([A-Za-z0-9]+)/) || [])[1];
-  $('#spotifyBox').innerHTML = id
-    ? `<iframe src="https://open.spotify.com/embed/playlist/${id}?theme=0" loading="lazy" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"></iframe>`
-    : '<div class="ph" data-t="mSpotifyPh"></div>';
+  // sin enlace de Spotify no se muestra nada de Spotify: solo el formulario para proponer canciones
+  if (id) $('#spotifyBox').innerHTML = `<iframe src="https://open.spotify.com/embed/playlist/${id}?theme=0" loading="lazy" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"></iframe>`;
+  else { $('#spotifyBox').hidden = true; $('.or').dataset.t = sp.invitar ? 'mOr' : 'mOr2'; }
   if (sp.invitar || sp.playlist) { const c = $('#spCollab'); c.href = sp.invitar || sp.playlist; c.hidden = false; }
   const IDEAS = [['Rosas', 'La Oreja de Van Gogh'], ['Querida', 'Juan Gabriel'], ['El Rey', 'Vicente Fernández'],
     ['Soldadito marinero', 'Fito & Fitipaldis'], ['Bidi Bidi Bom Bom', 'Selena'], ['Hasta la raíz', 'Natalia Lafourcade'],
