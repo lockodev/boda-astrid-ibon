@@ -1,0 +1,1255 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
+<title>[PRUEBA SONIDO] Ástrid & Ibon - Ezkondu egingo gara! - ¡Nos casamos!</title>
+<meta name="description" content="Gutun bat duzu! · ¡Tienes correo! 💌">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://lockodev.github.io/boda-astrid-ibon/">
+<meta property="og:title" content="Ástrid & Ibon · Ezkondu egingo gara! · ¡Nos casamos! 💍">
+<meta property="og:description" content="Gutun bat duzu! · ¡Tienes correo! 💌">
+<meta property="og:image" content="https://lockodev.github.io/boda-astrid-ibon/img/og.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="theme-color" content="#fbf4ea">
+<link rel="icon" href="img/pp-rosa.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Caveat:wght@600;700&family=Nunito:wght@400;700;900&family=Playfair+Display:ital,wght@0,700;1,700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --paper:#fbf4ea; --ink:#2b2340; --terra:#e2725b; --sage:#6f9a73;
+  --gold:#e9b44c; --pink:#e8458b;
+  --serif:'Playfair Display',Georgia,serif; --hand:'Caveat','Comic Sans MS',cursive;
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:'Nunito',system-ui,sans-serif;touch-action:pan-x pan-y;
+  transition:background 1.2s ease,color 1.2s ease;-webkit-tap-highlight-color:transparent}
+body.locked{overflow:hidden;height:100vh}
+body.party{}
+main{overflow-x:clip}
+section{min-height:100vh;min-height:100svh;display:flex;flex-direction:column;align-items:center;justify-content:center;
+  padding:70px 22px;text-align:center;position:relative}
+h2{font-family:var(--serif);font-size:clamp(2rem,9vw,3.2rem);margin:.2em 0;line-height:1.1}
+.kicker{text-transform:uppercase;letter-spacing:.2em;font-size:.75rem;font-weight:900;color:var(--terra)}
+.hand{font-family:var(--hand);font-size:1.6rem}
+.sub{margin:.2em 0 0;opacity:.75}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:.5em;border:none;cursor:pointer;text-decoration:none;
+  background:var(--ink);color:#fff;font:700 1rem 'Nunito',sans-serif;padding:.85em 1.4em;border-radius:999px;
+  box-shadow:0 6px 0 rgba(0,0,0,.18);transition:transform .15s}
+.btn:active{transform:translateY(3px);box-shadow:0 3px 0 rgba(0,0,0,.18)}
+.btn.terra{background:var(--terra)} .btn.sage{background:var(--sage)} .btn.light{background:#fff;color:var(--ink)}
+.btn.small{font-size:.85rem;padding:.6em 1.1em}
+[hidden]{display:none!important}
+
+[data-reveal]{opacity:0;transform:translateY(40px);transition:opacity .9s ease,transform .9s cubic-bezier(.2,1.2,.4,1)}
+[data-reveal].in{opacity:1;transform:none}
+
+#progress{position:fixed;top:0;left:0;height:5px;width:0;z-index:60;background:linear-gradient(90deg,var(--pink),var(--gold));border-radius:0 4px 4px 0}
+#progress::after{content:'💍';position:absolute;right:-12px;top:-7px;font-size:16px}
+#confetti{position:fixed;inset:0;pointer-events:none;z-index:90}
+.floaty{position:fixed;pointer-events:none;z-index:80;font-size:26px;animation:floatUp 1.4s ease-out forwards}
+@keyframes floatUp{to{transform:translate(var(--dx),-140px) rotate(var(--rot)) scale(1.4);opacity:0}}
+@keyframes popIn{from{transform:scale(0)}}
+
+.flag{width:24px;height:16px;border-radius:3px;display:block;box-shadow:0 0 0 1px rgba(0,0,0,.12);flex:none}
+#langBtn{position:fixed;top:14px;right:12px;z-index:70;display:none;align-items:center;gap:6px;background:rgba(255,255,255,.92);border:none;
+  border-radius:999px;padding:6px 12px 6px 8px;font:900 .78rem 'Nunito',sans-serif;box-shadow:0 4px 14px rgba(0,0,0,.18);cursor:pointer;color:var(--ink)}
+body.opened #langBtn{display:flex}
+#sndBtn{position:fixed;top:14px;left:12px;z-index:70;display:none;width:38px;height:38px;border-radius:50%;border:none;background:rgba(255,255,255,.92);
+  box-shadow:0 4px 14px rgba(0,0,0,.18);font-size:18px;line-height:38px;text-align:center;cursor:pointer;padding:0}
+body.opened #sndBtn{display:block}
+
+/* ===== SOBRE ===== */
+#intro{position:fixed;inset:0;z-index:100;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:30px;padding:20px;
+  background:radial-gradient(circle at 50% 40%,#fff8ee,#efd7bd);transition:opacity .9s,visibility .9s;text-align:center}
+#intro.gone{opacity:0;visibility:hidden}
+#intro .top{font-family:var(--hand);font-size:2rem;line-height:1.1;animation:wobble 2.5s ease-in-out infinite}
+@keyframes wobble{0%,100%{transform:rotate(-3deg)}50%{transform:rotate(3deg)}}
+.envelope{position:relative;width:290px;height:185px;background:#e6c39d;border-radius:8px;box-shadow:0 25px 50px rgba(90,50,20,.25);perspective:900px}
+.envelope .letter{position:absolute;left:14px;right:14px;bottom:10px;height:165px;background:#fffdf8;border-radius:6px;z-index:1;
+  padding:18px 10px;display:flex;flex-direction:column;align-items:center;justify-content:center;
+  transition:transform 1s cubic-bezier(.3,1.3,.5,1) .55s;box-shadow:0 2px 6px rgba(0,0,0,.1)}
+.envelope .letter b{font-family:var(--serif);font-size:1.6rem}
+.envelope .letter span{font-family:var(--hand);font-size:1.3rem;color:var(--terra)}
+.envelope .pocket{position:absolute;inset:0;z-index:2;border-radius:8px;background:#ddb388;clip-path:polygon(0 0,50% 58%,100% 0,100% 100%,0 100%)}
+.envelope .flap{position:absolute;top:0;left:0;right:0;height:118px;z-index:3;background:#d1a275;border-radius:8px 8px 0 0;
+  clip-path:polygon(0 0,100% 0,50% 100%);transform-origin:top;transition:transform .6s ease,z-index 0s .3s}
+.envelope.open .flap{transform:rotateX(180deg);z-index:0}
+.envelope.open .letter{transform:translateY(-130px) rotate(-2deg)}
+.seal{position:absolute;left:50%;top:104px;width:70px;height:70px;margin:-35px 0 0 -35px;border-radius:50%;z-index:4;cursor:pointer;border:none;
+  background:radial-gradient(circle at 35% 30%,#f08a73,#b23e2a 70%);color:#ffe9dc;font:700 1.15rem var(--serif);
+  box-shadow:0 4px 10px rgba(0,0,0,.3),inset 0 -4px 8px rgba(0,0,0,.25);animation:pulse 1.5s ease-in-out infinite}
+.envelope.open .seal{animation:none;transform:scale(0) rotate(90deg);transition:transform .35s}
+@keyframes pulse{0%,100%{transform:scale(1)}50%{transform:scale(1.12)}}
+.langs{display:flex;gap:12px;flex-wrap:wrap;justify-content:center;transition:opacity .4s}
+.langs button{display:flex;align-items:center;gap:10px;background:#fff;border:none;border-radius:999px;padding:12px 20px;
+  font:900 1rem 'Nunito',sans-serif;box-shadow:0 6px 0 rgba(0,0,0,.12);cursor:pointer;color:var(--ink)}
+.langs button:active{transform:translateY(3px)}
+.langs .flag{width:30px;height:20px}
+#intro .hint{font-size:.85rem;opacity:.65;margin-top:-14px}
+#intro.opening .langs,#intro.opening .hint{opacity:0;pointer-events:none}
+
+/* ===== HERO ===== */
+#hero{overflow:hidden;padding-top:140px}
+.garland{position:absolute;top:0;left:50%;transform:translateX(-50%);display:flex;width:max-content;pointer-events:none}
+.garland::before{content:'';position:absolute;top:3px;left:0;right:0;height:3px;background:#a0805f;border-radius:2px}
+.garland span{display:block;margin:0 -1vw;transform:translateY(-110%);transition:transform 1s cubic-bezier(.3,1.5,.5,1)}
+#hero.in .garland span{transform:none}
+.garland span:nth-child(2){transition-delay:.1s}.garland span:nth-child(3){transition-delay:.2s}.garland span:nth-child(4){transition-delay:.3s}.garland span:nth-child(5){transition-delay:.4s}
+.garland img{display:block;width:30vw;max-width:170px;transform-origin:50% 0;animation:flagSwing 3s ease-in-out infinite alternate;filter:drop-shadow(0 5px 4px rgba(0,0,0,.12))}
+.garland span:nth-child(even) img{animation-delay:-1.5s}
+@keyframes flagSwing{from{transform:rotate(-3.5deg)}to{transform:rotate(3.5deg)}}
+.petal{position:absolute;top:-40px;font-size:22px;animation:fall linear infinite;opacity:.8;pointer-events:none}
+@keyframes fall{to{transform:translate(var(--sway),115vh) rotate(540deg)}}
+.names{font-family:var(--serif);font-size:clamp(3.2rem,17vw,6.5rem);line-height:.95;margin:0;padding-top:.22em}
+#hero .kicker{margin-bottom:14px}
+.names .l{display:inline-block;opacity:0;transform:translateY(-90px) rotate(-25deg)}
+#hero.in .names .l{animation:drop .8s cubic-bezier(.2,1.6,.4,1) forwards;animation-delay:calc(var(--i)*70ms + .3s)}
+@keyframes drop{to{opacity:1;transform:none}}
+.amp{display:block;font-family:var(--hand);color:var(--pink);font-size:clamp(3rem,14vw,5rem);margin:.05em 0;opacity:0;transform:scale(0) rotate(-180deg)}
+#hero.in .amp{animation:ampIn .9s cubic-bezier(.2,1.6,.4,1) .8s forwards}
+@keyframes ampIn{to{opacity:1;transform:none}}
+.stamp{display:inline-block;margin-top:44px;border:4px solid var(--terra);color:var(--terra);padding:.3em .7em;border-radius:8px;
+  font:900 1.15rem 'Nunito',sans-serif;letter-spacing:.04em;text-transform:uppercase;opacity:0;transform:rotate(-7deg) scale(3)}
+#hero.in .stamp{animation:stamp .35s ease-in 1.8s forwards}
+@keyframes stamp{60%{opacity:1;transform:rotate(-7deg) scale(.9)}100%{opacity:1;transform:rotate(-7deg) scale(1)}}
+.late{margin-top:28px;opacity:0;transition:opacity 1s 2.3s}
+#hero.in .late{opacity:.9}
+.scrollhint{position:absolute;bottom:24px;left:0;right:0;font-size:.85rem;opacity:0;transition:opacity 1s 2.6s}
+#hero.in .scrollhint{opacity:.75}
+.scrollhint i{display:block;font-style:normal;font-size:1.6rem;animation:bounce 1.2s infinite}
+@keyframes bounce{50%{transform:translateY(8px)}}
+
+/* ===== MAPA ===== */
+.scene{display:block;padding:0;min-height:0}
+#historia{height:680vh}
+.sticky{position:sticky;top:0;height:100vh;height:100svh;overflow:hidden;display:flex;align-items:center;justify-content:center}
+.stage{position:relative;width:100%;max-width:520px;height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;padding:0 10px}
+.captions{position:relative;width:100%;height:112px;flex:none}
+.captions p{position:absolute;inset:0;margin:0;display:flex;flex-direction:column;align-items:center;justify-content:flex-end;
+  font-family:var(--serif);font-size:clamp(1.3rem,6.2vw,2.1rem);line-height:1.2;opacity:0;transform:translateY(18px) scale(.96);transition:.45s}
+.captions p.on{opacity:1;transform:none}
+.captions p em{font-family:var(--hand);font-style:normal;color:var(--terra);font-size:1.3em}
+.captions p small{font-family:'Nunito',sans-serif;font-size:.5em;opacity:.6}
+#mapSvg{width:100%;max-height:52vh;overflow:visible;flex:none;margin-top:8px}
+#mapSvg .lbl{font:900 10px 'Nunito',sans-serif;letter-spacing:.1em;fill:#2b2340;opacity:.75}
+#mapSvg .sea-lbl{font:italic 700 12px 'Playfair Display',serif;fill:#2f6d8f;opacity:.6}
+.wave{fill:none;stroke:#fff;stroke-width:2;stroke-linecap:round;opacity:.55;stroke-dasharray:14 10;animation:waveMove 3s linear infinite}
+@keyframes waveMove{to{stroke-dashoffset:-48}}
+.cloud{animation:cloud 16s linear infinite}
+@keyframes cloud{from{transform:translateX(-60px)}to{transform:translateX(460px)}}
+.bobbing{animation:bobY 2.4s ease-in-out infinite}
+@keyframes bobY{50%{transform:translateY(-5px)}}
+.trail{fill:none;stroke-width:3;stroke-linecap:round;opacity:0}
+.trail.I{stroke:var(--sage)} .trail.A{stroke:var(--terra)}
+.trail.drawing{opacity:1}
+.trail.done{opacity:.4;stroke-dasharray:3 7!important;stroke-dashoffset:0!important}
+.trail.final{stroke:var(--gold);stroke-width:4}
+.trail.final.done{opacity:1;stroke-dasharray:none!important}
+.trail.faded{opacity:0!important;transition:opacity .9s ease}
+.pin .pin-in{transform:scale(0);transform-box:fill-box;transform-origin:50% 100%;transition:transform .55s cubic-bezier(.2,1.8,.4,1)}
+.showI #pinI .pin-in,.showA #pinA .pin-in{transform:scale(1)}
+.pin{transition:transform .6s cubic-bezier(.3,1.4,.5,1)}
+.pin text.ini{font:700 22px 'Playfair Display',serif;fill:#fff}
+.pin text.nm{font:700 16px 'Caveat',cursive;fill:#2b2340}
+#miniHeart{transition:opacity .3s}
+#loveHeart{transform:scale(0);transform-box:fill-box;transform-origin:center;transition:transform .5s cubic-bezier(.2,1.8,.4,1)}
+.landed #loveHeart{transform:scale(1)}
+#rain,#rainbow{transition:opacity .8s}
+#rainbow,.landed #rain{opacity:0}
+.landed #rainbow{opacity:1}
+.stats{font-size:.82rem;font-weight:700;line-height:1.7;opacity:.9;margin-top:6px}
+.stats b{font-family:var(--serif);font-size:1.05rem;color:var(--terra)}
+.clocks{font-size:.78rem;opacity:.7;font-weight:400}
+.pass{position:absolute;left:50%;bottom:3%;width:min(92%,350px);background:#fff;color:var(--ink);border-radius:18px;overflow:hidden;text-align:left;
+  box-shadow:0 20px 50px rgba(0,0,0,.25);transform:translate(-50%,160%) rotate(6deg);transition:transform .7s cubic-bezier(.3,1.3,.5,1);z-index:5}
+.pass-on .pass{transform:translate(-50%,0) rotate(-2deg)}
+.pass-top{background:var(--ink);color:#fff;padding:10px 16px;font-weight:900;font-size:.74rem;letter-spacing:.1em;display:flex;justify-content:space-between;gap:8px}
+.pass-top span{opacity:.6;font-weight:400;letter-spacing:0}
+.pass-body{padding:12px 16px 14px;position:relative}
+.pass small{display:block;font-size:.6rem;text-transform:uppercase;letter-spacing:.12em;opacity:.5;font-weight:900}
+.pass .who{font:700 1.05rem var(--serif)}
+.pass .route{display:flex;align-items:center;gap:10px;margin:6px 0}
+.pass .route b{font:700 2rem var(--serif)}
+.pass .route i{flex:1;border-top:2px dashed #bbb;position:relative}
+.pass .route i::after{content:'✈️';position:absolute;left:50%;top:-15px;transform:translateX(-50%) rotate(45deg);font-style:normal}
+.pass .row{display:flex;gap:16px;margin-top:8px;font-weight:700;font-size:.86rem}
+.pass .row>div{flex:1}
+.pass .barcode{height:28px;margin-top:12px;background:repeating-linear-gradient(90deg,var(--ink) 0 2px,transparent 2px 4px,var(--ink) 4px 7px,transparent 7px 9px,var(--ink) 9px 10px,transparent 10px 13px)}
+.oneway{position:absolute;right:10px;top:66px;border:4px solid var(--pink);color:var(--pink);font:900 1.1rem 'Nunito',sans-serif;padding:.15em .5em;border-radius:8px;
+  background:rgba(255,255,255,.88);transform:rotate(-12deg) scale(3);opacity:0;transition:transform .3s ease-in,opacity .2s;white-space:nowrap}
+.stamped .oneway{transform:rotate(-12deg) scale(1);opacity:1}
+
+/* ===== FOTOS: la mesa ===== */
+#fotos{min-height:0;padding:80px 22px 28px}
+#mesa{min-height:0;height:100vh;height:100svh;padding:0}
+.table{position:relative;width:100%;height:100%;overflow:hidden;perspective:1000px;-webkit-user-select:none;user-select:none;-webkit-touch-callout:none}
+.tphoto{position:absolute;box-sizing:border-box;padding:9px 9px 0;border-radius:3px;background:#fff;
+  pointer-events:none;will-change:transform,opacity;opacity:0;backface-visibility:hidden}
+.tphoto .im{width:100%;background:center/cover no-repeat}
+.tphoto .cap{height:44px;display:flex;align-items:center;justify-content:center;gap:.35em;white-space:nowrap;overflow:hidden;
+  font-family:var(--hand);font-size:1.4rem;color:var(--ink)}
+.tphoto .cap small{font-size:.8em;color:var(--terra)}
+
+/* ===== FECHA ===== */
+.calendar{width:220px;background:#fff;border-radius:18px;overflow:hidden;box-shadow:0 20px 40px rgba(0,0,0,.15);margin:20px auto 8px;
+  transform-origin:top;transform:perspective(600px) rotateX(-95deg);opacity:0;transition:transform 1.1s cubic-bezier(.2,1.5,.4,1),opacity .4s}
+.calendar.in{transform:perspective(600px) rotateX(0);opacity:1}
+.calendar .m{background:var(--terra);color:#fff;font-weight:900;letter-spacing:.2em;text-transform:uppercase;padding:12px}
+.calendar .d{position:relative;font:700 6rem/1 var(--serif);padding:14px 0 0;color:var(--ink)}
+.calendar .d svg{position:absolute;left:50%;top:50%;width:170px;height:130px;transform:translate(-50%,-46%);overflow:visible}
+.calendar .d path{fill:none;stroke:var(--pink);stroke-width:4;stroke-linecap:round;stroke-dasharray:520;stroke-dashoffset:520;transition:stroke-dashoffset 1.3s ease 1s}
+.calendar.in .d path{stroke-dashoffset:0}
+.calendar .w{padding:4px 0 16px;color:#777;text-transform:capitalize;font-weight:700}
+.datelong{font-weight:700;font-size:1.05rem}
+.countdown{display:flex;gap:10px;justify-content:center;margin-top:14px;flex-wrap:wrap}
+.countdown div{background:var(--ink);color:#fff;border-radius:14px;padding:10px 0;width:70px}
+.countdown b{display:block;font:700 1.8rem var(--serif)}
+.countdown small{font-size:.7rem;text-transform:uppercase;letter-spacing:.1em;opacity:.7}
+
+/* ===== PLAN ===== */
+.timeline{position:relative;width:min(88vw,380px);margin:26px auto 10px;text-align:left}
+.tl-line{position:absolute;left:31px;top:20px;bottom:20px;width:4px;background:#ead9c4;border-radius:2px;overflow:hidden}
+.tl-line i{position:absolute;inset:0;background:linear-gradient(var(--terra),var(--pink));transform-origin:top;transform:scaleY(var(--lp,0))}
+.tl-item{position:relative;display:flex;align-items:center;gap:16px;margin:0 0 22px}
+.tl-icon{flex:none;width:66px;height:66px;border-radius:50%;background:#fff;border:3px solid var(--terra);display:flex;align-items:center;justify-content:center;
+  font-size:1.9rem;z-index:1;box-shadow:0 6px 16px rgba(0,0,0,.1)}
+.tl-item.in .tl-icon{animation:popIn .6s cubic-bezier(.3,1.7,.5,1)}
+.tl-time{font:900 .85rem 'Nunito',sans-serif;color:var(--terra);letter-spacing:.08em}
+.tl-txt b{display:block;font:700 1.25rem var(--serif);line-height:1.2}
+.place{background:#fff;color:var(--ink);border-radius:26px;padding:26px 22px;width:min(90vw,380px);box-shadow:0 18px 40px rgba(0,0,0,.12);margin-top:10px}
+.place .icon{font-size:3rem}
+.place h3{font-family:var(--serif);font-size:1.6rem;margin:.2em 0 .1em}
+.place p{margin:.3em 0;opacity:.8}
+.place .joke{font-size:.85rem;margin-top:14px}
+
+/* ===== MÚSICA ===== */
+#musica{background:linear-gradient(180deg,#fde9f1 0%,#f1e8fb 55%,#fbf4ea 100%);color:var(--ink);overflow:hidden;padding-top:190px}
+#musica .kicker{color:var(--pink)}
+.disco-cv{position:absolute;inset:0;width:100%;height:100%;z-index:0;pointer-events:none}
+#musica > *:not(.disco-cv){position:relative;z-index:1}
+#musica h2,#musica > p{text-shadow:0 1px 8px rgba(255,255,255,.9)}
+#musica h2{text-shadow:0 0 18px rgba(255,255,255,.9),0 3px 0 rgba(232,69,139,.18)}
+.ballhint{position:absolute!important;top:182px;left:0;right:0;font-size:.78rem;opacity:.6}
+#musica .kicker{margin-top:26px}
+.spotify{width:min(92vw,420px);margin:18px auto 16px}
+.spotify iframe{width:100%;height:352px;border:0;border-radius:14px}
+.spotify .ph{border:2px dashed rgba(255,255,255,.3);border-radius:16px;padding:22px;font-size:.9rem;opacity:.8}
+.or{margin:26px 0 10px;opacity:.85}
+.form{display:flex;flex-direction:column;gap:10px;width:min(92vw,380px)}
+.form input:not([type=radio]),.form textarea{background:rgba(255,255,255,.8);border:1.5px solid #ead7e3;border-radius:14px;
+  padding:.85em 1em;color:inherit;font:1rem 'Nunito',sans-serif;outline:none;width:100%;resize:vertical}
+.form input:focus,.form textarea:focus{border-color:var(--pink)}
+.form ::placeholder{color:currentColor;opacity:.5}
+.fieldrow{display:flex;gap:8px} .fieldrow input{flex:1;min-width:0}
+.dice{flex:none;width:54px;border-radius:14px;border:1.5px solid #ead7e3;background:rgba(255,255,255,.8);font-size:1.5rem;cursor:pointer}
+.dice.roll{animation:spin .5s}
+@keyframes spin{to{transform:rotate(360deg)}}
+.chips{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin:2px 0}
+.chips label{position:relative}
+.chips input{position:absolute;opacity:0;pointer-events:none}
+.chips span{display:inline-block;padding:.45em .9em;border-radius:999px;border:1.5px solid rgba(43,35,64,.22);background:rgba(255,255,255,.6);font-size:.85rem;cursor:pointer;transition:.2s}
+.chips input:checked+span{background:var(--pink);border-color:var(--pink);color:#fff;font-weight:900}
+.form .btn{align-self:center;margin-top:6px}
+#songThanks{min-height:1.5em;margin-top:14px;color:var(--terra)}
+.reqs{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin-top:8px;max-width:380px}
+.reqs span{background:rgba(232,69,139,.12);border-radius:999px;padding:.35em .9em;font-size:.85rem;animation:popIn .5s cubic-bezier(.3,1.7,.5,1)}
+
+/* ===== RSVP ===== */
+.rsvp-zone{position:relative;width:min(92vw,380px);height:200px;margin-top:6px}
+.rsvp-zone .btn{position:absolute;font-size:1.2rem;padding:.9em 1.8em;transition:left .25s ease,top .25s ease,transform .15s}
+#yes{left:12%;top:38%} #no{left:60%;top:38%;background:#aaa}
+#noMsg{height:1.6em;font-family:var(--hand);font-size:1.5rem;color:var(--terra)}
+#rsvpForm{color:var(--ink);background:#fff;border-radius:24px;padding:22px 18px;box-shadow:0 18px 40px rgba(0,0,0,.12);animation:popIn .5s cubic-bezier(.3,1.5,.5,1)}
+#rsvpForm h3{font-family:var(--serif);font-size:1.7rem;margin:0 0 4px}
+#rsvpForm input,#rsvpForm textarea{background:var(--paper);border-color:#e4d3bf}
+#rsvpForm input:focus,#rsvpForm textarea:focus{border-color:var(--terra)}
+.nums{display:flex;gap:8px;justify-content:space-between}
+.nums label{flex:1;display:flex;flex-direction:column;align-items:center;gap:6px;font-size:.78rem;font-weight:700}
+.step{display:flex;align-items:center;background:var(--paper);border:1.5px solid #e4d3bf;border-radius:999px;overflow:hidden}
+.step button{width:30px;height:34px;border:none;background:none;font:900 1.2rem 'Nunito',sans-serif;color:var(--terra);cursor:pointer}
+.step output{min-width:22px;text-align:center;font:700 1.05rem var(--serif)}
+.linklike{background:none;border:none;color:inherit;opacity:.6;font:.85rem 'Nunito',sans-serif;text-decoration:underline;cursor:pointer;align-self:center}
+#doneBox{display:flex;flex-direction:column;align-items:center;gap:12px;margin-top:10px;animation:popIn .5s cubic-bezier(.3,1.5,.5,1)}
+#doneBox h3{font-family:var(--serif);font-size:1.9rem;margin:0}
+footer{padding:30px 20px 70px;text-align:center}
+footer img{width:min(70vw,300px);transform-origin:50% 0;animation:flagSwing 3s ease-in-out infinite alternate}
+footer p{font-family:var(--hand);font-size:1.5rem;margin:.6em 0 0;opacity:.85}
+@media (prefers-reduced-motion:reduce){*{animation-duration:.01ms!important;animation-iteration-count:1!important}}
+</style>
+</head>
+<body class="locked">
+<div id="progress"></div>
+<canvas id="confetti"></canvas>
+<button id="langBtn" aria-label="Hizkuntza / Idioma"></button>
+<button id="sndBtn" aria-label="Soinua / Sonido">🔊</button>
+
+<!-- ============ SOBRE ============ -->
+<div id="intro">
+  <div class="top">Gutun bat duzu!<br>¡Tienes correo! 💌</div>
+  <div class="envelope" id="envelope">
+    <div class="letter"><b data-c="pareja"></b><span data-t="letterSub"></span></div>
+    <div class="pocket"></div>
+    <div class="flap"></div>
+    <button class="seal" id="seal" aria-label="Ireki / Abrir" data-c="iniciales"></button>
+  </div>
+  <div class="langs">
+    <button data-lang="eu"><span class="fl-eu"></span>Euskara</button>
+    <button data-lang="es"><span class="fl-es"></span>Castellano</button>
+  </div>
+  <div class="hint">Aukeratu hizkuntza · Elige idioma</div>
+</div>
+
+<main>
+<!-- ============ PORTADA ============ -->
+<section id="hero">
+  <div class="garland" id="garland"></div>
+  <div class="kicker" data-t="heroKicker"></div>
+  <h1 class="names" id="names"></h1>
+  <div class="stamp" data-t="stamp"></div>
+  <div class="late hand" data-t="late"></div>
+  <div class="scrollhint"><span data-t="scroll"></span><i>👇</i></div>
+</section>
+
+<!-- ============ HISTORIA: MAZATLÁN ↔ DONOSTI ============ -->
+<section class="scene" id="historia">
+  <div class="sticky"><div class="stage">
+    <div class="captions">
+      <p class="on" data-t="cap0"></p><p data-t="cap1"></p><p data-t="cap2"></p><p data-t="cap3"></p><p data-t="cap4"></p>
+      <p data-t="cap5"></p><p data-t="cap6"></p><p data-t="cap7"></p><p data-t="cap8"></p><p data-t="cap9"></p>
+    </div>
+    <svg id="mapSvg" viewBox="0 0 400 300">
+      <defs>
+        <clipPath id="mapClip"><rect x="0" y="0" width="400" height="300" rx="26"/></clipPath>
+        <clipPath id="clipI"><circle cx="0" cy="-40" r="20"/></clipPath>
+        <clipPath id="clipA"><circle cx="0" cy="-40" r="20"/></clipPath>
+      </defs>
+      <g clip-path="url(#mapClip)">
+        <path id="sea" fill="#a9d6ee"/>
+        <path class="wave" d="M130 175 q10 -6 20 0 t20 0 t20 0 t20 0 t20 0 t20 0"/>
+        <path class="wave" d="M150 215 q10 -6 20 0 t20 0 t20 0 t20 0 t20 0" style="animation-delay:-1s"/>
+        <path class="wave" d="M120 255 q10 -6 20 0 t20 0 t20 0 t20 0 t20 0 t20 0 t20 0" style="animation-delay:-2s"/>
+        <path fill="#f2c27b" d="M0 128 Q 50 118 82 142 Q 104 165 92 205 Q 82 245 106 300 L0 300Z"/>
+        <path fill="#8cc084" d="M400 120 Q 345 112 318 135 Q 296 160 308 200 Q 320 240 296 300 L400 300Z"/>
+        <path fill="#76ad6e" d="M322 300 Q 340 252 372 262 Q 392 270 400 250 V300Z"/>
+        <text x="16" y="215" font-size="24">🌵</text>
+        <text x="50" y="256" font-size="20">🌮</text>
+        <text x="12" y="270" font-size="18">🌵</text>
+        <text x="366" y="198" font-size="22">🌲</text>
+        <text x="334" y="236" font-size="20">🐑</text>
+        <text x="380" y="232" font-size="15">🌲</text>
+        <g class="bobbing"><text x="192" y="240" font-size="24">🐋</text></g>
+        <text class="sea-lbl" x="200" y="285" text-anchor="middle" data-t="sea"></text>
+        <text class="lbl" x="45" y="292" text-anchor="middle" data-t="mx"></text>
+        <text class="lbl" x="350" y="292" text-anchor="middle">EUSKAL HERRIA</text>
+      </g>
+      <text x="18" y="70" font-size="26">☀️</text>
+      <text id="rain" x="356" y="58" font-size="26">🌧️</text>
+      <text id="rainbow" x="358" y="40" font-size="24">🌈</text>
+      <g class="cloud"><text x="0" y="38" font-size="20">☁️</text></g>
+      <g id="trails"></g>
+      <g id="pinI" class="pin"><g class="pin-in"><g class="bobbing">
+        <path d="M0 0 C -6 -10 -26 -22 -26 -40 A26 26 0 1 1 26 -40 C 26 -22 6 -10 0 0Z" fill="#fff" stroke="#2b2340" stroke-width="3"/>
+        <circle cx="0" cy="-40" r="20" fill="#6f9a73"/>
+        <text class="ini" x="0" y="-32" text-anchor="middle"></text>
+      </g><text class="nm" x="0" y="18" text-anchor="middle" data-c="eu.nombre"></text></g></g>
+      <g id="pinA" class="pin"><g class="pin-in"><g class="bobbing" style="animation-delay:-1.2s">
+        <path d="M0 0 C -6 -10 -26 -22 -26 -40 A26 26 0 1 1 26 -40 C 26 -22 6 -10 0 0Z" fill="#fff" stroke="#2b2340" stroke-width="3"/>
+        <circle cx="0" cy="-40" r="20" fill="#e2725b"/>
+        <text class="ini" x="0" y="-32" text-anchor="middle"></text>
+      </g><text class="nm" x="0" y="18" text-anchor="middle" data-c="mx.nombre"></text></g></g>
+      <text id="miniHeart" font-size="22" text-anchor="middle" dominant-baseline="central" opacity="0">💕</text>
+      <text id="loveHeart" x="341" y="72" font-size="34" text-anchor="middle">💞</text>
+      <g id="plane" opacity="0"><text font-size="22" text-anchor="middle" dominant-baseline="central">✈️</text></g>
+    </svg>
+    <div class="stats">✈️ <b id="stFl">0</b> <span data-t="sTrips"></span> · 🌍 <b id="stKm">0</b> km · 📱 <b>∞</b> <span data-t="sCalls"></span>
+      <div class="clocks" id="clocks"></div></div>
+    <div class="pass">
+      <div class="pass-top"><span style="opacity:1;font-weight:900;letter-spacing:.1em" data-t="pTitle"></span><span>Boarding pass</span></div>
+      <div class="pass-body">
+        <small data-t="pName"></small><div class="who" data-c="pasajera"></div>
+        <div class="route"><b data-c="origen.codigo"></b><i></i><b data-c="destino.codigo"></b></div>
+        <div class="row"><div><small data-t="pFrom"></small><span data-c="origen.ciudad"></span></div><div><small data-t="pTo"></small><span data-c="destino.ciudad"></span></div></div>
+        <div class="row"><div><small data-t="pSeat"></small>1A ❤️</div><div><small data-t="pBack"></small><span data-t="pBackVal"></span></div></div>
+        <div class="barcode"></div>
+        <div class="oneway" data-t="pStamp"></div>
+      </div>
+    </div>
+  </div></div>
+</section>
+
+<!-- ============ FOTOS ============ -->
+<section id="fotos">
+  <div class="kicker" data-reveal data-t="phKicker"></div>
+  <h2 data-reveal data-t="phTitle"></h2>
+  <p class="sub hand" data-reveal data-t="phSub"></p>
+</section>
+<section id="mesa"><div class="table" id="table"></div></section>
+
+<!-- ============ FECHA ============ -->
+<section id="fecha">
+  <div class="kicker" data-reveal data-t="dKicker"></div>
+  <h2 data-reveal data-t="dTitle"></h2>
+  <div class="calendar" data-reveal>
+    <div class="m" id="calM"></div>
+    <div class="d"><span id="calD"></span>
+      <svg viewBox="0 0 170 130"><path d="M95 12 C 30 0, 2 50, 20 90 C 40 130, 140 128, 158 80 C 172 40, 130 8, 70 16"/></svg>
+    </div>
+    <div class="w" id="calW"></div>
+  </div>
+  <p class="datelong" data-reveal id="dateLong"></p>
+  <div class="countdown" data-reveal>
+    <div><b id="cdD">0</b><small data-t="uD"></small></div>
+    <div><b id="cdH">0</b><small data-t="uH"></small></div>
+    <div><b id="cdM">0</b><small>min</small></div>
+    <div><b id="cdS">0</b><small data-t="uS"></small></div>
+  </div>
+</section>
+
+<!-- ============ PLAN DEL DÍA ============ -->
+<section id="plan">
+  <div class="kicker" data-reveal data-t="plKicker"></div>
+  <h2 data-reveal data-t="plTitle"></h2>
+  <p class="sub" data-reveal data-t="plSub"></p>
+  <div class="timeline" id="timeline"><div class="tl-line"><i></i></div></div>
+  <div class="place" data-reveal>
+    <div class="icon">🏨</div>
+    <h3 data-c="lugar.nombre"></h3>
+    <p data-c="lugar.direccion"></p>
+    <br><a class="btn terra" id="mapLink" target="_blank" rel="noopener" data-t="howTo"></a>
+    <p class="joke" data-t="joke"></p>
+  </div>
+</section>
+
+<!-- ============ MÚSICA ============ -->
+<section id="musica">
+  <div class="ballhint" data-t="mBall"></div>
+  <div class="kicker" data-t="mKicker"></div>
+  <h2 data-t="mTitle"></h2>
+  <p data-t="mSub" style="max-width:380px"></p>
+  <div id="spotifyBox" class="spotify"></div>
+  <a class="btn light" id="spCollab" target="_blank" rel="noopener" data-t="mCollab" hidden></a>
+  <p class="or" data-t="mOr"></p>
+  <form class="form" id="songForm" autocomplete="off">
+    <div class="fieldrow"><input name="cancion" data-tp="mSong" required><button type="button" class="dice" id="dice">🎲</button></div>
+    <input name="artista" data-tp="mArtist">
+    <div class="chips">
+      <label><input type="radio" name="momento" value="c1" checked><span data-t="c1"></span></label>
+      <label><input type="radio" name="momento" value="c2"><span data-t="c2"></span></label>
+      <label><input type="radio" name="momento" value="c3"><span data-t="c3"></span></label>
+      <label><input type="radio" name="momento" value="c4"><span data-t="c4"></span></label>
+    </div>
+    <input name="nombre" data-tp="mName">
+    <button class="btn terra" type="submit" data-t="mSend"></button>
+  </form>
+  <div id="songThanks" class="hand"></div>
+  <div id="myRequests" class="reqs"></div>
+</section>
+
+<!-- ============ CONFIRMACIÓN ============ -->
+<section id="rsvp">
+  <div class="kicker" data-reveal data-t="rKicker"></div>
+  <h2 data-reveal data-t="rTitle"></h2>
+  <p data-reveal data-t="rDeadline"></p>
+  <div class="rsvp-zone" id="zone">
+    <button class="btn terra" id="yes" data-t="yes"></button>
+    <button class="btn" id="no" data-t="no"></button>
+  </div>
+  <div id="noMsg"></div>
+  <form class="form" id="rsvpForm" autocomplete="off" hidden>
+    <h3 id="rsvpTitle"></h3>
+    <input name="nombre" data-tp="fName" required>
+    <div class="nums">
+      <label><span data-t="fAdults"></span><div class="step" data-name="adultos"><button type="button" data-d="-1">−</button><output>1</output><button type="button" data-d="1">+</button></div></label>
+      <label><span data-t="fKids"></span><div class="step" data-name="ninos"><button type="button" data-d="-1">−</button><output>0</output><button type="button" data-d="1">+</button></div></label>
+      <label class="onlyYes"><span data-t="fKidMenu"></span><div class="step" data-name="menus"><button type="button" data-d="-1">−</button><output>0</output><button type="button" data-d="1">+</button></div></label>
+    </div>
+    <textarea name="intol" rows="2" class="onlyYes" data-tp="fIntol"></textarea>
+    <textarea name="coment" rows="3" data-tp="fComment"></textarea>
+    <button class="btn terra" type="submit" data-t="fSend"></button>
+    <button class="linklike" type="button" id="changeAns" data-t="fChange"></button>
+  </form>
+  <div id="doneBox" hidden>
+    <h3 id="doneTitle"></h3>
+    <p id="doneText"></p>
+    <a class="btn small" id="gcal" target="_blank" rel="noopener" data-t="addCal"></a>
+  </div>
+</section>
+
+<footer>
+  <img src="img/pp-rosa.png" alt="" draggable="false">
+  <p><span data-t="love"></span><br><b data-c="pareja"></b> 💛<br>Eskerrik asko!</p>
+</footer>
+</main>
+
+<script>
+/* =========================================================
+   ✏️  DATOS (todo lo demás se adapta solo)
+   ========================================================= */
+const CONFIG = {
+  eu: { nombre: 'Ibon' },                       // el que vive aquí
+  mx: { nombre: 'Ástrid' },                     // la que viene de México
+  pasajera: 'Ástrid Lilian Bonales Valle',
+  fecha: '2026-12-20T12:45:00+01:00',          // hora de la ceremonia (hora de aquí)
+  lugar: { nombre: 'Hotel Río Bidasoa', direccion: 'Nafarroa-Behera Kalea, 1 · 20280 Hondarribia (Gipuzkoa)', mapa: 'Hotel Río Bidasoa Hondarribia' },
+  plan: [
+    { hora: '12:45', icon: '💍', es: 'Ceremonia', eu: 'Ezkontza zeremonia' },
+    { hora: '14:00', icon: '🥂', es: 'Cóctel y pintxos', eu: 'Koktela eta pintxoak' },
+    { hora: '15:00', icon: '🍽️', es: 'Banquete', eu: 'Bazkaria' },
+    { hora: '', icon: '💃', es: 'Sobremesa… y lo que surja', eu: 'Bazkalondoa… eta sortzen dena' }
+  ],
+  origen:  { ciudad: 'Mazatlán', codigo: 'MZT', zona: 'America/Mazatlan' },
+  destino: { ciudad: 'Donosti',  codigo: 'EAS', zona: 'Europe/Madrid' },
+  km: 9350,
+  confirmarAntes: { es: '7 de diciembre', eu: 'abenduaren 7a' },
+  telefono: '34626917669',                      // WhatsApp para confirmaciones y canciones
+  spotify: { playlist: '', invitar: '' },       // enlace de la lista y de "Invitar colaboradores"
+  // fotos de "Nuestra historia", en orden: lugar (es / eu), mes (1-12) y año
+  fotos: [
+    ['Ciudad de México', 'Mexiko Hiria', 7, 2023], ['Mazatlán', '', 12, 2023], ['Donosti', '', 6, 2024], ['Donosti', '', 6, 2024],
+    ['Madrid', '', 6, 2024], ['Mazatlán', '', 8, 2025], ['Liérganes', '', 12, 2025], ['Bilbao', 'Bilbo', 12, 2025],
+    ['Budapest', '', 1, 2026], ['Viena', '', 1, 2026], ['Praga', '', 1, 2026], ['Anoeta', '', 1, 2026],
+    ['Mazatlán', '', 3, 2026], ['Mazatlán', '', 8, 2026]
+  ].map(([es, eu, mes, anio], i) => ({ src: `img/fotos/h${String(i + 1).padStart(2, '0')}.jpg`, lugar: { es, eu: eu || es }, mes, anio })),
+  fotoMs: 1100,                                 // cada cuánto cae una foto (milisegundos)
+  caras: { eu: '', mx: '' }                     // fotos de cara para las chinchetas del mapa (opcional)
+};
+CONFIG.pareja = `${CONFIG.mx.nombre} & ${CONFIG.eu.nombre}`;
+CONFIG.iniciales = 'A&I';
+
+/* ================= textos ES / EU ================= */
+const I = CONFIG.eu.nombre, A = CONFIG.mx.nombre;
+const T = {
+  es: {
+    letterSub: 'tienen algo que contarte…',
+    heroKicker: '🎉 Atención, noticia bomba 🎉', stamp: '¡Nos casamos!', late: 'De México a Euskal Herria, con amor 💚', scroll: 'Desliza hacia abajo',
+    cap0: `<span>Érase una vez <em>${I}</em>,</span><span>en Donosti 🌧️</span>`,
+    cap1: `<span>…y <em>${A}</em>,</span><span>en Mazatlán ☀️</span>`,
+    cap2: `<span>Entre los dos:</span><span><em>9.350 km</em> y un océano</span>`,
+    cap3: `<span>Primero, ${I} cruzó el charco…</span>`,
+    cap4: `<span>…luego vino ${A}…</span>`,
+    cap5: `<span>…otra vez ${I}…</span>`,
+    cap6: `<span>…y otra vez ${A}…</span>`,
+    cap7: `<span>…y ${I}, ¡dos veces seguidas! 😅</span><small>(y siempre con billete de vuelta)</small>`,
+    cap8: `<span>Hasta que un día…</span>`,
+    cap9: `<em>¡Billete solo de ida!</em><span>Esta vez, para quedarse 💚</span>`,
+    sea: 'Océano Atlántico', mx: 'MÉXICO', sTrips: 'viajes', sCalls: 'videollamadas',
+    clocks: (a, b) => `🕐 Mazatlán ${a} · Donosti ${b}`, clocksSame: t => `🕐 Por fin en la misma zona horaria: ${t}`,
+    pTitle: '✈️ TARJETA DE EMBARQUE', pName: 'Pasajera', pFrom: 'Desde', pTo: 'Hasta', pSeat: 'Asiento', pBack: 'Vuelta',
+    pBackVal: 'Solo de vacaciones 😉', pStamp: 'SOLO IDA',
+    phKicker: 'Pruebas del delito', phTitle: 'Nuestra historia de amor', phSub: 'Cómo empezó todo', phFrame: n => `Foto ${n}`,
+    dKicker: '📝 Apúntalo, ¡que no se te olvide!', dTitle: '¿Cuándo?', uD: 'días', uH: 'horas', uS: 'seg',
+    plKicker: 'El gran día', plTitle: 'Plan del día', plSub: 'Todo en el mismo sitio, sin coches ni prisas 🙌', later: 'Después',
+    howTo: '📍 Cómo llegar', joke: 'Llega pronto: los pañuelos se reparten por orden de llegada 🤧',
+    mKicker: 'No habrá DJ…', mTitle: '…¡así que la música la ponéis vosotros!',
+    mSub: 'Proponed las canciones que no pueden faltar y las añadiremos a nuestra lista 🎶',
+    mBall: '👆 toca la bola',
+    mSpotifyPh: '🎧 Aquí aparecerá nuestra lista de Spotify, para escucharla desde la invitación.',
+    mCollab: '🎧 Añadir canciones en Spotify', mOr: '¿Sin Spotify? Proponla aquí:', mOr2: 'Proponed vuestras canciones aquí 👇',
+    mSong: 'Canción *', mArtist: 'Artista', mName: 'Tu nombre', mSend: '🎶 Proponer canción',
+    c1: '💃 Para bailar', c2: '💞 Para emocionarse', c3: '🎤 Para cantar a gritos', c4: '🌙 Para el final',
+    mThanks: '¡Apuntada! 🎧', mMsg: (s, m, n) => `🎶 Propuesta de canción para la boda: ${s} (${m})${n ? ' — ' + n : ''}`,
+    rKicker: 'La pregunta del millón', rTitle: '¿Vienes?', rDeadline: `Confírmanoslo antes del <b>${CONFIG.confirmarAntes.es}</b>`,
+    yes: '¡Sí! 🎉', no: 'No', noFinal: 'No puedo 😢',
+    excuses: ['¿Seguro? 🤨', 'Habrá pintxos 👀', 'Y tequila 🌵'], noLast: 'Vale… 😢',
+    yesTitle: '¡Bieeen! 🥳', noTitle: '¡Qué pena! 😢',
+    fName: 'Nombre(s) *', fAdults: 'Adultos', fKids: 'Niños', fKidMenu: 'Menús infantiles',
+    fIntol: 'Intolerancias o alergias', fComment: '¿Algo más? Cuéntanos', fSend: '💬 Enviar por WhatsApp', fChange: 'cambiar respuesta',
+    doneYesT: '¡Ya casi está! 🎉', doneYes: 'Solo falta darle a enviar en WhatsApp. ¡Nos vemos en la boda!',
+    doneNoT: '¡Gracias por avisar! 💛', doneNo: 'Solo falta darle a enviar en WhatsApp. ¡Os echaremos de menos!',
+    addCal: '📅 Añadir al calendario', love: 'Con todo nuestro amor,',
+    wa: (yes, d) => `¡Hola, ${A} e ${I}! 💌\n${yes ? '✅ ¡SÍ, allí estaremos!' : '❌ No podremos ir 😢'}\n👤 ${d.nombre}\n👥 Adultos: ${d.adultos} · Niños: ${d.ninos}` +
+      (yes ? `\n🧒 Menús infantiles: ${d.menus}\n🥗 Intolerancias/alergias: ${d.intol || 'ninguna'}` : '') + (d.coment ? `\n💬 ${d.coment}` : ''),
+    calText: `Boda de ${A} e ${I} 💍`, calDetails: 'Ceremonia 12:45 · Cóctel 14:00 · Banquete 15:00',
+    months: ['enero', 'febrero', 'marzo', 'abril', 'mayo', 'junio', 'julio', 'agosto', 'septiembre', 'octubre', 'noviembre', 'diciembre'],
+    days: ['domingo', 'lunes', 'martes', 'miércoles', 'jueves', 'viernes', 'sábado'],
+    dateLong: (y, m, d, w) => `${w[0].toUpperCase() + w.slice(1)}, ${d} de ${m} de ${y}`
+  },
+  eu: {
+    letterSub: 'zerbait kontatu nahi dizute…',
+    heroKicker: '🎉 Adi, albiste itzela! 🎉', stamp: 'Ezkondu egingo gara!', late: 'Mexikotik Euskal Herrira, maitasunez 💚', scroll: 'Irristatu behera',
+    cap0: `<span>Bazen behin <em>${I}</em>,</span><span>Donostian 🌧️</span>`,
+    cap1: `<span>…eta <em>${A}</em>,</span><span>Mazatlánen ☀️</span>`,
+    cap2: `<span>Bien artean:</span><span><em>9.350 km</em> eta ozeano bat</span>`,
+    cap3: `<span>Lehenik, ${I}ek ozeanoa zeharkatu zuen…</span>`,
+    cap4: `<span>…gero ${A} etorri zen…</span>`,
+    cap5: `<span>…berriro ${I}…</span>`,
+    cap6: `<span>…eta berriro ${A}…</span>`,
+    cap7: `<span>…eta ${I}, bi aldiz jarraian! 😅</span><small>(eta beti itzulerako txartelarekin)</small>`,
+    cap8: `<span>Harik eta egun batean…</span>`,
+    cap9: `<em>Joateko txartela soilik!</em><span>Oraingoan, geratzeko 💚</span>`,
+    sea: 'Ozeano Atlantikoa', mx: 'MEXIKO', sTrips: 'bidaia', sCalls: 'bideodei',
+    clocks: (a, b) => `🕐 Mazatlán ${a} · Donostia ${b}`, clocksSame: t => `🕐 Azkenean, ordu-eremu berean: ${t}`,
+    pTitle: '✈️ ONTZIRATZE-TXARTELA', pName: 'Bidaiaria', pFrom: 'Nondik', pTo: 'Nora', pSeat: 'Eserlekua', pBack: 'Itzulera',
+    pBackVal: 'Oporretan bakarrik 😉', pStamp: 'JOAN BAKARRIK',
+    phKicker: 'Delituaren frogak', phTitle: 'Gure maitasun istorioa', phSub: 'Nola hasi zen dena', phFrame: n => `${n}. argazkia`,
+    dKicker: '📝 Idatzi agendan, ez ahazteko!', dTitle: 'Noiz?', uD: 'egun', uH: 'ordu', uS: 'seg',
+    plKicker: 'Egun handia', plTitle: 'Eguneko egitaraua', plSub: 'Dena leku berean, autorik eta presarik gabe 🙌', later: 'Gero',
+    howTo: '📍 Nola heldu', joke: 'Etorri garaiz, mukizapiak lehenengo iristen direnen artean banatuko baitira! 🤧',
+    mKicker: 'Ez da DJrik izango…', mTitle: '…beraz, musika zuek jarriko duzue!',
+    mSub: 'Proposatu falta ezin diren abestiak eta gure zerrendara gehituko ditugu 🎶',
+    mBall: '👆 ukitu bola',
+    mSpotifyPh: '🎧 Hemen agertuko da gure Spotify zerrenda, gonbidapenetik bertatik entzuteko.',
+    mCollab: '🎧 Gehitu abestiak Spotifyn', mOr: 'Spotifyrik ez? Proposatu hemen:', mOr2: 'Proposatu zuen abestiak hemen 👇',
+    mSong: 'Abestia *', mArtist: 'Artista', mName: 'Zure izena', mSend: '🎶 Abestia proposatu',
+    c1: '💃 Dantzatzeko', c2: '💞 Hunkitzeko', c3: '🎤 Oihuka abesteko', c4: '🌙 Amaierarako',
+    mThanks: 'Apuntatuta! 🎧', mMsg: (s, m, n) => `🎶 Abesti proposamena ezkontzarako: ${s} (${m})${n ? ' — ' + n : ''}`,
+    rKicker: 'Milioi bateko galdera', rTitle: 'Etorriko zara?', rDeadline: `Baieztatu <b>${CONFIG.confirmarAntes.eu}</b> baino lehen`,
+    yes: 'Bai! 🎉', no: 'Ez', noFinal: 'Ezin dut 😢',
+    excuses: ['Ziur? 🤨', 'Pintxoak egongo dira 👀', 'Eta tekila 🌵'], noLast: 'Ados… 😢',
+    yesTitle: 'Ederki! 🥳', noTitle: 'Zer pena! 😢',
+    fName: 'Izena(k) *', fAdults: 'Helduak', fKids: 'Haurrak', fKidMenu: 'Haurren menuak',
+    fIntol: 'Intolerantziak edo alergiak', fComment: 'Besterik? Kontaiguzu', fSend: '💬 Bidali WhatsApp bidez', fChange: 'erantzuna aldatu',
+    doneYesT: 'Ia prest! 🎉', doneYes: 'WhatsAppen bidali botoia sakatzea besterik ez da falta. Ezkontzan ikusiko gara!',
+    doneNoT: 'Eskerrik asko abisatzeagatik! 💛', doneNo: 'WhatsAppen bidali botoia sakatzea besterik ez da falta. Faltan botako zaituztegu!',
+    addCal: '📅 Gehitu egutegira', love: 'Maitasun handiz,',
+    wa: (yes, d) => `Kaixo, ${A} eta ${I}! 💌\n${yes ? '✅ BAI, han izango gara!' : '❌ Ezin izango gara joan 😢'}\n👤 ${d.nombre}\n👥 Helduak: ${d.adultos} · Haurrak: ${d.ninos}` +
+      (yes ? `\n🧒 Haurren menuak: ${d.menus}\n🥗 Intolerantziak/alergiak: ${d.intol || 'bat ere ez'}` : '') + (d.coment ? `\n💬 ${d.coment}` : ''),
+    calText: `${A} eta ${I}en ezkontza 💍`, calDetails: 'Zeremonia 12:45 · Koktela 14:00 · Bazkaria 15:00',
+    months: ['urtarrila', 'otsaila', 'martxoa', 'apirila', 'maiatza', 'ekaina', 'uztaila', 'abuztua', 'iraila', 'urria', 'azaroa', 'abendua'],
+    days: ['igandea', 'astelehena', 'asteartea', 'asteazkena', 'osteguna', 'ostirala', 'larunbata'],
+    dateLong: (y, m, d, w) => `${y}ko ${m.slice(0, -1)}aren ${d}an, ${w}`
+  }
+};
+
+/* ================= utilidades ================= */
+const $ = s => document.querySelector(s), $$ = s => [...document.querySelectorAll(s)];
+const get = path => path.split('.').reduce((o, k) => (o == null ? o : o[k]), CONFIG);
+$$('[data-c]').forEach(el => { el.textContent = get(el.dataset.c) ?? ''; });
+
+const FLAGS = {
+  eu: '<svg class="flag" viewBox="0 0 30 20"><rect width="30" height="20" fill="#D52B1E"/><path d="M0 0L30 20M30 0L0 20" stroke="#009B48" stroke-width="3.4"/><path d="M15 0V20M0 10H30" stroke="#fff" stroke-width="3.4"/></svg>',
+  es: '<svg class="flag" viewBox="0 0 30 20"><rect width="10" height="20" fill="#006847"/><rect x="10" width="10" height="20" fill="#fff"/><rect x="20" width="10" height="20" fill="#CE1126"/><circle cx="15" cy="10" r="2.6" fill="#8C5A2B"/></svg>'
+};
+$$('.fl-eu').forEach(e => e.outerHTML = FLAGS.eu);
+$$('.fl-es').forEach(e => e.outerHTML = FLAGS.es);
+
+// bloquear zoom (iOS ignora user-scalable)
+['gesturestart', 'gesturechange'].forEach(ev => document.addEventListener(ev, e => e.preventDefault(), { passive: false }));
+document.addEventListener('touchmove', e => { if (e.touches.length > 1) e.preventDefault(); }, { passive: false });
+let lastTap = 0;
+document.addEventListener('touchend', e => { const n = Date.now(); if (n - lastTap < 300 && !e.target.closest('input,textarea,button,a')) e.preventDefault(); lastTap = n; }, { passive: false });
+
+/* ================= idioma ================= */
+let lang = localStorage.getItem('lang') || ((navigator.language || '').toLowerCase().startsWith('eu') ? 'eu' : 'es');
+const L = () => T[lang];
+const fecha = new Date(CONFIG.fecha);
+const [fy, fm, fd] = CONFIG.fecha.slice(0, 10).split('-').map(Number);
+const fw = new Date(Date.UTC(fy, fm - 1, fd)).getUTCDay();
+function setLang(l) {
+  lang = l; localStorage.setItem('lang', l); document.documentElement.lang = l;
+  $$('[data-t]').forEach(el => {
+    const v = T[l][el.dataset.t]; if (typeof v !== 'string') return;
+    if (el instanceof SVGElement) el.textContent = v; else el.innerHTML = v;
+  });
+  $$('[data-tp]').forEach(el => el.placeholder = T[l][el.dataset.tp]);
+  const other = l === 'es' ? 'eu' : 'es';
+  $('#langBtn').innerHTML = FLAGS[other] + (other === 'eu' ? 'EUSKARA' : 'CASTELLANO');
+  // fecha
+  const mName = L().months[fm - 1], wName = L().days[fw];
+  $('#calM').textContent = mName + ' ' + fy; $('#calD').textContent = fd; $('#calW').textContent = wName;
+  $('#dateLong').textContent = L().dateLong(fy, mName, fd, wName);
+  buildTimeline(); updateClocks();
+  $$('.tphoto').forEach(el => el.querySelector('.cap').innerHTML = fotoCap(CONFIG.fotos[el.dataset.i]));
+  $('#gcal').href = gcalUrl();
+  if (rsvpState) showForm(rsvpState);
+}
+$('#langBtn').addEventListener('click', () => { setLang(lang === 'es' ? 'eu' : 'es'); tone(660, .12, 'triangle', .1); });
+
+/* ================= portada ================= */
+(() => {
+  let i = 0;
+  const word = w => [...w].map(ch => `<span class="l" style="--i:${i++}">${ch}</span>`).join('');
+  $('#names').innerHTML = word(A) + '<span class="amp">&amp;</span>' + word(I);
+  $('#garland').innerHTML = ['amarillo', 'verde', 'rosa', 'azul', 'morado'].map(c => `<span><img src="img/pp-${c}.png" alt="" draggable="false"></span>`).join('');
+  for (let k = 0; k < 14; k++) {
+    const p = document.createElement('span'); p.className = 'petal';
+    p.textContent = ['🌸', '🌼', '💮', '🍃'][k % 4];
+    p.style.left = Math.random() * 100 + '%';
+    p.style.setProperty('--sway', (Math.random() * 120 - 60) + 'px');
+    p.style.animationDuration = 7 + Math.random() * 7 + 's';
+    p.style.animationDelay = -Math.random() * 14 + 's';
+    $('#hero').appendChild(p);
+  }
+})();
+
+/* ================= cuenta atrás ================= */
+function tick() {
+  const s = Math.max(0, Math.floor((fecha - Date.now()) / 1000));
+  $('#cdD').textContent = Math.floor(s / 86400); $('#cdH').textContent = Math.floor(s % 86400 / 3600);
+  $('#cdM').textContent = Math.floor(s % 3600 / 60); $('#cdS').textContent = s % 60;
+}
+tick(); setInterval(tick, 1000);
+
+/* ================= sonidos ================= */
+let actx;
+function tone(freq, dur = .4, type = 'sine', vol = .25, when = 0) {
+  if (!actx) return;
+  const t = actx.currentTime + when, o = actx.createOscillator(), g = actx.createGain();
+  o.type = type; o.frequency.setValueAtTime(freq, t);
+  g.gain.setValueAtTime(vol, t); g.gain.exponentialRampToValueAtTime(.001, t + dur);
+  o.connect(g).connect(actx.destination); o.start(t); o.stop(t + dur);
+}
+const ding = () => { tone(880, 1.2, 'sine', .25); tone(1320, 1, 'sine', .1, .02); };
+const chime = () => [523, 659, 784, 1047].forEach((f, i) => tone(f, .5, 'triangle', .15, i * .09));
+// sonido al posarse cada foto: un "plop" suave de papel + una notita de marimba
+// que va subiendo por la escala con cada foto (como una melodía que se va formando)
+let noiseBuf;
+const PLOP_NOTES = [523, 587, 659, 784, 880, 1047, 880, 784, 659, 784, 880, 1047, 1175, 1319];   // pentatónica de Do
+function photoPlop(k) {
+  if (SND.fx('foto', .9 + Math.random() * .2, .75 + Math.random() * .25)) return;
+  if (!actx) return;
+  if (!noiseBuf) {
+    noiseBuf = actx.createBuffer(1, Math.floor(actx.sampleRate * .15), actx.sampleRate);
+    const d = noiseBuf.getChannelData(0); for (let i = 0; i < d.length; i++) d[i] = Math.random() * 2 - 1;
+  }
+  const t = actx.currentTime;
+  // papel que cae sobre el montón: ruido muy suave y apagado
+  const s = actx.createBufferSource(), f = actx.createBiquadFilter(), g = actx.createGain();
+  s.buffer = noiseBuf; f.type = 'lowpass'; f.frequency.value = 900;
+  g.gain.setValueAtTime(.05, t); g.gain.exponentialRampToValueAtTime(.001, t + .09);
+  s.connect(f).connect(g).connect(actx.destination); s.start(t); s.stop(t + .1);
+  // notita de marimba: suave, redonda y corta
+  const fr = PLOP_NOTES[k % PLOP_NOTES.length];
+  [[fr, .07, .45], [fr * 4, .012, .12]].forEach(([fq, vol, dec]) => {
+    const o = actx.createOscillator(), gg = actx.createGain();
+    o.type = 'sine'; o.frequency.value = fq;
+    gg.gain.setValueAtTime(0, t + .01); gg.gain.linearRampToValueAtTime(vol, t + .018); gg.gain.exponentialRampToValueAtTime(.0005, t + .018 + dec);
+    o.connect(gg).connect(actx.destination); o.start(t + .01); o.stop(t + .03 + dec);
+  });
+}
+const sad = () => [392, 370, 349, 330].forEach((f, i) => tone(f, .4, 'triangle', .12, i * .25));
+
+/* ================= audio real: música y efectos ================= */
+const SND = (() => {
+  // canciones largas: se reproducen en streaming (no se cargan enteras en memoria)
+  const SONGS = { fondo: 'sonidos/fondo-marimba.mp3', mx: 'sonidos/viaje-mexico.mp3', eu: 'sonidos/viaje-euskadi.mp3', fiesta: 'sonidos/fiesta.mp3', fotos: 'sonidos/fotos-arpa.mp3' };
+  const VOL = { fondo: .30, mx: .55, eu: .60, fiesta: .50, fotos: .50, avion: .40, ding: .55, papel: .7, foto: .55, confeti: .6 };
+  let on = localStorage.getItem('snd') !== 'off', started = false, master, songs = {}, bufs = {}, avion = null;
+  const want = { fondo: 0, mx: 0, eu: 0, fiesta: 0, fotos: 0, avion: 0 };
+  // la marimba de fondo se aparta sola cuando suena cualquier otra canción
+  const level = k => k === 'fondo' ? (want.fondo && !(want.mx || want.eu || want.fiesta || want.fotos) ? 1 : 0) : want[k];
+  let alive = new Set();          // canciones que siguen avanzando aunque estén en silencio
+  const btn = $('#sndBtn'); btn.textContent = on ? '🔊' : '🔇';
+
+  async function loadBuf(k, url) {
+    try { const r = await fetch(url); bufs[k] = await actx.decodeAudioData(await r.arrayBuffer()); } catch (e) {}
+  }
+  // se llama dentro del toque del sobre (así el móvil deja sonar todo después)
+  function start() {
+    if (started || !actx) return; started = true;
+    master = actx.createGain(); master.gain.value = on ? 1 : 0; master.connect(actx.destination);
+    for (const k in SONGS) {
+      const a = new Audio(SONGS[k]); a.loop = true; a.preload = k === 'fondo' ? 'auto' : 'metadata';
+      const g = actx.createGain(); g.gain.value = 0;
+      actx.createMediaElementSource(a).connect(g).connect(master);
+      songs[k] = { a, g, to: 0 };
+      // "desbloquear" cada canción en el gesto del usuario (necesario en iPhone)
+      a.play().then(() => { if (!level(k) && !alive.has(k)) a.pause(); }).catch(() => {});
+    }
+    loadBuf('papel', 'sonidos/papel.mp3').then(() => fx('papel'));
+    loadBuf('ding', 'sonidos/ding.mp3'); loadBuf('avion', 'sonidos/avion.mp3');
+    loadBuf('foto', 'sonidos/foto.mp3'); loadBuf('confeti', 'sonidos/confeti.mp3');
+    apply();
+  }
+  // efecto corto; rate cambia un poco el tono (para que 14 fotos no suenen idénticas)
+  function fx(k, rate = 1, vol = 1) {
+    if (!started || !bufs[k]) return false;
+    const n = actx.createBufferSource(), g = actx.createGain();
+    n.buffer = bufs[k]; n.playbackRate.value = rate; g.gain.value = VOL[k] * vol; n.connect(g).connect(master); n.start();
+    return true;
+  }
+  let lastConfeti = 0;
+  function confeti() { const t = performance.now(); if (t - lastConfeti > 1500) { lastConfeti = t; fx('confeti'); } }
+  function avionNode() {
+    if (avion || !bufs.avion) return avion;
+    const n = actx.createBufferSource(), g = actx.createGain();
+    n.buffer = bufs.avion; n.loop = true; n.loopStart = .06; n.loopEnd = bufs.avion.duration - .06;
+    g.gain.value = 0; n.connect(g).connect(master); n.start(0, .06);
+    return avion = { n, g };
+  }
+  function apply() {
+    if (!started) return;
+    const t = actx.currentTime;
+    for (const k in songs) {
+      const sg = songs[k], v = level(k) * VOL[k];
+      sg.g.gain.setTargetAtTime(v, t, k === 'mx' || k === 'eu' ? .45 : .7);   // fade in / fade out
+      if ((v > 0 || alive.has(k)) && sg.a.paused) { clearTimeout(sg.to); sg.a.play().catch(() => {}); }
+      if (v === 0 && !alive.has(k) && !sg.a.paused) { clearTimeout(sg.to); sg.to = setTimeout(() => { if (!level(k) && !alive.has(k)) sg.a.pause(); }, 3500); }
+      if (v > 0) clearTimeout(sg.to);
+    }
+    const av = want.avion ? avionNode() : avion;
+    if (av) av.g.gain.setTargetAtTime(want.avion * VOL.avion, t, want.avion ? .25 : .5);
+  }
+  function set(o) { let ch = false; for (const k in o) if (want[k] !== o[k]) { want[k] = o[k]; ch = true; } if (ch) apply(); }
+  function keep(ks) { alive = new Set(ks); apply(); }
+  btn.addEventListener('click', () => {
+    on = !on; localStorage.setItem('snd', on ? 'on' : 'off'); btn.textContent = on ? '🔊' : '🔇';
+    if (master) master.gain.setTargetAtTime(on ? 1 : 0, actx.currentTime, .15);
+    if (actx) on ? actx.resume() : setTimeout(() => !on && actx.suspend(), 400);
+  });
+  // si se sale de WhatsApp o se bloquea el móvil, todo se calla
+  document.addEventListener('visibilitychange', () => {
+    if (!started) return;
+    if (document.hidden) { for (const k in songs) songs[k].a.pause(); actx.suspend(); }
+    else { if (on) actx.resume(); apply(); }
+  });
+  // estado para comprobar (consola: SND.estado())
+  const estado = () => ({ ctx: actx && actx.state, want: { ...want }, alive: [...alive], bufs: Object.keys(bufs),
+    songs: Object.fromEntries(Object.entries(songs).map(([k, v]) => [k, { paused: v.a.paused, t: +v.a.currentTime.toFixed(1), gain: +v.g.gain.value.toFixed(2), ready: v.a.readyState }])),
+    avion: avion ? +avion.g.gain.value.toFixed(2) : null });
+  return { start, fx, confeti, set, keep, estado, get on() { return on; } };
+})();
+
+/* ================= confeti ================= */
+const cv = $('#confetti'), ctx = cv.getContext('2d');
+let parts = [], running = false; const dpr = Math.min(2, devicePixelRatio || 1);
+function resize() { cv.width = innerWidth * dpr; cv.height = innerHeight * dpr; }
+resize(); addEventListener('resize', resize);
+const COLORS = ['#e8458b', '#2fa36b', '#f2b134', '#2f8fd8', '#8e5bd0', '#e2725b'];
+function burst(x, y, n = 80, spread = 1) {
+  SND.confeti();
+  for (let i = 0; i < n; i++) {
+    const a = Math.random() * Math.PI * 2, v = (4 + Math.random() * 8) * spread;
+    parts.push({ x, y, vx: Math.cos(a) * v, vy: Math.sin(a) * v - 6, r: Math.random() * 6, vr: (Math.random() - .5) * .4,
+      w: 6 + Math.random() * 6, h: 4 + Math.random() * 6, c: COLORS[i % COLORS.length], life: 1 });
+  }
+  if (!running) { running = true; requestAnimationFrame(loop); }
+}
+function loop() {
+  ctx.setTransform(dpr, 0, 0, dpr, 0, 0); ctx.clearRect(0, 0, innerWidth, innerHeight);
+  parts = parts.filter(p => p.life > 0 && p.y < innerHeight + 40);
+  for (const p of parts) {
+    p.vy += .25; p.vx *= .99; p.x += p.vx; p.y += p.vy; p.r += p.vr; p.life -= .006;
+    ctx.save(); ctx.translate(p.x, p.y); ctx.rotate(p.r); ctx.globalAlpha = Math.min(1, p.life * 2);
+    ctx.fillStyle = p.c; ctx.fillRect(-p.w / 2, -p.h / 2, p.w, p.h); ctx.restore();
+  }
+  if (parts.length) requestAnimationFrame(loop); else { running = false; ctx.clearRect(0, 0, innerWidth, innerHeight); }
+}
+
+/* ================= toques = corazones ================= */
+document.addEventListener('pointerdown', e => {
+  if (e.target.closest('button,a,input,textarea,label,#intro')) return;
+  const set = document.body.classList.contains('party') ? ['🪩', '✨', '🎶', '🎉'] : ['💖', '💕', '🌸', '✨', '🥰'];
+  for (let i = 0; i < 3; i++) {
+    const s = document.createElement('span'); s.className = 'floaty';
+    s.textContent = set[Math.floor(Math.random() * set.length)];
+    s.style.left = (e.clientX - 13) + 'px'; s.style.top = (e.clientY - 13) + 'px';
+    s.style.setProperty('--dx', (Math.random() * 120 - 60) + 'px'); s.style.setProperty('--rot', (Math.random() * 90 - 45) + 'deg');
+    s.style.animationDelay = i * 80 + 'ms';
+    document.body.appendChild(s); setTimeout(() => s.remove(), 1700);
+  }
+});
+
+/* ================= abrir el sobre ================= */
+let opened = false;
+function openEnvelope(l) {
+  if (opened) return; opened = true;
+  setLang(l);
+  try { actx = new (window.AudioContext || window.webkitAudioContext)(); } catch (e) {}
+  if (actx && !SND.on) actx.suspend();
+  SND.start(); SND.set({ fondo: 1 });
+  $('#intro').classList.add('opening'); $('#envelope').classList.add('open');
+  setTimeout(() => {
+    $('#intro').classList.add('gone'); document.body.classList.remove('locked'); document.body.classList.add('opened');
+    $('#hero').classList.add('in');
+    setTimeout(() => { burst(innerWidth / 2, innerHeight * .45, 120); chime(); }, 1850);
+  }, 1900);
+}
+$$('.langs button').forEach(b => b.addEventListener('click', () => openEnvelope(b.dataset.lang)));
+$('#seal').addEventListener('click', () => openEnvelope(lang));
+
+/* ================= apariciones ================= */
+const io = new IntersectionObserver(es => es.forEach(e => {
+  if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); }
+}), { threshold: .25 });
+$$('[data-reveal]').forEach(el => io.observe(el));
+new IntersectionObserver(es => es.forEach(e => {
+  document.body.classList.toggle('party', e.isIntersecting);   // solo cambia los emojis al tocar
+  SND.set({ fiesta: e.isIntersecting ? 1 : 0, fondo: e.isIntersecting ? 0 : 1 });
+}), { rootMargin: '-40% 0px -40% 0px' }).observe($('#musica'));
+
+/* ================= MAPA: los viajes ================= */
+new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) SND.keep(['mx', 'eu']); else { SND.keep([]); SND.set({ mx: 0, eu: 0, avion: 0 }); } }), { rootMargin: '200px' }).observe(document.querySelector('#historia'));
+const hist = $('#historia'), trailsG = $('#trails'), plane = $('#plane'), miniHeart = $('#miniHeart');
+const PIN = { I: $('#pinI'), A: $('#pinA') };
+const SVGNS = 'http://www.w3.org/2000/svg';
+(() => { let d = 'M0 118 Q12.5 110 25 118'; for (let x = 50; x <= 400; x += 25) d += ` T${x} 118`; $('#sea').setAttribute('d', d + ' V300 H0Z'); })();
+[['I', CONFIG.caras.eu, 'clipI'], ['A', CONFIG.caras.mx, 'clipA']].forEach(([k, src, clip]) => {
+  const g = PIN[k].querySelector('.bobbing'); g.querySelector('.ini').textContent = (k === 'I' ? I : A)[0];
+  if (src) {
+    const im = document.createElementNS(SVGNS, 'image');
+    Object.entries({ href: src, x: -20, y: -60, width: 40, height: 40, preserveAspectRatio: 'xMidYMid slice', 'clip-path': `url(#${clip})` }).forEach(([a, v]) => im.setAttribute(a, v));
+    g.appendChild(im);
+  }
+});
+// puntas de las chinchetas
+const POS = {
+  I: { home: { x: 340, y: 152 }, host: { x: 364, y: 150 }, away: { x: 88, y: 168 } },   // Ibon: casa, recibiendo visita, de visita en México
+  A: { home: { x: 62, y: 165 }, host: { x: 36, y: 166 }, away: { x: 318, y: 158 } }     // Ástrid: casa, recibiendo visita, de visita aquí
+};
+const arc = (a, b, h) => `M${a.x} ${a.y - 40} C ${a.x + (b.x - a.x) * .25} ${h}, ${a.x + (b.x - a.x) * .75} ${h}, ${b.x} ${b.y - 40}`;
+const TRIPS = [['I', 15, 80], ['A', -5, 65], ['I', 25, 95], ['A', 5, 55], ['I', -10, 85], ['I', 30, 70]];   // [quién, altura ida, altura vuelta]
+const legs = [];
+function addLeg(d, cls) {
+  const el = document.createElementNS(SVGNS, 'path'); el.setAttribute('d', d); el.setAttribute('class', 'trail ' + cls);
+  trailsG.appendChild(el); const L = el.getTotalLength(); el.style.strokeDasharray = L; el.style.strokeDashoffset = L;
+  legs.push({ el, L }); return legs.length - 1;
+}
+TRIPS.forEach(([w, h1, h2]) => { addLeg(arc(POS[w].home, POS[w].away, h1), w); addLeg(arc(POS[w].away, POS[w].home, h2), w); });
+const FINAL = addLeg(arc(POS.A.home, POS.A.away, 10), 'A final');
+const seg = (p, a, b) => Math.min(1, Math.max(0, (p - a) / (b - a)));
+function setLeg(i, t) {
+  const { el, L } = legs[i];
+  el.classList.toggle('drawing', t > 0 && t < 1); el.classList.toggle('done', t >= 1);
+  if (t < 1) el.style.strokeDashoffset = L * (1 - t);
+}
+const ptOn = (i, t) => legs[i].el.getPointAtLength(legs[i].L * t);
+function place(k, p, instant) {
+  PIN[k].style.transition = instant ? 'none' : '';
+  PIN[k].style.transform = `translate(${p.x}px,${p.y}px)`;
+}
+function flyPlane(i, t) {
+  const { el, L } = legs[i], l = Math.min(L, L * t + 14);
+  const pt = el.getPointAtLength(l), a = el.getPointAtLength(Math.max(0, l - 1)), b = el.getPointAtLength(Math.min(L, l + 1));
+  plane.setAttribute('transform', `translate(${pt.x},${pt.y}) rotate(${Math.atan2(b.y - a.y, b.x - a.x) * 180 / Math.PI + 45})`);
+  plane.setAttribute('opacity', 1);
+}
+const caps = $$('.captions p');
+const CAP_T = [.05, .10, .15, .24, .33, .42, .51, .70, .86];
+let landedDone = false, stampDone = false;
+function story(p) {
+  const idx = CAP_T.filter(t => p >= t).length;
+  caps.forEach((c, i) => c.classList.toggle('on', i === idx));
+  hist.classList.toggle('showI', hist.getBoundingClientRect().top < innerHeight * .4);
+  hist.classList.toggle('showA', p >= .05);
+
+  let pos = { I: POS.I.home, A: POS.A.home }, moving = null, done = 0, legsDone = 0, planeOn = false, heart = null;
+  TRIPS.forEach(([w], k) => {
+    const t = seg(p, .15 + k * .09, .24 + k * .09), out = seg(t, 0, .4), back = seg(t, .6, 1);
+    setLeg(2 * k, out); setLeg(2 * k + 1, back); legsDone += out + back;
+    if (t >= 1) done++;
+    if (t > 0 && t < 1) {
+      const host = w === 'I' ? 'A' : 'I';
+      pos[host] = POS[host].host; moving = w;
+      if (back > 0) { const q = ptOn(2 * k + 1, back); pos[w] = { x: q.x, y: q.y + 40 }; if (back < 1) { flyPlane(2 * k + 1, back); planeOn = true; } }
+      else { const q = ptOn(2 * k, out); pos[w] = { x: q.x, y: q.y + 40 }; if (out < 1) { flyPlane(2 * k, out); planeOn = true; } else heart = w === 'I' ? { x: 62, y: 86 } : { x: 341, y: 70 }; }
+    }
+  });
+  const tf = seg(p, .86, .97);
+  setLeg(FINAL, tf); legsDone += tf; if (tf >= 1) done++;
+  // la estela de un viaje se difumina en cuanto empieza el siguiente
+  const tripsStarted = TRIPS.filter((_, k) => p > .15 + k * .09).length + (tf > 0 ? 1 : 0);
+  TRIPS.forEach((_, k) => { const f = k < tripsStarted - 1; legs[2 * k].el.classList.toggle('faded', f); legs[2 * k + 1].el.classList.toggle('faded', f); });
+  if (tf > 0) {
+    pos.I = POS.I.host; moving = 'A';
+    if (tf < 1) { const q = ptOn(FINAL, tf); pos.A = { x: q.x, y: q.y + 40 }; flyPlane(FINAL, tf); planeOn = true; }
+    else pos.A = POS.A.away;
+  }
+  // música del sitio al que se viaja: mariachi hacia México, txalaparta hacia Euskadi
+  let dest = null;
+  TRIPS.forEach(([w], k) => {
+    const t = seg(p, .15 + k * .09, .24 + k * .09);
+    if (t > 0 && t < 1) dest = (seg(t, .6, 1) > 0) === (w === 'I') ? 'eu' : 'mx';
+  });
+  if (tf > 0 || p >= .70) dest = 'eu';   // desde el billete solo de ida ya suena Euskadi
+  const inMap = hist.getBoundingClientRect().top < innerHeight * .5 && hist.getBoundingClientRect().bottom > innerHeight * .5;
+  if (!inMap) dest = null;
+  SND.set({ mx: dest === 'mx' ? 1 : 0, eu: dest === 'eu' ? 1 : 0, avion: planeOn && inMap ? 1 : 0, fondo: dest || document.body.classList.contains('party') ? 0 : 1 });
+  place('I', pos.I, moving === 'I'); place('A', pos.A, moving === 'A');
+  if (!planeOn) plane.setAttribute('opacity', 0);
+  if (heart) { miniHeart.setAttribute('x', heart.x); miniHeart.setAttribute('y', heart.y); miniHeart.setAttribute('opacity', 1); }
+  else miniHeart.setAttribute('opacity', 0);
+
+  $('#stFl').textContent = done;
+  $('#stKm').textContent = (Math.round(legsDone * CONFIG.km / 50) * 50).toLocaleString('es-ES');
+
+  const passOn = p >= .70 && p < .86;
+  if (passOn && !hist.classList.contains('pass-on')) SND.fx('ding');
+  hist.classList.toggle('pass-on', passOn);
+  const stamped = p >= .76; hist.classList.toggle('stamped', stamped);
+  if (stamped && !stampDone) { stampDone = true; tone(90, .25, 'square', .15); }
+  if (!stamped) stampDone = false;
+  const landed = tf >= 1;
+  if (landed !== hist.classList.contains('landed')) { hist.classList.toggle('landed', landed); updateClocks(); }
+  if (landed && !landedDone) {
+    landedDone = true; const r = $('#loveHeart').getBoundingClientRect();
+    burst(r.left + r.width / 2, r.top + r.height / 2, 70, .8); chime();
+  }
+}
+function updateClocks() {
+  const f = tz => new Date().toLocaleTimeString('es-ES', { hour: '2-digit', minute: '2-digit', timeZone: tz });
+  $('#clocks').textContent = hist.classList.contains('landed') ? L().clocksSame(f(CONFIG.destino.zona)) : L().clocks(f(CONFIG.origen.zona), f(CONFIG.destino.zona));
+}
+setInterval(updateClocks, 15000);
+
+/* ================= FOTOS: caen sobre la mesa ================= */
+const table = $('#table');
+const fotoImgs = CONFIG.fotos.filter(f => f.src).map(f => { const im = new Image(); im.src = f.src; return im; });
+const fotosReady = Promise.all(fotoImgs.map(im => (im.decode ? im.decode() : Promise.resolve()).catch(() => {})));
+const shuffle = a => { for (let i = a.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [a[i], a[j]] = [a[j], a[i]]; } return a; };
+const rnd = (a, b) => a + Math.random() * (b - a);
+let dropRun = 0, dropTimers = [];
+function clearTable() { dropRun++; dropTimers.forEach(clearTimeout); dropTimers = []; table.innerHTML = ''; }
+// pie de foto: "Mazatlán · diciembre 2023" / "Mazatlán · 2023ko abendua"
+function fotoCap(f) {
+  const m = L().months[f.mes - 1];
+  return `📍 ${f.lugar[lang]} <small>·</small> ${lang === 'eu' ? f.anio + 'ko ' + m : m + ' ' + f.anio}`;
+}
+async function dropPhotos() {
+  clearTable(); const run = dropRun;
+  await fotosReady; if (run !== dropRun) return;
+  const W = table.clientWidth, H = table.clientHeight;
+  const step = CONFIG.fotoMs, dur = 720, capH = 44, padX = 18;
+  // caen en orden, desde arriba, y se van apilando en el centro de la mesa
+  CONFIG.fotos.forEach((f, k) => {
+    const im = fotoImgs[k], ar = (im.naturalWidth || 4) / (im.naturalHeight || 3);
+    let iw = Math.min(W * .8, 360) - padX, ih = iw / ar;
+    const maxH = H * .56; if (ih > maxH) { ih = maxH; iw = ih * ar; }
+    const w = iw + padX, h = ih + capH + 9;
+    const x = W / 2 + rnd(-.05, .05) * W, y = H * .5 + rnd(-.04, .04) * H;
+    const r = rnd(-9, 9), spin = rnd(15, 45) * (Math.random() < .5 ? -1 : 1);
+    const fromX = rnd(-.35, .35) * W, fromY = -(y + h * 1.2);       // fuera de la pantalla, por arriba
+    const tilt = [rnd(-18, 18), rnd(-18, 18)];
+    const el = document.createElement('div'); el.className = 'tphoto'; el.dataset.i = k;
+    el.style.cssText = `width:${w}px;left:${x - w / 2}px;top:${y - h / 2}px;z-index:${k + 1}`;
+    el.innerHTML = `<div class="im" style="height:${ih}px;background-image:url('${im.src}')"></div><div class="cap">${fotoCap(f)}</div>`;
+    const T = (tx, ty, rz, rx, ry, sc) => `translate(${tx}px,${ty}px) rotateZ(${rz}deg) rotateX(${rx}deg) rotateY(${ry}deg) scale(${sc})`;
+    const kf = [
+      // cae desde arriba, algo más grande (más cerca de la cámara) y girando
+      { offset: 0,   opacity: 1, transform: T(fromX, fromY, r + spin, tilt[0], tilt[1], 1.3), boxShadow: '0 60px 50px rgba(0,0,0,.12)', easing: 'cubic-bezier(.45,.05,.8,.5)' },
+      // golpea el montón
+      { offset: .72, opacity: 1, transform: T(0, 0, r, 0, 0, .985), boxShadow: '0 2px 3px rgba(0,0,0,.45)', easing: 'ease-out' },
+      // pequeño rebote y se asienta
+      { offset: .86, opacity: 1, transform: T(rnd(-3, 3), -4, r + rnd(-1.5, 1.5), 0, 0, 1.008), boxShadow: '0 5px 8px rgba(0,0,0,.32)', easing: 'ease-in-out' },
+      { offset: 1,   opacity: 1, transform: T(0, 0, r, 0, 0, 1), boxShadow: '0 3px 7px rgba(0,0,0,.35)' }
+    ];
+    dropTimers.push(setTimeout(() => {
+      if (run !== dropRun) return;
+      table.appendChild(el);
+      el.animate(kf, { duration: dur, fill: 'forwards' });
+      dropTimers.push(setTimeout(() => { if (run === dropRun) photoPlop(k); }, dur * .72 - 170));   // suena al posarse
+    }, k * step));
+  });
+}
+new IntersectionObserver(es => es.forEach(e => {
+  if (e.intersectionRatio >= .6 && !table.dataset.on) { table.dataset.on = '1'; dropPhotos(); }
+  else if (e.intersectionRatio === 0 && table.dataset.on) { delete table.dataset.on; clearTable(); }
+}), { threshold: [0, .6] }).observe(table);
+new IntersectionObserver(es => es.forEach(e => SND.set({ fotos: e.isIntersecting ? 1 : 0 })), { rootMargin: '-30% 0px -30% 0px' }).observe($('#mesa'));
+table.addEventListener('contextmenu', e => e.preventDefault());
+
+/* ================= PLAN DEL DÍA ================= */
+const timeline = $('#timeline');
+function buildTimeline() {
+  $$('.tl-item').forEach(n => n.remove());
+  CONFIG.plan.forEach(it => {
+    const d = document.createElement('div'); d.className = 'tl-item'; d.setAttribute('data-reveal', '');
+    d.innerHTML = `<div class="tl-icon">${it.icon}</div><div class="tl-txt"><div class="tl-time">${it.hora ? it.hora + ' h' : L().later}</div><b>${it[lang]}</b></div>`;
+    timeline.appendChild(d); io.observe(d);
+  });
+}
+$('#mapLink').href = 'https://www.google.com/maps/search/?api=1&query=' + encodeURIComponent(CONFIG.lugar.mapa);
+
+/* ================= scroll ================= */
+const progress = $('#progress'), tlLine = $('.tl-line');
+let ticking = false;
+function onScroll() {
+  ticking = false;
+  progress.style.width = (scrollY / (document.documentElement.scrollHeight - innerHeight) * 100) + '%';
+  const r = hist.getBoundingClientRect();
+  if (r.bottom > -50 && r.top < innerHeight + 50) story(Math.min(1, Math.max(0, -r.top / (r.height - innerHeight))));
+  const tr = timeline.getBoundingClientRect();
+  tlLine.style.setProperty('--lp', Math.min(1, Math.max(0, (innerHeight * .75 - tr.top) / tr.height)));
+}
+addEventListener('scroll', () => { if (!ticking) { ticking = true; requestAnimationFrame(onScroll); } }, { passive: true });
+addEventListener('resize', onScroll);
+
+/* ================= DISCOTECA: bola de espejos, focos, reflejos y pista ================= */
+const disco = (() => {
+  const sec = $('#musica'), cv = document.createElement('canvas'); cv.className = 'disco-cv'; sec.prepend(cv);
+  const g = cv.getContext('2d');
+  let W = 0, H = 0, dp = 1, running = false, theta = 0, last = 0, turboUntil = 0;
+  const t0 = performance.now();
+  function size() { dp = Math.min(1.5, devicePixelRatio || 1); W = sec.clientWidth; H = sec.clientHeight; cv.width = W * dp; cv.height = H * dp; }
+  const hash = (a, b) => { const s = Math.sin(a * 127.1 + b * 311.7) * 43758.5453; return s - Math.floor(s); };
+  const HEADS = [{ x: .04, ph: 0, sp: .9 }, { x: .3, ph: 1.7, sp: 1.25 }, { x: .7, ph: 3.1, sp: 1.05 }, { x: .96, ph: 4.4, sp: .8 }];
+  const DOTS = Array.from({ length: 90 }, () => ({ lon: Math.random() * Math.PI * 2, y: Math.random(), s: 2 + Math.random() * 3.5, hue: Math.random() * 360, ph: Math.random() * 6 }));
+  const BX = () => W / 2, BY = 112, R = 54;
+  function frame(now) {
+    if (!running) return;
+    const t = (now - t0) / 1000, dt = Math.min(.05, last ? (now - last) / 1000 : 0); last = now;
+    const turbo = now < turboUntil, bpm = turbo ? 150 : 118, beatF = t * bpm / 60, beatN = Math.floor(beatF), pulse = Math.exp(-(beatF % 1) * 5);
+    theta += dt * (turbo ? 2.8 : .55);
+    const bx = BX(), by = BY;
+    g.setTransform(dp, 0, 0, dp, 0, 0);
+    g.globalCompositeOperation = 'source-over';
+    const bgG = g.createLinearGradient(0, 0, 0, H);
+    bgG.addColorStop(0, '#fde9f1'); bgG.addColorStop(.55, '#f1e8fb'); bgG.addColorStop(1, '#fbf4ea');
+    g.fillStyle = bgG; g.fillRect(0, 0, W, H);
+    // focos móviles: barren la sala y laten con el ritmo
+    HEADS.forEach((h, i) => {
+      const hue = (t * 35 + i * 90 + (turbo ? t * 260 : 0)) % 360;
+      const ang = Math.PI / 2 + Math.sin(t * h.sp * (turbo ? 2.3 : 1) + h.ph) * .6;
+      const len = Math.max(H, 900) * 1.1, spread = .075 + .025 * Math.sin(t * 2.7 + i);
+      const x0 = h.x * W, inten = (.12 + .2 * pulse) * (.85 + Math.random() * .15);
+      const gr = g.createLinearGradient(x0, 0, x0 + Math.cos(ang) * len, Math.sin(ang) * len);
+      gr.addColorStop(0, `hsla(${hue},90%,72%,${inten})`); gr.addColorStop(.6, `hsla(${hue},90%,75%,${inten * .4})`); gr.addColorStop(1, `hsla(${hue},90%,75%,0)`);
+      g.fillStyle = gr; g.beginPath(); g.moveTo(x0, 0);
+      g.lineTo(x0 + Math.cos(ang - spread) * len, Math.sin(ang - spread) * len);
+      g.lineTo(x0 + Math.cos(ang + spread) * len, Math.sin(ang + spread) * len); g.closePath(); g.fill();
+      const sg = g.createRadialGradient(x0, 0, 0, x0, 0, 46);
+      sg.addColorStop(0, `hsla(${hue},90%,75%,${.25 + .35 * pulse})`); sg.addColorStop(1, `hsla(${hue},90%,75%,0)`);
+      g.fillStyle = sg; g.fillRect(x0 - 46, -46, 92, 92);
+    });
+    // reflejos de la bola que recorren las paredes al girar
+    DOTS.forEach(d => {
+      const a = d.lon + theta, c = Math.cos(a); if (c < .05) return;
+      const x = bx + Math.sin(a) * W * .8, y = 30 + d.y * (H - 60);
+      const al = c * (.35 + .25 * Math.sin(t * 7 + d.ph)) * (turbo ? 1.3 : 1), r = d.s * 2.2;
+      const rg = g.createRadialGradient(x, y, 0, x, y, r);
+      rg.addColorStop(0, `hsla(${d.hue},85%,68%,${al})`); rg.addColorStop(1, `hsla(${d.hue},85%,68%,0)`);
+      g.fillStyle = rg; g.fillRect(x - r, y - r, r * 2, r * 2);
+    });
+    // la bola de espejos
+    g.globalCompositeOperation = 'source-over';
+    g.strokeStyle = '#8a8a9a'; g.lineWidth = 1.5; g.beginPath(); g.moveTo(bx, 0); g.lineTo(bx, by - R); g.stroke();
+    const base = g.createRadialGradient(bx - R * .3, by - R * .3, R * .1, bx, by, R);
+    base.addColorStop(0, '#5a5a66'); base.addColorStop(1, '#0c0c12');
+    g.fillStyle = base; g.beginPath(); g.arc(bx, by, R, 0, Math.PI * 2); g.fill();
+    const STEP = Math.PI / 15, sparks = [];
+    for (let la = -Math.PI / 2 + STEP * .5, li = 0; la < Math.PI / 2 - .01; la += STEP, li++) {
+      const n = Math.max(6, Math.round(30 * Math.cos(la))), dl = Math.PI * 2 / n;
+      for (let k = 0; k < n; k++) {
+        const lo = k * dl + theta, mid = lo + dl * .45, zc = Math.cos(la + STEP * .45) * Math.cos(mid);
+        if (zc <= .03) continue;
+        const P = (A, B) => [bx + R * Math.cos(A) * Math.sin(B), by - R * Math.sin(A)];
+        const p1 = P(la, lo), p2 = P(la, lo + dl * .88), p3 = P(la + STEP * .88, lo + dl * .88), p4 = P(la + STEP * .88, lo);
+        const nx = Math.cos(la) * Math.sin(mid), ny = Math.sin(la);
+        const lit = Math.max(0, -.45 * nx + .55 * ny + .7 * zc);
+        const sp = hash(li, k), tw = Math.pow(Math.max(0, Math.sin(t * (turbo ? 9 : 3) + sp * 50 + mid * 3)), 14);
+        const hue = (t * 50 + sp * 360) % 360;
+        g.fillStyle = tw > .35 ? `hsl(${hue},85%,${62 + 30 * tw}%)` : `hsl(225,12%,${Math.min(92, 14 + 62 * lit + 18 * sp)}%)`;
+        g.beginPath(); g.moveTo(p1[0], p1[1]); g.lineTo(p2[0], p2[1]); g.lineTo(p3[0], p3[1]); g.lineTo(p4[0], p4[1]); g.closePath(); g.fill();
+        if (tw > .85) sparks.push([(p1[0] + p3[0]) / 2, (p1[1] + p3[1]) / 2, hue]);
+      }
+    }
+    const halo = g.createRadialGradient(bx, by, R * .8, bx, by, R * 2.2);
+    const hh = (t * 40) % 360; halo.addColorStop(0, `hsla(${hh},90%,78%,${.2 + .15 * pulse})`); halo.addColorStop(1, `hsla(${hh},90%,78%,0)`);
+    g.fillStyle = halo; g.fillRect(bx - R * 2.2, by - R * 2.2, R * 4.4, R * 4.4);
+    sparks.slice(0, 6).forEach(([x, y, hue]) => {           // destellos en forma de estrella
+      g.strokeStyle = `hsla(${hue},100%,97%,.95)`; g.lineWidth = 1.2; const s = 9 + Math.random() * 6;
+      g.beginPath(); g.moveTo(x - s, y); g.lineTo(x + s, y); g.moveTo(x, y - s); g.lineTo(x, y + s); g.stroke();
+    });
+    if (turbo && pulse > .8) { g.fillStyle = 'rgba(255,255,255,.4)'; g.fillRect(0, 0, W, H); }   // estroboscopio
+    requestAnimationFrame(frame);
+  }
+  function start() { if (running) return; size(); running = true; last = 0; requestAnimationFrame(frame); }
+  function stop() { running = false; }
+  new IntersectionObserver(es => es.forEach(e => e.isIntersecting ? start() : stop()), { rootMargin: '100px' }).observe(sec);
+  if (window.ResizeObserver) new ResizeObserver(() => { if (running) size(); }).observe(sec);
+  function turbo(ms = 3000) {
+    turboUntil = performance.now() + ms;
+    [0, .2, .4, .6, .8, 1, 1.2, 1.4].forEach((w, i) => tone(i % 2 ? 180 : 60, .16, i % 2 ? 'square' : 'sine', i % 2 ? .05 : .35, w));
+  }
+  sec.addEventListener('pointerdown', e => {
+    const r = sec.getBoundingClientRect(), x = e.clientX - r.left, y = e.clientY - r.top;
+    if (Math.hypot(x - BX(), y - BY) < R * 1.4) { turbo(3500); burst(e.clientX, e.clientY, 50, .7); }
+  });
+  return { turbo };
+})();
+
+/* ================= MÚSICA ================= */
+(() => {
+  const sp = CONFIG.spotify, id = (sp.playlist.match(/playlist\/([A-Za-z0-9]+)/) || [])[1];
+  // sin enlace de Spotify no se muestra nada de Spotify: solo el formulario para proponer canciones
+  if (id) $('#spotifyBox').innerHTML = `<iframe src="https://open.spotify.com/embed/playlist/${id}?theme=0" loading="lazy" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"></iframe>`;
+  else { $('#spotifyBox').hidden = true; $('.or').dataset.t = sp.invitar ? 'mOr' : 'mOr2'; }
+  if (sp.invitar || sp.playlist) { const c = $('#spCollab'); c.href = sp.invitar || sp.playlist; c.hidden = false; }
+  const IDEAS = [['Rosas', 'La Oreja de Van Gogh'], ['Querida', 'Juan Gabriel'], ['El Rey', 'Vicente Fernández'],
+    ['Soldadito marinero', 'Fito & Fitipaldis'], ['Bidi Bidi Bom Bom', 'Selena'], ['Hasta la raíz', 'Natalia Lafourcade'],
+    ['Eres', 'Café Tacvba'], ['Txoria txori', 'Mikel Laboa'], ['Eres mi religión', 'Maná'], ['Ay mamá', 'Rigoberta Bandini'],
+    ['La Bamba', 'Ritchie Valens'], ['Lau teilatu', 'Itoiz']];
+  const form = $('#songForm'), dice = $('#dice');
+  dice.addEventListener('click', () => {
+    const [c, a] = IDEAS[Math.floor(Math.random() * IDEAS.length)];
+    form.cancion.value = c; form.artista.value = a;
+    dice.classList.remove('roll'); void dice.offsetWidth; dice.classList.add('roll'); tone(520, .1, 'triangle', .1);
+  });
+  form.addEventListener('submit', e => {
+    e.preventDefault();
+    const fd = new FormData(form), c = fd.get('cancion').trim(); if (!c) return;
+    const song = c + (fd.get('artista').trim() ? ' – ' + fd.get('artista').trim() : '');
+    window.open(`https://wa.me/${CONFIG.telefono}?text=` + encodeURIComponent(L().mMsg(song, L()[fd.get('momento')], fd.get('nombre').trim())), '_blank');
+    $('#songThanks').textContent = L().mThanks;
+    const tag = document.createElement('span'); tag.textContent = '🎵 ' + song; $('#myRequests').appendChild(tag);
+    disco.turbo(2500);
+    const r = form.getBoundingClientRect(); burst(r.left + r.width / 2, r.top, 60, .8); chime();
+    form.reset();
+  });
+})();
+
+/* ================= CONFIRMACIÓN ================= */
+const no = $('#no'), yes = $('#yes'), zone = $('#zone'), noMsg = $('#noMsg'), rform = $('#rsvpForm');
+let tries = 0, tired = false, rsvpState = null;
+function runAway(e) {
+  if (tired) return;
+  if (e && e.cancelable) e.preventDefault();
+  no.style.left = Math.random() * (zone.clientWidth - no.offsetWidth) + 'px';
+  no.style.top = Math.random() * (zone.clientHeight - no.offsetHeight) + 'px';
+  noMsg.textContent = L().excuses[tries]; tone(300 + tries * 60, .12, 'square', .05);
+  if (++tries >= L().excuses.length) { tired = true; setTimeout(() => { no.textContent = L().noFinal; noMsg.textContent = L().noLast; }, 600); }
+}
+no.addEventListener('pointerenter', e => { if (e.pointerType === 'mouse') runAway(e); });
+no.addEventListener('touchstart', runAway, { passive: false });
+no.addEventListener('click', e => { if (tired) answer('no'); else runAway(e); });
+yes.addEventListener('click', () => answer('yes'));
+function answer(a) {
+  rsvpState = a; zone.hidden = true; noMsg.textContent = '';
+  showForm(a);
+  if (a === 'yes') { chime(); for (let i = 0; i < 4; i++) setTimeout(() => burst(Math.random() * innerWidth, innerHeight * (.3 + Math.random() * .4), 90), i * 250); }
+  else sad();
+}
+function showForm(a) {
+  rform.hidden = false;
+  $('#rsvpTitle').textContent = a === 'yes' ? L().yesTitle : L().noTitle;
+  $$('.onlyYes').forEach(el => el.hidden = a !== 'yes');
+}
+$$('.step').forEach(st => st.addEventListener('click', e => {
+  const b = e.target.closest('button'); if (!b) return;
+  const o = st.querySelector('output'); o.textContent = Math.max(0, Math.min(20, +o.textContent + +b.dataset.d)); tone(600, .06, 'triangle', .08);
+}));
+$('#changeAns').addEventListener('click', () => {
+  rsvpState = null; rform.hidden = true; $('#doneBox').hidden = true; zone.hidden = false;
+  tries = 0; tired = false; no.textContent = L().no; no.style.left = ''; no.style.top = '';
+});
+rform.addEventListener('submit', e => {
+  e.preventDefault();
+  const d = { nombre: rform.nombre.value.trim(), intol: rform.intol.value.trim(), coment: rform.coment.value.trim() };
+  if (!d.nombre) return;
+  $$('.step').forEach(st => d[st.dataset.name] = st.querySelector('output').textContent);
+  const isYes = rsvpState === 'yes';
+  window.open(`https://wa.me/${CONFIG.telefono}?text=` + encodeURIComponent(L().wa(isYes, d)), '_blank');
+  rform.hidden = true; $('#doneBox').hidden = false;
+  $('#doneTitle').textContent = isYes ? L().doneYesT : L().doneNoT;
+  $('#doneText').textContent = isYes ? L().doneYes : L().doneNo;
+  $('#gcal').hidden = !isYes;
+});
+function gcalUrl() {
+  const z = d => d.toISOString().replace(/[-:]/g, '').slice(0, 15) + 'Z';
+  const end = new Date(fecha.getTime() + 8 * 3600e3);
+  return 'https://calendar.google.com/calendar/render?action=TEMPLATE&ctz=Europe/Madrid' +
+    '&text=' + encodeURIComponent(L().calText) + '&dates=' + z(fecha) + '/' + z(end) +
+    '&location=' + encodeURIComponent(CONFIG.lugar.nombre + ', ' + CONFIG.lugar.direccion) + '&details=' + encodeURIComponent(L().calDetails);
+}
+
+/* ================= arranque ================= */
+setLang(lang);
+story(0); onScroll();
+</script>
+</body>
+</html>
