@@ -147,6 +147,7 @@ body.opened #langBtn{display:flex}
 .trail.done{opacity:.4;stroke-dasharray:3 7!important;stroke-dashoffset:0!important}
 .trail.final{stroke:var(--gold);stroke-width:4}
 .trail.final.done{opacity:1;stroke-dasharray:none!important}
+.trail.faded{opacity:0!important;transition:opacity .9s ease}
 .pin .pin-in{transform:scale(0);transform-box:fill-box;transform-origin:50% 100%;transition:transform .55s cubic-bezier(.2,1.8,.4,1)}
 .showI #pinI .pin-in,.showA #pinA .pin-in{transform:scale(1)}
 .pin{transition:transform .6s cubic-bezier(.3,1.4,.5,1)}
@@ -850,6 +851,9 @@ function story(p) {
   });
   const tf = seg(p, .86, .97);
   setLeg(FINAL, tf); legsDone += tf; if (tf >= 1) done++;
+  // la estela de un viaje se difumina en cuanto empieza el siguiente
+  const tripsStarted = TRIPS.filter((_, k) => p > .15 + k * .09).length + (tf > 0 ? 1 : 0);
+  TRIPS.forEach((_, k) => { const f = k < tripsStarted - 1; legs[2 * k].el.classList.toggle('faded', f); legs[2 * k + 1].el.classList.toggle('faded', f); });
   if (tf > 0) {
     pos.I = POS.I.host; moving = 'A';
     if (tf < 1) { const q = ptOn(FINAL, tf); pos.A = { x: q.x, y: q.y + 40 }; flyPlane(FINAL, tf); planeOn = true; }
